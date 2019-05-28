@@ -5,7 +5,8 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const app = express();
-const models = require('./database/models');
+const { port } = require('./config/config.js');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,6 +29,9 @@ models.sequelize
 });
 
 
+app.listen(port, err => {
+    if (!err) console.log('Server started on ' + port + ' port');
+    else console.error('Server not started');
+});
 
 
-module.exports = app;

@@ -2,18 +2,14 @@ const express = require('express');
 const app = express.Router();
 
 const bodyParser = require('body-parser');
-const path = require('path')
-const viewsDir = path.join(__dirname, "..", "views/")
+
+const sendHtml = require("../services/sendHtml")
+const arduino = require("../services/handleArduinoDatas")
 
 
-app.get('/', (req, res, next) =>  {
-  res.sendFile(viewsDir + "index.html")
-});
+app.get('/', sendHtml.index);
 
-app.post('/', (req,res,next) => {
-  console.log(req.body)
-  res.send(req.body)
-})
+app.post('/arduinoData', arduino.getArduinoValues)
 
 
 module.exports = app;
