@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const app = express();
+const models = require('./database/models');
 const { port } = require('./config/config.js');
 
 
