@@ -1,3 +1,14 @@
+//данные приходят в req.query
 
+function saveArduinoData(req, res, next) {
 
-//пока не знаю как буду получать данные
+}
+
+function getArduinoData(req, res, next) {
+
+}
+
+module.exports = {
+    saveArduinoData,
+    getArduinoData
+}
