@@ -8,10 +8,13 @@ const sendHtml = require("../services/sendHtml")
 const arduino = require("../services/handleArduinoDatas")
 const handler = require("../controllers/arduino")
 
+//-------- рендер страниц -------------
 app.get('/', sendHtml.index);
 
-app.post('/arduinoData', handler.saveArduinoData) //сюда обращается сама ардуинка
+
+//---------- API ----------------------
 app.get('/arduinoData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
+app.post('/arduinoData', handler.saveArduinoData) //сюда обращается сама ардуинка
 
 
 module.exports = app;

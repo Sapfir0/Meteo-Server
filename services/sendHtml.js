@@ -1,9 +1,9 @@
 
-const path = require('path')
-const viewsDir = path.join(__dirname, "..", "views/")
+const config = require("../config/config")
+
 
 const index = (req, res) => {
-    res.sendFile(viewsDir + "index.html")
+    res.sendFile(config.viewsDir + "index.html")
 }
 
 module.exports = {

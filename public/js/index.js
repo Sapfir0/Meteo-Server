@@ -1,7 +1,5 @@
-fetch("/arduinoData").then( (json) => {
-    console.log(json)
-})
 
+console.log("pik")
 document.addEventListener('DOMContentLoaded', () => {
 
 const option = {
