@@ -4,12 +4,12 @@ const arduinoAPI = require("../services/handleArduinoDatas")
 
 function saveArduinoData(req, res, next) {
     arduinoAPI.writeArduinoValuesToSQL(req.query)
+    next()
 }
 
 function getArduinoData(req, res, next) {
-    let data;
     arduinoAPI.getLastArduinoValueFromSQL().then( (ard) => {
-            data=ard.dataValues;
+            const data=ard.dataValues;
             return data;
         }).then( (data) => {
             console.log(data)
