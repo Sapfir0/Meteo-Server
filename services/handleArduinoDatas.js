@@ -2,8 +2,7 @@ const arduinoInit = require('../database/models/arduino')
 const models = require('../database/models');
 const Arduino = arduinoInit(models.sequelize, models.Sequelize)
 
-const Op = Sequelize.Op;
-
+const { Op } = require('sequelize')
 
 function  writeArduinoValuesToSQL(arduinoData) {
     console.log(arduinoData)
@@ -40,7 +39,7 @@ function deleteOldArduinoValuesFromSQL () {
     return Arduino.destroy({
         where: {
             created_at: {
-                [Op.lt]: new Date( Sequelize.NOW - 24 * 60 * 60 * 30 ) 
+                [Op.lt]: new Date( new Date() - 24 * 60 * 60 * 30 ) 
             }
         }
     })
