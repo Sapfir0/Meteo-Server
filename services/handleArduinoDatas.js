@@ -2,6 +2,9 @@ const arduinoInit = require('../database/models/arduino')
 const models = require('../database/models');
 const Arduino = arduinoInit(models.sequelize, models.Sequelize)
 
+const Op = Sequelize.Op;
+
+
 function  writeArduinoValuesToSQL(arduinoData) {
     console.log(arduinoData)
     //ВАЖНО, надо учитывать все эти поля на ардуинке
@@ -33,13 +36,13 @@ function getLastArduinoValueFromSQL() {
 }
 
 function deleteOldArduinoValuesFromSQL () {
-    //да, айдишники у нас скоро вырастут до бесконечности, т.к. мы удаляем старые записи по айдишнику
-    //думаю, это неверно и нужно переписать по дате
+    // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
     return Arduino.destroy({
-        order: [
-            ['id', 'DESC']
-        ],
-        limit: 1
+        where: {
+            created_at: {
+                [Op.lt]: new Date( Sequelize.NOW - 24 * 60 * 60 * 30 ) 
+            }
+        }
     })
 }
 

@@ -16,4 +16,5 @@ app.get('/arduinoData', handler.getArduinoData) //сюда обращается 
 app.post('/arduinoData', handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
 
 
+
 module.exports = app;
