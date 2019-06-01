@@ -12,8 +12,8 @@ app.get('/', sendHtml.index);
 
 
 //---------- API ----------------------
-app.get('/arduinoData', handler.getArduinoData, sendHtml.success) //сюда обращается клиент для получения инфы о датчиках 
-app.post('/arduinoData', handler.saveArduinoData) //сюда обращается сама ардуинка
+app.get('/arduinoData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
+app.post('/arduinoData', handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
 
 
 module.exports = app;
