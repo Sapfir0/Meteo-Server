@@ -1,8 +1,24 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #B0E4AA;
+  background: -webkit-linear-gradient(top left, #B0E4AA, #9EEBD1);
+  background: -moz-linear-gradient(top left, #B0E4AA, #9EEBD1);
+  background: linear-gradient(to bottom right, #B0E4AA, #9EEBD1);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 a {
   color: #00B7FF;
 }
+
+content {
+  display: flex;
+}
+
+.street {
+  margin-left: 50%;
+}
+

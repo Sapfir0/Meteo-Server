@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const humidity = document.querySelector(".humidity")
     const pressure = document.querySelector(".pressure")
     const weatherDescription = document.querySelector(".weatherDescription")
-    
+    const createdAt = document.querySelector(".createdAt");
     // :( очень нехороший ход сделаю
     //переписать 
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             humidity.innerHTML = arduinoValues.humidity
             pressure.innerHTML = arduinoValues.pressure
             weatherDescription.innerHTML = arduinoValues.weatherDescription
-
+            createdAt.innerHTML = arduinoValues.createdAt
         })
         .catch(err => {
             console.error(err);
