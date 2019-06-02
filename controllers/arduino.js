@@ -7,16 +7,25 @@ function saveArduinoData(req, res, next) {
     next()
 }
 
-function postArrays(req, res, next) {  
+function getArrays(req, res, next) {  
+    
     const columns = ["temperatureInHome", "humidityInHome", "temperature",
     "humidity", "pressure", "weatherDescription", "arduinoTimestamp" ]
-    var finalJson=[]
-    for(let i in columns) {
+    let finalJson=[]
+    for(let i=0; i<columns.length; i++) {
         arduinoAPI.getColumnArduinoFromSQL(columns[i]).then( (obj) => { //тут было бы неплохо проверять столбце на существование
             finalJson.push(obj)
+            if(columns.length - i == 1) { //надо написать асинк функцию а не этот кал
+                console.log(finalJson)
+                return res.json(finalJson);
+            }
         })
     }
-    return res.json(finalJson);
+
+}
+
+async function cycle() {
+
 }
 
 function getArduinoData(req, res, next) {
@@ -40,5 +49,5 @@ module.exports = {
     saveArduinoData,
     getArduinoData,
     deleteOldArticles,
-    postArrays
+    getArrays
 }

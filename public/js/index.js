@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(json => {
             arduinoValues= json;
-            console.log(arduinoValues)
+            //console.log(arduinoValues)
             return json;
         })
         .then( () => {
