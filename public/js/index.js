@@ -35,7 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(err);
         })
 
-    
+        
+        // var ctx = document.getElementById('myChart');
+        // var myLineChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //         label: '# of Votes',
+        //         datasets: [{
+        //             data: [12, 19, 3, 5, 2, 3]
+        //         }] 
+        //     }
+
+        // });
 })
 
 

@@ -18,7 +18,13 @@ function getArduinoData(req, res, next) {
     
 }
 
+function deleteOldArticles(req,res,next) {
+    arduinoAPI.deleteOldArduinoValuesFromSQL()
+    next()
+}
+
 module.exports = {
     saveArduinoData,
-    getArduinoData
+    getArduinoData,
+    deleteOldArticles
 }

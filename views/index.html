@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script type="text/javascript" src="/js/index.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+
+    <script type="text/javascript" src="/Chart.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
     <content>
-        <div class="home"> <p>Блок дома
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <div class="home"> <p>Блок дома
             <p> Температура дома <img src="/img/icons8-temperature-filled-16.png" alt=""><span class="temperatureInHome"></span>
             <p> Влажность в доме <img src="/img/icons8-hygrometer-16.png" alt=""><span class="humidityInHome"></span>
             <p> Освещенность в доме<img src="/img/icons8-light-16.png" alt=""><span class="sansityInHome"></span>
@@ -25,6 +28,8 @@
 
         <p> Данные были получены <span class="createdAt"></span>
     </content>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
 
 </body>
 </html>

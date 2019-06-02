@@ -38,8 +38,8 @@ function deleteOldArduinoValuesFromSQL () {
     // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
     return Arduino.destroy({
         where: {
-            created_at: {
-                [Op.lt]: new Date( new Date() - 24 * 60 * 60 * 30 ) 
+            createdAt: {
+                [Op.lt]: new Date( new Date() - 1000*60*60*24) //в микросекундах //сутки
             }
         }
     })
