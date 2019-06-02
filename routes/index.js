@@ -16,5 +16,8 @@ app.get('/arduinoData', handler.getArduinoData) //сюда обращается 
 app.post('/arduinoData', handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
 //при посте новой записи, удаляем старые
 
+//app.post("/chartsValues", handler.postArrays)
+
+
 
 module.exports = app;

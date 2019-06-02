@@ -2,7 +2,7 @@
 const config = require("../config/config")
 
 
-const index = (req, res) => {
+const index = (req, res, next) => {
     res.sendFile(config.viewsDir + "index.html")
 }
 

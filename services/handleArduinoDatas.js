@@ -18,8 +18,17 @@ function  writeArduinoValuesToSQL(arduinoData) {
     })
 }
 
-function readArduinoValuesFromSQL()  {
-
+function getColumnArduinoFromSQL(column)  { 
+    //SELECT column FROM TABLE;
+    return Arduino.findAll({
+        attributes: [column]
+    }).then( obj => {
+        var temp=[]
+        for(let i=0; i<obj.length; i++) {
+            temp.push(obj[i].dataValues[`${column}`]) 
+        }
+        return temp;
+    })
 }
 
 function getLastArduinoValueFromSQL() { 
@@ -48,7 +57,7 @@ function deleteOldArduinoValuesFromSQL () {
 
 module.exports = {
     writeArduinoValuesToSQL,
-    readArduinoValuesFromSQL,
+    getColumnArduinoFromSQL,
     getLastArduinoValueFromSQL,
     deleteOldArduinoValuesFromSQL
 }
