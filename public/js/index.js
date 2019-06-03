@@ -1,7 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
     
-    var fullParams;
 
     const temperatureInHome = document.querySelector(".temperatureInHome")
     const humidityInHome = document.querySelector(".humidityInHome")
@@ -12,55 +10,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const weatherDescription = document.querySelector(".weatherDescription")
     const createdAt = document.querySelector(".createdAt");
 
-    const ctx = document.getElementById('myChart');
+    const temperatureGraphic = document.getElementById('temperatureGraphic');
+    const humidityGraphic = document.getElementById('humidityGraphic');
 
     //переписать 
 
     getlastArduinoValues()
 
-    const graphicsResponse = await fetch("/chartsValues");
-    const graphicValues = await graphicsResponse.json();
+    var graphicValues = await getGraphicValues()
+    await createGraphics(graphicValues);
 
-    var temperatureInHomeArray = graphicValues[0];
-    var himidityInHomeArray = graphicValues[1];
-    var temperatureArray = graphicValues[2];
-    var himidityArray = graphicValues[3];
-    var pressureArray = graphicValues[4];
-    var weatherDescriptionArray = graphicValues[5];
-    var arduinoTimestampArray = graphicValues[6];
-    var createdAtArray = graphicValues[7];
 
-    //         // var newCreatedAtArray=[]
-    //         // for (let i = 0; i < createdAtArray.length; i++) {
-    //         //     newCreatedAtArray[i] = dateToStr(new Date(createdAtArray[i]))
-    //         //     console.log(newCreatedAtArray[i])
-    //         // }
-    //         // генерировать лейблы динамически, в зависимости от времени у данных
-            
-
-    var datasForCharts = {
-        labels: createdAtArray,
-        datasets: [{
-            label: "Температура твоей попки",
-            data: temperatureInHomeArray
-        }]
-    };
-
-    var  options = {
-        title: {
-            display: true,
-            text: 'Температурный режим'
-        }
-    }
-
-    chartNewLineGraphic(ctx, datasForCharts, options)
-
-        
+    // -------- быдло функции    
 
     async function getlastArduinoValues() {
         const response = await fetch("/arduinoData");
         const arduinoValues = await response.json();
-        console.log(arduinoValues)
+        //console.log(arduinoValues)
     
         temperatureInHome.innerHTML = arduinoValues.temperatureInHome
         humidityInHome.innerHTML = arduinoValues.humidityInHome
@@ -71,6 +37,57 @@ document.addEventListener('DOMContentLoaded', async () => {
         createdAt.innerHTML = arduinoValues.createdAt
     }
 
+    async function getGraphicValues() {
+        const graphicsResponse = await fetch("/chartsValues");
+        const graphicValues = await graphicsResponse.json();
+        return graphicValues;
+    }
+
+    async function createGraphics(graphicValues) {
+        var temperatureInHomeArray = graphicValues[0];
+        var himidityInHomeArray = graphicValues[1];
+        var temperatureArray = graphicValues[2];
+        var himidityArray = graphicValues[3];
+        var pressureArray = graphicValues[4];
+        var weatherDescriptionArray = graphicValues[5];
+        var arduinoTimestampArray = graphicValues[6];
+        var createdAtArray = graphicValues[7];
+    
+        //         // var newCreatedAtArray=[]
+        //         // for (let i = 0; i < createdAtArray.length; i++) {
+        //         //     newCreatedAtArray[i] = dateToStr(new Date(createdAtArray[i]))
+        //         //     console.log(newCreatedAtArray[i])
+        //         // }
+        //         // генерировать лейблы динамически, в зависимости от времени у данных
+                
+    
+        var datasForCharts = {
+            labels: createdAtArray,
+            datasets: [{
+                label: "Температура твоей попки",
+                data: temperatureInHomeArray
+            }]
+        };
+    
+        var  options = {
+            title: {
+                display: true,
+                text: 'Температурный режим'
+            }
+        }
+
+
+        chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
+        datasForCharts = {
+            labels: createdAtArray,
+            datasets: [{
+                label: "Влажность твоей попки",
+                data: himidityInHomeArray
+            }]
+        };
+        chartNewLineGraphic(humidityGraphic, datasForCharts, options)
+
+    }
 
 })
 

@@ -24,15 +24,10 @@ function getArrays(req, res, next) {
 }
 
 
-function getArduinoData(req, res, next) {
+async function getArduinoData(req, res, next) {
 
-    arduinoAPI.getLastArduinoValueFromSQL().then( (ard) => {
-            const data=ard.dataValues;
-            return data;
-        }).then( (data) => {
-            return res.json(data)
-        });
-    
+    const ard = await arduinoAPI.getLastArduinoValueFromSQL();
+    return res.json(ard.dataValues)
 }
 
 function deleteOldArticles(req,res,next) {

@@ -24,7 +24,12 @@ content {
 
 
 .chart-container {
-  position: relative; 
-  height: 80vh; 
-  width: 160vw;
+   position: relative;  
+  height: 500px; 
+  width: 500px;
+}
+
+.graphics {
+  margin-top: 30px;
+
 }

@@ -18,17 +18,19 @@ function  writeArduinoValuesToSQL(arduinoData) {
     })
 }
 
-function getColumnArduinoFromSQL(column)  { // вернет все значения у заданного столбца 
+async function getColumnArduinoFromSQL(column)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE;
-    return Arduino.findAll({
+    
+    const currentColumn = await Arduino.findAll({
         attributes: [column]
-    }).then( obj => {
-        var temp=[]
-        for(let i=0; i<obj.length; i++) {
-            temp.push(obj[i].dataValues[`${column}`]) 
-        }
-        return temp;
     })
+
+    var temp=[]
+    for(let i=0; i<currentColumn.length; i++) {
+        temp.push(currentColumn[i].dataValues[`${column}`]) 
+    }
+    // console.log(temp)
+    return temp;
 }
 
 function getLastArduinoValueFromSQL() { 
