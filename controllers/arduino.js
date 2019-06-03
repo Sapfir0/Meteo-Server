@@ -10,13 +10,12 @@ function saveArduinoData(req, res, next) {
 function getArrays(req, res, next) {  
     
     const columns = ["temperatureInHome", "humidityInHome", "temperature",
-    "humidity", "pressure", "weatherDescription", "arduinoTimestamp" ]
+    "humidity", "pressure", "weatherDescription", "arduinoTimestamp", "createdAt" ]
     let finalJson=[]
     for(let i=0; i<columns.length; i++) {
         arduinoAPI.getColumnArduinoFromSQL(columns[i]).then( (obj) => { //тут было бы неплохо проверять столбце на существование
             finalJson.push(obj)
             if(columns.length - i == 1) { //надо написать асинк функцию а не этот кал
-                console.log(finalJson)
                 return res.json(finalJson);
             }
         })
@@ -24,9 +23,6 @@ function getArrays(req, res, next) {
 
 }
 
-async function cycle() {
-
-}
 
 function getArduinoData(req, res, next) {
 
@@ -34,7 +30,6 @@ function getArduinoData(req, res, next) {
             const data=ard.dataValues;
             return data;
         }).then( (data) => {
-            //console.log(data)
             return res.json(data)
         });
     

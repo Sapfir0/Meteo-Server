@@ -18,7 +18,7 @@ function  writeArduinoValuesToSQL(arduinoData) {
     })
 }
 
-function getColumnArduinoFromSQL(column)  { 
+function getColumnArduinoFromSQL(column)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE;
     return Arduino.findAll({
         attributes: [column]
