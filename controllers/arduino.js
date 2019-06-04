@@ -13,14 +13,19 @@ function getArrays(req, res, next) {
     const columns = ["temperatureInHome", "humidityInHome", "temperature",
     "humidity", "pressure", "weatherDescription", "arduinoTimestamp", "createdAt" ]
     let finalJson=[]
-    for(let i=0; i<columns.length; i++) {
-        arduinoAPI.getColumnArduinoFromSQL(columns[i]).then( (obj) => { //тут было бы неплохо проверять столбце на существование
-            finalJson.push(obj)
-            if(columns.length - i == 1) { //надо написать асинк функцию а не этот кал
-                return res.json(finalJson);
-            }
-        })
+
+    helper().then( (column) =>{
+        return res.json(column)
+    })
+
+    async function helper() {
+        for(let i=0; i<columns.length; i++) {
+            let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i])
+            finalJson.push(item)
+        }
+        return finalJson;
     }
+
 
 }
 

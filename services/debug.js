@@ -1,5 +1,4 @@
 
-
 function seeBody(req, res, next) {
     console.log("*_____BODY_____*")
     console.log(req.body)
