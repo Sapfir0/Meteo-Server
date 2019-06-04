@@ -15,7 +15,7 @@ app.get('/', sendHtml.index);
 //---------- API ----------------------
 app.get('/arduinoData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
 
-app.post('/arduinoData', urlencodedParser, debug.seeBody, debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
+app.post('/arduinoData', urlencodedParser, debug.seeREQ, debug.seeBody, debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
 //при посте новой записи, удаляем старые
 
 

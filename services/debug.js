@@ -12,7 +12,14 @@ function seeQuery(req, res, next) {
     next()
 }
 
+function seeREQ(req, res, next) {
+    console.log("*_____!!!REQ!!!!_____*")
+    console.log(req)
+    next()
+}
+
 module.exports = {
     seeBody,
-    seeQuery
+    seeQuery,
+    seeREQ
 }
