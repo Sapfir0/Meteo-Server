@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const humidityGraphic = document.getElementById('humidityGraphic');
 
     //переписать 
-    var datasForCharts
-    var options = {
+    let datasForCharts
+    let options = {
         title: {
             display: true,
             text: 'Температурный режим'
@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     getlastArduinoValues()
 
-    var graphicValues = await getGraphicValues()
-    await createGraphics(graphicValues);
+    const graphicValues = await getGraphicValues()
+    console.log(graphicValues)
+    createGraphics(graphicValues);
 
 
     // -------- быдло функции    
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         humidity.innerHTML = arduinoValues.humidity
         pressure.innerHTML = arduinoValues.pressure
         weatherDescription.innerHTML = arduinoValues.weatherDescription
-        createdAt.innerHTML = arduinoValues.createdAt
+        createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
     }
 
     async function getGraphicValues() {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return graphicValues;
     }
 
-    async function createGraphics(graphicValues) {
+    function createGraphics(graphicValues) {
         const temperatureInHomeArray = graphicValues[0];
         const humidityInHomeArray = graphicValues[1];
         const temperatureArray = graphicValues[2];
