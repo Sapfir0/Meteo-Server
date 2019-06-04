@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const humidityGraphic = document.getElementById('humidityGraphic');
 
     //переписать 
+    var datasForCharts
+    var options = {
+        title: {
+            display: true,
+            text: 'Температурный режим'
+        }
+    }
 
     getlastArduinoValues()
 
@@ -44,47 +51,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function createGraphics(graphicValues) {
-        var temperatureInHomeArray = graphicValues[0];
-        var himidityInHomeArray = graphicValues[1];
-        var temperatureArray = graphicValues[2];
-        var himidityArray = graphicValues[3];
-        var pressureArray = graphicValues[4];
-        var weatherDescriptionArray = graphicValues[5];
-        var arduinoTimestampArray = graphicValues[6];
-        var createdAtArray = graphicValues[7];
+        const temperatureInHomeArray = graphicValues[0];
+        const humidityInHomeArray = graphicValues[1];
+        const temperatureArray = graphicValues[2];
+        const himidityArray = graphicValues[3];
+        const pressureArray = graphicValues[4];
+        const weatherDescriptionArray = graphicValues[5];
+        const arduinoTimestampArray = graphicValues[6];
+        const createdAtArray = graphicValues[7];
     
-        //         // var newCreatedAtArray=[]
-        //         // for (let i = 0; i < createdAtArray.length; i++) {
-        //         //     newCreatedAtArray[i] = dateToStr(new Date(createdAtArray[i]))
-        //         //     console.log(newCreatedAtArray[i])
-        //         // }
-        //         // генерировать лейблы динамически, в зависимости от времени у данных
-                
-    
-        var datasForCharts = {
-            labels: createdAtArray,
-            datasets: [{
-                label: "Температура твоей попки",
-                data: temperatureInHomeArray
-            }]
-        };
-    
-        var  options = {
-            title: {
-                display: true,
-                text: 'Температурный режим'
-            }
+        for (let i = 0; i < createdAtArray.length; i++) {
+            createdAtArray[i] = dateToStr(new Date(createdAtArray[i]))
         }
 
+        // есть баг, если обновлять страницу, графики цикл выше может не выполниться
 
+
+        datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки")
         chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
-        datasForCharts = {
-            labels: createdAtArray,
-            datasets: [{
-                label: "Влажность твоей попки",
-                data: himidityInHomeArray
-            }]
-        };
+
+        datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
         chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
     }
@@ -92,6 +78,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
+
+function setDatasForGraphic(labels, data, label) {
+    let datasForCharts = {
+        labels: labels,
+        datasets: [{
+            label: label,
+            data: data
+        }]
+    };
+
+    datasForCharts.labels = labels // подпись на оси Х
+    datasForCharts.datasets[0].data = data // точки для графика
+    datasForCharts.datasets[0].label = label // подпись самого графика
+    return datasForCharts;
+}
 
 
 function chartNewLineGraphic(ctx, datasForCharts, options) {
@@ -118,19 +119,8 @@ function dateToStr(date) {
         // сегодня
         str = 'сегодня ';
     } else {
-        const month = [
-            'Января',
-            'Февраля',
-            'Марта',
-            'Апреля',
-            'Мая',
-            'Июня',
-            'Июля',
-            'Августа',
-            'Сентября',
-            'Октября',
-            'Ноября',
-            'Декабря'
+        const month = ['Января','Февраля','Марта','Апреля','Мая',
+            'Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'
         ];
         str = `${date.getDate()} ${
             month[date.getMonth() - 1]
