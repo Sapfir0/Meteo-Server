@@ -3,6 +3,7 @@ const arduinoAPI = require("../services/handleArduinoDatas")
 
 
 function saveArduinoData(req, res, next) {
+    console.log(req.query)
     arduinoAPI.writeArduinoValuesToSQL(req.query)
     next()
 }
@@ -25,9 +26,14 @@ function getArrays(req, res, next) {
 
 
 async function getArduinoData(req, res, next) {
-
-    const ard = await arduinoAPI.getLastArduinoValueFromSQL();
-    return res.json(ard.dataValues)
+    try {
+        const ard = await arduinoAPI.getLastArduinoValueFromSQL();
+        console.log(ard)
+        return res.json(ard.dataValues)
+    }
+    catch(error) {
+        console.error(error)
+    }
 }
 
 function deleteOldArticles(req,res,next) {
