@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const temperatureInHome = document.querySelector(".temperatureInHome")
     const humidityInHome = document.querySelector(".humidityInHome")
-    const sansityInHome = document.querySelector(".sansityInHome")
+    const sansityInHome = document.querySelector(".sansityInHome") //реализовать на арудино скан освещенности
     const temperature = document.querySelector(".temperature")
     const humidity = document.querySelector(".humidity")
     const pressure = document.querySelector(".pressure")
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperatureGraphic = document.getElementById('temperatureGraphic');
     const humidityGraphic = document.getElementById('humidityGraphic');
 
-    //переписать 
+    //вынести работу с графиками в отдельный файл
     let datasForCharts
     let options = {
         title: {
@@ -25,16 +25,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     getlastArduinoValues()
 
     const graphicValues = await getGraphicValues()
-    console.log(graphicValues)
     createGraphics(graphicValues);
 
 
     // -------- быдло функции    
 
-    async function getlastArduinoValues() {
+    async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/arduinoData");
         const arduinoValues = await response.json();
-        //console.log(arduinoValues)
     
         temperatureInHome.innerHTML = arduinoValues.temperatureInHome
         humidityInHome.innerHTML = arduinoValues.humidityInHome
@@ -45,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
     }
 
-    async function getGraphicValues() {
+    async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
         return graphicValues;
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // есть баг, если обновлять страницу, графики цикл выше может не выполниться
 
-
         datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки")
         chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
@@ -75,29 +72,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
     }
-
 })
 
 
 
 function setDatasForGraphic(labels, data, label) {
     let datasForCharts = {
-        labels: labels,
+        labels: labels, // подпись на оси Х
         datasets: [{
-            label: label,
-            data: data
+            label: label, // подпись самого графика
+            data: data // точки для графика
         }]
     };
 
-    datasForCharts.labels = labels // подпись на оси Х
-    datasForCharts.datasets[0].data = data // точки для графика
-    datasForCharts.datasets[0].label = label // подпись самого графика
     return datasForCharts;
 }
 
 
 function chartNewLineGraphic(ctx, datasForCharts, options) {
-    var myLineChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'line',
         data: datasForCharts,
         options: options

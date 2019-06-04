@@ -9,7 +9,6 @@ const sendHtml = require("../services/sendHtml")
 const handler = require("../controllers/arduino")
 
 
-const debug = require("../services/debug")
 
 //-------- рендер страниц -------------
 app.get('/', sendHtml.index);
@@ -19,12 +18,9 @@ app.get('/', sendHtml.index);
 app.get('/arduinoData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
 
 app.post('/arduinoData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
-
 //при посте новой записи, удаляем старые
 
-
-
-app.get("/chartsValues", handler.getArrays)
+app.get("/chartsValues", handler.getArrays) //для построения графиков
 
 
 
