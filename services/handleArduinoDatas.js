@@ -50,7 +50,7 @@ function deleteOldArduinoValuesFromSQL () {
     return Arduino.destroy({
         where: {
             createdAt: {
-                [Op.lt]: new Date( new Date() - 1000*60*60*24) //в микросекундах //сутки
+                [Op.lt]: new Date( new Date() - 1000*60*60*12) //в микросекундах // 12ч
             }
         }
     })
