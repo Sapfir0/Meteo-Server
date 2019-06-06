@@ -37,6 +37,9 @@ export function setDatasForGraphic(labels, data, label) {
         datasets: [{
             label: label, // подпись самого графика
             data: data // точки для графика
+            // borderColor: 'gray',
+            // backgroundColor: 'orange',
+
         }]
     };
 
@@ -76,6 +79,6 @@ export function dateToStr(date) {
         } ${date.getFullYear()}`;
     }
 
-    str += ' в ' + date.toLocaleTimeString();
+    str += ' в ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     return str;
 }
