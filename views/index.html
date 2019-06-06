@@ -13,8 +13,17 @@
 <body>
     <content>
             <div class="home"> <p>Блок дома
-            <p> <img src="/img/icons8-temperature-filled-16.png" alt="Температура дома "><span class="temperatureInHome"></span>
-            <p> <img src="/img/icons8-hygrometer-16.png" alt="Влажность в доме "><span class="humidityInHome"></span>
+
+            <div class="block"> <!-- контейнер -->
+                <div class="hover"><img src="/img/icons8-temperature-filled-16.png" alt="Температура дома "><span class="temperatureInHome"></span></div> <!-- видимый элемент -->
+                <span class="hidden">Температура дома</span> <!-- скрытый элемент -->
+            </div>
+
+            <div class="block"> <!-- контейнер -->
+                <div class="hover"><img src="/img/icons8-hygrometer-16.png" alt="Влажность в доме "><span class="humidityInHome"></span> </div> 
+                <span class="hidden">Влажность в доме</span> <!-- скрытый элемент -->
+            </div>
+
             <p> <img src="/img/icons8-light-16.png" alt="Освещенность в доме"><span class="sansityInHome"></span>
         </div>
 
@@ -36,11 +45,6 @@
             <canvas id="humidityGraphic">Your browser does not support the canvas element.</canvas>
         </div>
     </div>
-
-    <div class="block"> <!-- контейнер -->
-        <div class="hover">?</div> <!-- видимый элемент -->
-        <span class="hidden">это подсказка с оформлением</span> <!-- скрытый элемент -->
-        </div>
 
 </body>
 </html>
