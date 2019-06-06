@@ -12,21 +12,44 @@
 </head>
 <body>
     <content>
-            <div class="home"> <p>Блок дома
-            <p> Температура дома <img src="/img/icons8-temperature-filled-16.png" alt=""><span class="temperatureInHome"></span>
-            <p> Влажность в доме <img src="/img/icons8-hygrometer-16.png" alt=""><span class="humidityInHome"></span>
-            <p> Освещенность в доме<img src="/img/icons8-light-16.png" alt=""><span class="sansityInHome"></span>
+            <div class="home"> <h2>Блок дома</h2>
+
+            <p><img src="/img/icons8-temperature-80.png" alt="Температура дома ">
+            <span class="temperatureInHome"></span>
+            <span class="temperatureInHomeHint" aria-live="polite"></span>
+
+            <p><img src="/img/icons8-hygrometer-80.png" alt="Влажность в доме ">
+            <span class="humidityInHome"></span> 
+            <span class="humidityInHomeHint" aria-live="polite"></span>
+
+            <p> <img src="/img/icons8-light-80.png" alt="Освещенность в доме">
+            <span class="sansityInHome"></span>
+            <span class="sansityHint" aria-live="polite"></span>
+
         </div>
 
-        <div class="street"><p>На улице
-            <p> Температура на улице <img src="/img/icons8-temperature-filled-16.png" alt=""><span class="temperature"></span>
-            <p> Влажность на улице <img src="/img/icons8-hygrometer-16.png" alt=""><span class="humidity"></span>
-            <p> Атмосферное давление <img src="/img/icons8-pressure-16.png" alt=""><span class="pressure"></span>
+        <div class="street"><h2>На улице</h2>
+            <p> <img src="/img/icons8-temperature-80.png" alt="Температура на улице">
+            <span class="temperature"></span>
+            <span class="temperatureHint" aria-live="polite"></span>
+
+
+            <p> <img src="/img/icons8-hygrometer-80.png" alt="Влажность на улице">
+            <span class="humidity"></span>
+            <span class="humidityHint" aria-live="polite"></span>
+
+            
+            <p> <img src="/img/icons8-pressure-80.png" alt="Атмосферное давление">
+            <span class="pressure"></span> 
+            <span class="pressureHint" aria-live="polite"></span>
+            
             <p><span class="weatherDescription"></span>
+            <span class="weatherDescriptionHint" aria-live="polite"></span>
+
         </div>
 
-        <p> Данные были получены <span class="createdAt"></span>
     </content>
+    <p> Данные были получены <span class="createdAt"></span>
     
     <div class="graphics">
         <div class="chart-container">
@@ -36,7 +59,6 @@
             <canvas id="humidityGraphic">Your browser does not support the canvas element.</canvas>
         </div>
     </div>
-
 
 </body>
 </html>

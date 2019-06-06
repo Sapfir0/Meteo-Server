@@ -7,17 +7,17 @@ export function createGraphics(graphicValues) {
             text: 'Температурный режим'
         }
     }
-
+    console.log(graphicValues)
     
-    const temperatureInHomeArray = graphicValues[0];
-    const humidityInHomeArray = graphicValues[1];
-    const temperatureArray = graphicValues[2];
-    const himidityArray = graphicValues[3];
-    const pressureArray = graphicValues[4];
-    const weatherDescriptionArray = graphicValues[5];
-    const arduinoTimestampArray = graphicValues[6];
-    const createdAtArray = graphicValues[7];
-
+    const temperatureInHomeArray = graphicValues.temperatureInHome;
+    const humidityInHomeArray = graphicValues.humidityInHome;
+    // const temperatureArray = graphicValues[2];
+    // const himidityArray = graphicValues[3];
+    // const pressureArray = graphicValues[4];
+    // const weatherDescriptionArray = graphicValues[5];
+    // const arduinoTimestampArray = graphicValues[6];
+    const createdAtArray = graphicValues.createdAt;
+    
     for (let i = 0; i < createdAtArray.length; i++) {
         createdAtArray[i] = dateToStr(new Date(createdAtArray[i]))
     }
