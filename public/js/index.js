@@ -21,6 +21,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     createGraphics(graphicValues);
 
 
+
+    const temperatureHint = document.querySelector(".temperatureInHomeHint")
+    const humidityHint = document.querySelector(".humidityInHomeHint")
+    const sansityHint = document.querySelector(".sansityHint")
+
+
+    temperatureInHome.addEventListener('mouseover', () => {
+        showError(temperatureHint, "Температура дома")
+    })
+    temperatureInHome.addEventListener('mouseout', () => {
+        hideError(temperatureHint)
+    })
+
+    humidityInHome.addEventListener('mouseover', () => {
+        showError(temperatureHint, "Влажность дома")
+    })
+    humidityInHome.addEventListener('mouseout', () => {
+        hideError(temperatureHint)
+    })
+
+    sansityInHome.addEventListener('mouseover', () => {
+        showError(temperatureHint, "Освещенность дома")
+    })
+    sansityInHome.addEventListener('mouseout', () => {
+        hideError(temperatureHint)
+    })
+
+
+
     // -------- быдло функции    
 
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
@@ -45,3 +74,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 })
 
+
+function showError(widget, str) {
+    widget.innerHTML = str;
+    widget.className = 'error active';
+}
+
+function hideError(widget) {
+    widget.innerHTML = '';
+    widget.className = 'error';
+}
