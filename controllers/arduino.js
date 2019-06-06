@@ -12,7 +12,7 @@ function getArrays(req, res, next) {
     
     const columns = ["temperatureInHome", "humidityInHome", "temperature",
     "humidity", "pressure", "weatherDescription", "arduinoTimestamp", "createdAt" ]
-    let finalJson=[]
+    let finalJson= new Object
 
     helper().then( (column) =>{
         return res.json(column)
@@ -21,7 +21,7 @@ function getArrays(req, res, next) {
     async function helper() {
         for(let i=0; i<columns.length; i++) {
             let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i])
-            finalJson.push(item)
+            finalJson[columns[i]] = item
         }
         return finalJson;
     }
@@ -33,7 +33,6 @@ function getArrays(req, res, next) {
 async function getArduinoData(req, res, next) {
     try {
         const ard = await arduinoAPI.getLastArduinoValueFromSQL();
-        console.log(ard)
         return res.json(ard.dataValues)
     }
     catch(error) {
