@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperature = document.querySelector(".temperature")
     const humidity = document.querySelector(".humidity")
     const pressure = document.querySelector(".pressure")
-    const weatherDescription = document.querySelector(".weatherDescription")
+    const engWeatherDescription = document.querySelector(".engWeatherDescription")
     const createdAt = document.querySelector(".createdAt");
 
     const temperatureGraphic = document.getElementById('temperatureGraphic');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperatureHint = document.querySelector(".temperatureHint")
     const humidityHint = document.querySelector(".humidityHint")
     const pressureHint = document.querySelector(".pressureHint")
-    const weatherDescriptionHint = document.querySelector(".weatherDescriptionHint")
+    const engWeatherDescriptionHint = document.querySelector(".engWeatherDescriptionHint")
 
 
     const sansityHint = document.querySelector(".sansityHint")
@@ -83,13 +83,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/arduinoData");
         const arduinoValues = await response.json();
-    
+        console.log(arduinoValues.engWeatherDescription)
         temperatureInHome.innerHTML = arduinoValues.temperatureInHome + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityInHome + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
-        weatherDescription.innerHTML = arduinoValues.weatherDescription
+        engWeatherDescription.innerHTML = arduinoValues.engWeatherDescription
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
     }
 

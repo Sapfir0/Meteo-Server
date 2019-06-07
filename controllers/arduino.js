@@ -8,15 +8,21 @@ function saveArduinoData(req, res, next) {
     next()
 }
 
+
 function getArrays(req, res, next) {  
     
     const columns = ["temperatureInHome", "humidityInHome", "temperature",
-    "humidity", "pressure", "weatherDescription", "arduinoTimestamp", "createdAt" ]
-    let finalJson= new Object
+    "humidity", "pressure", "engWeatherDescription", "arduinoTimestamp", "createdAt" ]
+    
+
+
+    let finalJson= new Object;
 
     helper().then( (column) =>{
         return res.json(column)
     })
+
+    //переписать код выше на авейты
 
     async function helper() {
         for(let i=0; i<columns.length; i++) {
@@ -33,6 +39,7 @@ function getArrays(req, res, next) {
 async function getArduinoData(req, res, next) {
     try {
         const ard = await arduinoAPI.getLastArduinoValueFromSQL();
+        console.log(ard.dataValues)
         return res.json(ard.dataValues)
     }
     catch(error) {

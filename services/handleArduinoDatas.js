@@ -13,9 +13,22 @@ function  writeArduinoValuesToSQL(arduinoData) {
         temperature: arduinoData.temperature,
         humidity: arduinoData.humidity,
         pressure: arduinoData.pressure,
-        weatherDescription: arduinoData.weatherDescription,
-        arduinoTimestamp: arduinoData.CURRENTTIMESTAMP
+        engWeatherDescription: arduinoData.engWeatherDescription,
+        rusWeatherDescription: arduinoData.engWeatherDescription,
+        arduinoTimestamp: arduinoData.CURRENTTIMESTAMP,
+        weatherId: arduinoData.weatherId,
+        windSpeed:arduinoData.windSpeed,
+        windDeg: arduinoData.windDeg,
+        icon: arduinoData.icon
     })
+}
+
+function getFields(table) {
+    //SHOW FIELDS FROM $table
+    return [`${table}`].findAll({
+        
+    })
+
 }
 
 async function getColumnArduinoFromSQL(column)  { // вернет все значения у заданного столбца 
