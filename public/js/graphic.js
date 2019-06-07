@@ -1,5 +1,8 @@
 
 export function createGraphics(graphicValues) {
+    const temperatureGraphic = document.getElementById('temperatureGraphic');
+    const humidityGraphic = document.getElementById('humidityGraphic');
+    
     let datasForCharts
     let options = {
         title: {
@@ -7,15 +10,10 @@ export function createGraphics(graphicValues) {
             text: 'Температурный режим'
         }
     }
-    console.log(graphicValues)
+    //console.log(graphicValues)
     
     const temperatureInHomeArray = graphicValues.temperatureInHome;
     const humidityInHomeArray = graphicValues.humidityInHome;
-    // const temperatureArray = graphicValues[2];
-    // const himidityArray = graphicValues[3];
-    // const pressureArray = graphicValues[4];
-    // const weatherDescriptionArray = graphicValues[5];
-    // const arduinoTimestampArray = graphicValues[6];
     const createdAtArray = graphicValues.createdAt;
     
     for (let i = 0; i < createdAtArray.length; i++) {

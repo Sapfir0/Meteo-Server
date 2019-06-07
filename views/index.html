@@ -14,21 +14,31 @@
     <content>
             <div class="home"> <h2>Блок дома</h2>
 
-            <p><img src="/img/icons8-temperature-80.png" alt="Температура дома ">
-            <span class="temperatureInHome"></span>
+            <div id="temperatureInHomeBlock"> 
+                <p><img src="/img/icons8-temperature-80.png" alt="Температура дома ">
+                <span class="temperatureInHome"></span>
+            </div>
             <span class="temperatureInHomeHint" aria-live="polite"></span>
+            <!-- вынес строчку выше из дива, нужно потестить как оно будет дальше  -->
 
-            <p><img src="/img/icons8-hygrometer-80.png" alt="Влажность в доме ">
-            <span class="humidityInHome"></span> 
+            <div id="humidityInHomeBlock"> 
+                <p><img src="/img/icons8-hygrometer-80.png" alt="Влажность в доме ">
+                <span class="humidityInHome"></span> 
+            </div>
             <span class="humidityInHomeHint" aria-live="polite"></span>
 
-            <p> <img src="/img/icons8-light-80.png" alt="Освещенность в доме">
-            <span class="sansityInHome"></span>
+            <div id="sansityInHomeBlock"> 
+                <p> <img src="/img/icons8-light-80.png" alt="Освещенность в доме">
+                <span class="sansityInHome"></span>
+            </div>
             <span class="sansityHint" aria-live="polite"></span>
 
         </div>
 
         <div class="street"><h2>На улице</h2>
+            <span class="weatherIcon" aria-live="polite"></span>
+            <span class="weatherIconHint" aria-live="polite"></span>
+
             <p> <img src="/img/icons8-temperature-80.png" alt="Температура на улице">
             <span class="temperature"></span>
             <span class="temperatureHint" aria-live="polite"></span>
@@ -43,8 +53,8 @@
             <span class="pressure"></span> 
             <span class="pressureHint" aria-live="polite"></span>
             
-            <p><span class="engWeatherDescription"></span>
-            <span class="engWeatherDescriptionHint" aria-live="polite"></span>
+            <!-- <p><span class="engWeatherDescription"></span>
+            <span class="engWeatherDescriptionHint" aria-live="polite"></span> -->
 
         </div>
 

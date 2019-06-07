@@ -1,10 +1,10 @@
 import { createGraphics, setDatasForGraphic, chartNewLineGraphic, dateToStr } from "./graphic.js"
-
+import { showHint, hideHint } from "./helpers.js"
 
 
 document.addEventListener('DOMContentLoaded', async () => {
     
-
+    // widgets
     const temperatureInHome = document.querySelector(".temperatureInHome")
     const humidityInHome = document.querySelector(".humidityInHome")
     const sansityInHome = document.querySelector(".sansityInHome") //реализовать на арудино скан освещенности
@@ -13,69 +13,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pressure = document.querySelector(".pressure")
     const engWeatherDescription = document.querySelector(".engWeatherDescription")
     const createdAt = document.querySelector(".createdAt");
+    const weatherIcon = document.querySelector(".weatherIcon")
 
-    const temperatureGraphic = document.getElementById('temperatureGraphic');
-    const humidityGraphic = document.getElementById('humidityGraphic');
 
+    let weatherDescription; // dynamic string, got from arduino
     getlastArduinoValues()
 
     const graphicValues = await getGraphicValues()
     createGraphics(graphicValues);
 
-
-
+    // hints
     const temperatureInHomeHint = document.querySelector(".temperatureInHomeHint")
     const humidityInHomeHint = document.querySelector(".humidityInHomeHint")
     const temperatureHint = document.querySelector(".temperatureHint")
     const humidityHint = document.querySelector(".humidityHint")
     const pressureHint = document.querySelector(".pressureHint")
     const engWeatherDescriptionHint = document.querySelector(".engWeatherDescriptionHint")
-
-
+    const weatherIconHint = document.querySelector(".weatherIconHint")
     const sansityHint = document.querySelector(".sansityHint")
 
-    temperatureInHome.addEventListener('mouseover', () => {
-        showError(temperatureInHomeHint, "Температура дома")
-    })
-    temperatureInHome.addEventListener('mouseout', () => {
-        hideError(temperatureInHomeHint)
-    })
 
-    humidityInHome.addEventListener('mouseover', () => {
-        showError(humidityInHomeHint , "Влажность дома")
-    })
-    humidityInHome.addEventListener('mouseout', () => {
-        hideError(humidityInHomeHint )
-    })
 
-    temperature.addEventListener('mouseover', () => {
-        showError(temperatureHint, "Температура на улице")
-    })
-    temperature.addEventListener('mouseout', () => {
-        hideError(temperatureHint)
-    })
+    // block for hovers
+    const temperatureInHomeBlock = document.querySelector("#temperatureInHomeBlock")
+    const humidityInHomeBlock = document.querySelector("#humidityInHomeBlock")
+    const sansityInHomeBlock = document.querySelector("#sansityInHomeBlock")
 
-    humidity.addEventListener('mouseover', () => {
-        showError(humidityHint , "Влажность на улице")
-    })
-    humidity.addEventListener('mouseout', () => {
-        hideError(humidityHint )
-    })
 
-    pressure.addEventListener('mouseover', () => {
-        showError(pressureHint , "Атмосферное давление на улице")
-    })
-    pressure.addEventListener('mouseout', () => {
-        hideError(pressureHint )
-    })
+    //единственное что важно в этих массивах - это сохранить корректность тройки значений(они должны быть на одном i)
+    const widgets=[temperatureInHomeBlock, humidityInHomeBlock, temperature, 
+        humidity, pressure, sansityInHomeBlock, weatherIcon]
+    const hints = [temperatureInHomeHint, humidityInHomeHint, 
+        temperatureHint, humidityHint, pressureHint, sansityHint, weatherIconHint]
+    const stingsHints = ["Температура дома", "Влажность дома", 
+    "Температура на улице", "Влажность на улице", "Атмосферное давление на улице", "Освещенность дома", weatherDescription]
 
-    sansityInHome.addEventListener('mouseover', () => {
-        showError(sansityHint, "Освещенность дома")
-    })
-    sansityInHome.addEventListener('mouseout', () => {
-        hideError(sansityHint)
-    })
 
+    for(let i=0; i<widgets.length; i++) {
+        widgets[i].addEventListener('mouseover', () => {
+            showHint(hints[i], stingsHints[i])
+        })
+        widgets[i].addEventListener('mouseout', () => {
+            hideHint(hints[i])
+        })
+    }
 
 
     // -------- быдло функции    
@@ -83,14 +64,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/arduinoData");
         const arduinoValues = await response.json();
-        console.log(arduinoValues.engWeatherDescription)
+
         temperatureInHome.innerHTML = arduinoValues.temperatureInHome + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityInHome + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
-        engWeatherDescription.innerHTML = arduinoValues.engWeatherDescription
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
+        weatherDescription = arduinoValues.engWeatherDescription
+
+        const openweathermapUrl = "http://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
+        weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода">` );
     }
 
     async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
@@ -103,12 +87,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
-function showError(widget, str) {
-    widget.innerHTML = str;
-    widget.className = 'error active';
-}
-
-function hideError(widget) {
-    widget.innerHTML = '';
-    widget.className = 'error';
-}

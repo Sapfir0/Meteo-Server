@@ -39,7 +39,6 @@ function getArrays(req, res, next) {
 async function getArduinoData(req, res, next) {
     try {
         const ard = await arduinoAPI.getLastArduinoValueFromSQL();
-        console.log(ard.dataValues)
         return res.json(ard.dataValues)
     }
     catch(error) {
