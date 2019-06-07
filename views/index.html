@@ -14,20 +14,20 @@
     <content>
             <div class="home"> <h2>Блок дома</h2>
 
-            <div id="temperatureInHomeBlock"> 
+            <div id="temperatureInHomeBlock" class="block"> 
                 <p><img src="/img/icons8-temperature-80.png" alt="Температура дома ">
                 <span class="temperatureInHome"></span>
             </div>
             <span class="temperatureInHomeHint" aria-live="polite"></span>
             <!-- вынес строчку выше из дива, нужно потестить как оно будет дальше  -->
 
-            <div id="humidityInHomeBlock"> 
+            <div id="humidityInHomeBlock" class="block">  
                 <p><img src="/img/icons8-hygrometer-80.png" alt="Влажность в доме ">
                 <span class="humidityInHome"></span> 
             </div>
             <span class="humidityInHomeHint" aria-live="polite"></span>
 
-            <div id="sansityInHomeBlock"> 
+            <div id="sansityInHomeBlock" class="block"> 
                 <p> <img src="/img/icons8-light-80.png" alt="Освещенность в доме">
                 <span class="sansityInHome"></span>
             </div>
@@ -36,26 +36,29 @@
         </div>
 
         <div class="street"><h2>На улице</h2>
-            <span class="weatherIcon" aria-live="polite"></span>
+            <div id="weatherIconBlock" class="block"> 
+                <span class="weatherIcon" aria-live="polite"></span>
+            </div>
             <span class="weatherIconHint" aria-live="polite"></span>
 
-            <p> <img src="/img/icons8-temperature-80.png" alt="Температура на улице">
-            <span class="temperature"></span>
+            <div id="temperatureBlock" class="block"> 
+                <p> <img src="/img/icons8-temperature-80.png" alt="Температура на улице">
+                <span class="temperature"></span>
+            </div>
             <span class="temperatureHint" aria-live="polite"></span>
 
-
-            <p> <img src="/img/icons8-hygrometer-80.png" alt="Влажность на улице">
-            <span class="humidity"></span>
+            <div id="humidityBlock" class="block" class="block"> 
+                <p> <img src="/img/icons8-hygrometer-80.png" alt="Влажность на улице">
+                <span class="humidity"></span>
+            </div>
             <span class="humidityHint" aria-live="polite"></span>
 
-            
-            <p> <img src="/img/icons8-pressure-80.png" alt="Атмосферное давление">
-            <span class="pressure"></span> 
+            <div id="pressureBlock" class="block"> 
+                <p> <img src="/img/icons8-pressure-80.png" alt="Атмосферное давление">
+                <span class="pressure"></span> 
+            </div>
             <span class="pressureHint" aria-live="polite"></span>
             
-            <!-- <p><span class="engWeatherDescription"></span>
-            <span class="engWeatherDescriptionHint" aria-live="polite"></span> -->
-
         </div>
 
     </content>

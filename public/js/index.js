@@ -38,11 +38,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperatureInHomeBlock = document.querySelector("#temperatureInHomeBlock")
     const humidityInHomeBlock = document.querySelector("#humidityInHomeBlock")
     const sansityInHomeBlock = document.querySelector("#sansityInHomeBlock")
+    const temperatureBlock = document.querySelector("#temperatureBlock")
+    const humidityBlock = document.querySelector("#humidityBlock")
+    const pressureBlock = document.querySelector("#pressureBlock")
 
 
     //единственное что важно в этих массивах - это сохранить корректность тройки значений(они должны быть на одном i)
-    const widgets=[temperatureInHomeBlock, humidityInHomeBlock, temperature, 
-        humidity, pressure, sansityInHomeBlock, weatherIcon]
+    const widgets=[temperatureInHomeBlock, humidityInHomeBlock, temperatureBlock, 
+        humidityBlock, pressureBlock, sansityInHomeBlock, weatherIconBlock]
     const hints = [temperatureInHomeHint, humidityInHomeHint, 
         temperatureHint, humidityHint, pressureHint, sansityHint, weatherIconHint]
     const stingsHints = ["Температура дома", "Влажность дома", 
@@ -74,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         weatherDescription = arduinoValues.engWeatherDescription
 
         const openweathermapUrl = "http://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
-        weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода">` );
+        weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
     }
 
     async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)

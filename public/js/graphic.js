@@ -6,10 +6,13 @@ export function createGraphics(graphicValues) {
     let datasForCharts
     let options = {
         title: {
+            responsive: true,
+            maintainAspectRatio: false,
             display: true,
             text: 'Температурный режим'
         }
     }
+
     //console.log(graphicValues)
     
     const temperatureInHomeArray = graphicValues.temperatureInHome;
@@ -46,11 +49,13 @@ export function setDatasForGraphic(labels, data, label) {
 
 
 export function chartNewLineGraphic(ctx, datasForCharts, options) {
-    new Chart(ctx, {
+    var chart = new Chart(ctx, {
         type: 'line',
         data: datasForCharts,
-        options: options
+        options: options,
     });
+
+    //chart.canvas.parentNode.style.height = '128px'; //ВАЖНО СМОТРИ СЮДА
 
 }
 

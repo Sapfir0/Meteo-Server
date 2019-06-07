@@ -2,10 +2,10 @@
 
 export function showHint(widget, str) {
     widget.innerHTML = str;
-    widget.className = 'error active';
+    widget.className = 'hint active';
 }
 
 export function hideHint(widget) {
     widget.innerHTML = '';
-    widget.className = 'error';
+    widget.className = 'hint';
 }

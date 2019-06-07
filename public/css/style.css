@@ -5,6 +5,10 @@ body {
 
 }
 
+.block {
+  width: 230px;
+}
+
 a {
   color: #00B7FF;
 }
@@ -22,28 +26,24 @@ content {
   /* align-items: center; */
 }
 
-.street {
-  /* margin-left: 5%; */
+
+img {
+  height: 40px;
 }
 
 
 .chart-container {
   position: relative;  
   height: auto; 
+  min-height: 256px;
 }
 
-.graphics {
-
-  width: 50%;
-}	
-
+.chart-container {
+  width: 30%;
+}
 @media screen and (max-width: 650px) {
-  .graphics {
+  .chart-container {
     width: 100%;
-    height: 100%;
   }
 }
 
-.temperatureInHomeHint {
-  color: gray;
-}
