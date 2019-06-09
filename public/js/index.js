@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // -------- быдло функции    
 
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
-        const response = await fetch("/arduinoData");
+        const response = await fetch("/meteostationData");
         const arduinoValues = await response.json();
 
         temperatureInHome.innerHTML = arduinoValues.temperatureInHome + " °C"
