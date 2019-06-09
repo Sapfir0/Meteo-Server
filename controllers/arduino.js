@@ -3,9 +3,13 @@ const arduinoAPI = require("../services/handleArduinoDatas")
 
 
 function saveArduinoData(req, res, next) {
-    console.log(req.query)
+    //console.log(req.query)
     arduinoAPI.writeArduinoValuesToSQL(req.query)
     next()
+}
+
+function updateMeteoId(req, res, next) {
+    arduinoAPI.changeMeteoId()
 }
 
 
@@ -27,8 +31,10 @@ function getArrays(req, res, next) {
     //переписать код выше на авейты
 
     async function helper() {
+        const meteoId = req.user.meteostationId;
+
         for(let i=0; i<columns.length; i++) {
-            let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i])
+            let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i], meteoId)
             finalJson[columns[i]] = item
         }
         return finalJson;
@@ -39,8 +45,11 @@ function getArrays(req, res, next) {
 
 
 async function getArduinoData(req, res, next) {
+    console.log(req.user)
+
     try {
-        const ard = await arduinoAPI.getLastArduinoValueFromSQL();
+        const meteoId = req.user.meteostationId;
+        const ard = await arduinoAPI.getLastArduinoValueFromSQL(meteoId);
         return res.json(ard.dataValues)
     }
     catch(error) {
@@ -49,7 +58,10 @@ async function getArduinoData(req, res, next) {
 }
 
 function deleteOldArticles(req,res,next) {
-    arduinoAPI.deleteOldArduinoValuesFromSQL()
+    //запросить айди метеостанции
+    console.log(req.user)
+    const meteoId = req.user.meteostationId;
+    arduinoAPI.deleteOldArduinoValuesFromSQL(meteoId)
     next()
 }
 
@@ -57,5 +69,6 @@ module.exports = {
     saveArduinoData,
     getArduinoData,
     deleteOldArticles,
-    getArrays
+    getArrays,
+    updateMeteoId
 }

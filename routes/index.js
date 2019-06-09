@@ -13,6 +13,7 @@ const {
 } = require('../services/validator');
 
 function initAuthControllers(app, passport)  {
+
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -25,11 +26,12 @@ function initAuthControllers(app, passport)  {
 
 
     //---------- API ----------------------
-    app.get('/meteostationData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
-    app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
-    //при посте новой записи, удаляем старые
+     app.get('/meteostationData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
+     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
+    // //при посте новой записи, удаляем старые
+     app.post('/updateMeteoId', debug.seeREQ, handler.updateMeteoId, sendHtml.datasPage)
 
-    app.get("/chartsValues", handler.getArrays) //для построения графиков
+     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
 
 
