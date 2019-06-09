@@ -11,16 +11,18 @@ function saveArduinoData(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperatureInHome", "humidityInHome", "temperature",
-    "humidity", "pressure", "engWeatherDescription", "arduinoTimestamp", "createdAt" ]
+    const columns = ["temperatureInHome", "humidityInHome", 
+     "createdAt" ]
     
-
-
     let finalJson= new Object;
+
+    // const column = await helper();
+    // return res.json(column)
 
     helper().then( (column) =>{
         return res.json(column)
     })
+
 
     //переписать код выше на авейты
 
