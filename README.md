@@ -13,4 +13,4 @@ Meteo-server
 
 [Метеостанция](https://github.com/Sapfir0/meteostation "Не юзай это, ты че")
 
-[Wiki для метеостанции такого рода](https://github.com/Sapfir0/Meteo-Server/wiki)
+[Центральная вики, объединяющая все невозможное](https://github.com/Sapfir0/Meteo-Server/wiki)

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <script type="text/javascript" src="/js/register.js"></script>
+</head>
+<body>
+    
+    <div class="reg" name="register">
+        <p>Email</p>
+        <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />      
+        <span class="emailError" aria-live="polite"></span>
+        <p>Password</p>
+        <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,50}" />
+        <span class="passwordError" aria-live="polite"></span>
+        <p>Retype password</p>
+        <input id="repassword" type="password" name="repassword" placeholder="Retype password" required="required" />
+        <span class="repasswordError" aria-live="polite"></span>
+        <button class="welcome" id="submit" type="submit">Зарегистрироваться</button>
+        <span class="serverError" aria-live="polite"></span>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign in</title>
+    <script type="text/javascript" src="/js/sign_In.js"></script>
+</head>
+<body>
+    <div class="inputForm">
+        <div class="reg">
+            <p> Email
+            <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />            
+            <span class="emailError" aria-live="polite"></span>
+            <p> Password
+            <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,}" />
+            <span class="passwordError" aria-live="polite"></span>
+            <button class="welcome" id="submit">Войти</button>
+            <span class="serverError" aria-live="polite"></span>
+        </div>
+    </div>
+</body>
+</html>
