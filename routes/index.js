@@ -12,14 +12,14 @@ const {
     userLoginValidator
 } = require('../services/validator');
 
-const initAuthControllers = (app, passport) => {
+function initAuthControllers(app, passport)  {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
     //-------- рендер страниц -------------
     app.get('/', sendHtml.index);
-    app.get('/datasPage', sendHtml.datasPage);
+    app.get('/datasPage', isLoggedIn, sendHtml.datasPage);
     app.get('/register', sendHtml.register);
     app.get('/sign_In', sendHtml.sign_In);
 
@@ -34,22 +34,16 @@ const initAuthControllers = (app, passport) => {
 
 
 
-    app.post(
-        '/register',
-        urlencodedParser,
-        userCreateValidator,
+    app.post('/register',urlencodedParser,userCreateValidator,
         passport.authenticate('local-signup', {
-            successRedirect: '/datasPage',
+            successRedirect: '/datasPage',//не жди от этого чего-то
             failureRedirect: '/register'
         }),
     );
 
-    app.post(
-        '/sign_In', 
-        urlencodedParser,
-        userLoginValidator,
+    app.post('/sign_In', urlencodedParser,userLoginValidator,
         passport.authenticate('local-signin', {
-            successRedirect: '/datasPage',
+            successRedirect: '/datasPage', //это не робит так как нужно, но это хер уберешь, все ломается, тащите сюда одмена пасспорт джс
             failureRedirect: '/sign_In'
         })
     );

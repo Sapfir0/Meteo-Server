@@ -3,10 +3,8 @@ const validators = { ////поправить
     strPasswordError: 'Пароль должен содержать более 5 символов', 
     strEventEmailError: 'Вводи почту правильно', 
     strRepasswordError: 'Введенные пароли не совпадают', 
-    strLoginError: 'Логин должен состоять более чем из 3 символов',
     emailRegExp: new RegExp('.+@.+\\..+'),
     passwordRegExp: new RegExp('.{5,}'),
-    loginRegExp: new RegExp('.{3,}')
 }
 
 document.addEventListener('DOMContentLoaded', start);
@@ -55,6 +53,11 @@ function start() {
         }
     }
 
+
+    const widgets = [email,password,repassword]
+    const errorsSpans = [emailError, passwordError, repasswordError]
+    const errorsStrings = [validators.strEmailError, validators.strPasswordError,validators.strRepasswordError]
+
     email.addEventListener('input', () => {
         hideError(serverError)
         checkValidation(email, emailError, validators.strEmailError)
@@ -100,7 +103,7 @@ function start() {
             }
             fetch("/register", options).then(response => {
                 if (response.ok) {
-                    document.location.href = "/"
+                    document.location.href = "/datasPage"
                 } else {
                     errorHandler(response.text().then(errorHandler))
                 }

@@ -25,7 +25,6 @@ function generateHash (password) {
 }
 
 const loadPasportStrategies = (passport, user) => {
-    //const User = user;
     const LocalStrategy = require('passport-local').Strategy;
 
     passport.serializeUser((user, done) => {
@@ -38,7 +37,7 @@ const loadPasportStrategies = (passport, user) => {
         UserApi.getUserById(id).then(user => {
             done(null, user.get()); //нашли
         }).catch(err => {
-            done('not found', null); //не нашли
+            done(err, null); //не нашли
         });
     });
 
@@ -52,13 +51,12 @@ const loadPasportStrategies = (passport, user) => {
             },
             (req, email, password, done) => {
                 const res = req.res;
-                //console.log(res)
 
-                //const errors = validationResult(req); 
-                // if (!errors.isEmpty()) {
-                //     res.statusCode = 406;
-                //     res.send(validators.register.validationFailed)
-                // }
+                const errors = validationResult(req); 
+                if (!errors.isEmpty()) {
+                    res.statusCode = 406;
+                    res.send(validators.register.validationFailed)
+                }
 
                 UserApi.getUserByEmail(email).then(user => {
                     console.log(user)

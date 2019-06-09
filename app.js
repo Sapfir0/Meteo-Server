@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
 const app = express();
 const models = require('./database/models');
 const config = require('./config/config.js');
@@ -17,8 +16,6 @@ app.use(express.static('node_modules/chart.js/dist'))
 
 app.use(favicon(path.join(config.imgDir, 'favicon.ico')));
 
-//app.use('/', indexRouter)
-
 
 const { initAuthControllers } = require('./routes/index.js');
 const { loadPasportStrategies } = require('./controllers/users');
@@ -31,7 +28,8 @@ app.use(
 app.use(passport.initialize()); //возможно, нужно чистить сессии
 app.use(passport.session()); // persistent login sessions
 
-const authRoute = initAuthControllers(app, passport);
+
+initAuthControllers(app, passport);
 loadPasportStrategies(passport, models.user)
 
 

@@ -2,7 +2,7 @@
 const config = require("../config/config")
 
 
-const index = (req, res, next) => {
+const index = (req, res ) => {
     res.sendFile(config.viewsDir + "index.html")
 }
 
@@ -10,11 +10,11 @@ const success = (req, res) => {
     res.send("Успешно")
 }
 
-const sign_In = (req, res, next) => {
+const sign_In = (req, res  ) => {
     res.sendFile(config.viewsDir + "sign_In.html")
 }
 
-const register = (req, res, next) => {
+const register = (req, res  ) => {
     res.sendFile(config.viewsDir + "register.html")
 }
 

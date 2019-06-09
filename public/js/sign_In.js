@@ -3,7 +3,6 @@ const validators = { // все еще не понимаю как вынести 
     strPasswordError: 'Пароль должен содержать более 5 символов', 
     strEventEmailError: 'Вводи почту правильно', 
     strRepasswordError: 'Введенные пароли не совпадают', 
-    strLoginError: 'Логин должен состоять более чем из 3 символов',
     emailRegExp: new RegExp('.+@.+\\..+'),
     passwordRegExp: new RegExp('.{5,}')
 }
@@ -56,13 +55,13 @@ function start() {
 
 
     sendBtn.addEventListener('click', (event) => {
-            // if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
-            //     showError(emailError, validators.strEventEmailError)
-            // }
-            // else if(!password.value.match(validators.passwordRegExp) ) {
-            //     showError(passwordError, validators.strPasswordError)
-            // }
-            // else { // валидация на фронте пройдена, делаем запрос к серверу и смотрим на его ответ
+            if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
+                showError(emailError, validators.strEventEmailError)
+            }
+            else if(!password.value.match(validators.passwordRegExp) ) {
+                showError(passwordError, validators.strPasswordError)
+            }
+            else { // валидация на фронте пройдена, делаем запрос к серверу и смотрим на его ответ
                 console.log("запрос")
                 const options = {
                     method:"post",
@@ -76,7 +75,7 @@ function start() {
                 }
                 fetch("/sign_In", options).then(response => {
                     if (response.ok) {
-                        document.location.href = "/"
+                        document.location.href = "/datasPage"
                     }
                     else {
                         errorHandler(response.text().then(errorHandler))
@@ -84,7 +83,7 @@ function start() {
                 }).catch((err) => {
                     console.error(err)
                 })
-            //}
+            }
         },
         false
     );
