@@ -1,4 +1,4 @@
-import { showHint, hideHint, checkValidation, errorHandler } from "./helpers.js"
+import { showHint, hideHint, errorHandler } from "./helpers.js"
 
 import { validators } from "./errorStrings.js"
 
@@ -15,6 +15,15 @@ function start() {
     const password = document.querySelector('#password')
     const sendBtn = document.querySelector("#submit")
     
+
+    function checkValidation(widget, errorSpan, strError, checkPassword=false) {
+        if (widget.validity.valid) {
+            hideHint(errorSpan)
+        }
+        else {
+            showHint(errorSpan, strError)
+        }
+    }
     
     email.addEventListener('input', () => {
         hideHint(serverError)

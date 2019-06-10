@@ -97,6 +97,7 @@ function start() {
                     "password": password.value
                 })
             }
+            
             fetch("/register", options).then(response => {
                 if (response.ok) {
                     document.location.href = "/datasPage"
