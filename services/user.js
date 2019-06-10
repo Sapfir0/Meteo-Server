@@ -1,3 +1,4 @@
+const bCrypt = require('bcryptjs');
 const { User } = require('../database/tables')
 
 
@@ -40,9 +41,19 @@ function createUser(email, password) {
     })
 }
 
+function generateHash (password) {
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10),null);
+}
+
+function isValidPassword(userpass, password) {
+    return bCrypt.compareSync(password, userpass);
+}
+
 module.exports = {
     createUser,
     getUserById,
     getUserByEmail,
-    changeMeteoId
+    changeMeteoId,
+    generateHash,
+    isValidPassword
 }

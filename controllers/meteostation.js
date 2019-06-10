@@ -16,8 +16,7 @@ function updateMeteoId(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperatureInHome", "humidityInHome", 
-     "createdAt" ]
+    const columns = ["temperatureInHome", "humidityInHome", "createdAt" ]
     
     let finalJson= new Object;
 
@@ -59,7 +58,7 @@ async function getArduinoData(req, res, next) {
 }
 
 function deleteOldArticles(req,res,next) {
-    //запросить айди метеостанции
+    //запрашиваю айди метеостанции
     const meteoId = req.query.meteostationId
     console.log(meteoId)
     arduinoAPI.deleteOldArduinoValuesFromSQL(meteoId)

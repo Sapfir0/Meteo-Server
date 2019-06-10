@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const debug = require("../services/debug")
 
 const sendHtml = require("../services/sendHtml")
-const handler = require("../controllers/arduino")
+const handler = require("../controllers/meteostation")
 
 //  проверка логирования
 const { isLoggedIn, loggedCheker } = require('../controllers/logged.js');

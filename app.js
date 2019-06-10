@@ -18,7 +18,7 @@ app.use(favicon(path.join(config.imgDir, 'favicon.ico')));
 
 
 const { initAuthControllers } = require('./routes/index.js');
-const { loadPasportStrategies } = require('./controllers/users');
+const { loadPasportStrategies } = require('./controllers/users/users');
 const session = require('express-session');
 const passport = require('passport');
 
