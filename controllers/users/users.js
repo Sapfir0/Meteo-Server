@@ -20,9 +20,7 @@ const loadPasportStrategies = (passport, user) => {
 
 
 
-
-    passport.use(
-        'local-signup',
+    passport.use('local-signup',
         new LocalStrategy({
                 usernameField: 'email',
                 passwordField: 'password',
@@ -33,8 +31,7 @@ const loadPasportStrategies = (passport, user) => {
     );
 
 
-    passport.use(
-        'local-signin',
+    passport.use('local-signin',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
                 usernameField: 'email',

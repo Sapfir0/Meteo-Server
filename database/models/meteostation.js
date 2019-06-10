@@ -1,5 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
-    var Arduino = sequelize.define('arduino', {
+    var Meteostation = sequelize.define('meteostation', {
         id: { autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER },
         temperatureInHome: { type: Sequelize.DOUBLE, allowNull: false },
         humidityInHome: { type: Sequelize.DOUBLE, allowNull: false },
@@ -18,5 +18,5 @@ module.exports = function(sequelize, Sequelize) {
 
     });
 
-    return Arduino;
+    return Meteostation;
 };

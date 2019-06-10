@@ -2,18 +2,8 @@
 
 const { validationResult } = require('express-validator/check');
 const UserApi = require("../../services/user")
+const {validators } = require("./errorStrings")
 
-const validators = {
-    register: {
-        validationFailed: 'Валидация не пройдена',
-        existedEmail: 'Емейл уже занят',
-        userNotCreated: 'Юзер не создан',
-    },
-    signIn: {
-        emailNotExisted: 'Такого емейла не существует',
-        incorrectPassword: 'Неправильный пароль.'
-    }
-}
 
 function loginUser(req, email, password, next)  { //некст нас не кинет на следующий обработчик
     const res = req.res;

@@ -2,10 +2,10 @@ const bodyParser = require('body-parser');
 const debug = require("../services/debug")
 
 const sendHtml = require("../services/sendHtml")
-const handler = require("../controllers/meteostation")
+const handler = require("../controllers/devices/meteostation")
 
 //  проверка логирования
-const { isLoggedIn, loggedCheker } = require('../controllers/logged.js');
+const { isLoggedIn, loggedCheker } = require('../controllers/users/logged.js');
 
 const {
     userCreateValidator,
@@ -49,7 +49,7 @@ function initAuthControllers(app, passport)  {
             failureRedirect: '/sign_In'
         })
     );
-};
+}
 
 module.exports = {
     initAuthControllers

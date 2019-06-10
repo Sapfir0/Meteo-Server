@@ -1,10 +1,10 @@
-const { Arduino } = require("../database/tables")
+const { Meteostation } = require("../database/tables")
 const { Op } = require('sequelize')
 
 function  writeArduinoValuesToSQL(arduinoData) {
     console.log(arduinoData)
     //ВАЖНО, надо учитывать все эти поля на ардуинке
-    return Arduino.create({
+    return Meteostation.create({
         temperatureInHome: arduinoData.temperatureInHome,
         humidityInHome: arduinoData.humidityInHome,
         temperature: arduinoData.temperature,
@@ -32,7 +32,7 @@ function getFields(table) {
 async function getColumnArduinoFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
     
-    const currentColumn = await Arduino.findAll({
+    const currentColumn = await Meteostation.findAll({
         attributes: [column],
         where: {
             meteostationId
@@ -50,7 +50,7 @@ async function getColumnArduinoFromSQL(column, meteostationId)  { // верне�
 function getLastArduinoValueFromSQL(meteostationId) { 
     //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
 
-    return Arduino.findOne({ 
+    return Meteostation.findOne({ 
         order: [
             ['id', 'DESC']
         ],
@@ -64,7 +64,7 @@ function getLastArduinoValueFromSQL(meteostationId) {
 
 function deleteOldArduinoValuesFromSQL (meteostationId) {
     // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
-    return Arduino.destroy({
+    return Meteostation.destroy({
         where: {
             meteostationId,
             createdAt: {

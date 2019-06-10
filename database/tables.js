@@ -2,9 +2,9 @@ const models = require('./models');
 
 
 const User = models.users
-const Arduino = models.arduino
+const Meteostation = models.meteostation
 
 module.exports = {
     User, 
-    Arduino
+    Meteostation
 }

@@ -1,6 +1,6 @@
 //данные приходят в req.query
-const arduinoAPI = require("../services/handleArduinoDatas")
-const userApi = require("../services/user")
+const arduinoAPI = require("../../services/handleMeteostationDatas")
+const userApi = require("../../services/user")
 
 function saveArduinoData(req, res, next) {
     arduinoAPI.writeArduinoValuesToSQL(req.query)
