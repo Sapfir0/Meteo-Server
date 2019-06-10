@@ -45,10 +45,12 @@ function getArrays(req, res, next) {
 
 
 async function getArduinoData(req, res, next) {
-    console.log(req.user)
+    const userId = req.user.meteostationId
+    if (userId == null || userId == undefined ) {
+        return;
+    }
 
     try {
-        const userId = req.user.meteostationId
         const ard = await arduinoAPI.getLastArduinoValueFromSQL(userId);
         return res.json(ard.dataValues)
     }

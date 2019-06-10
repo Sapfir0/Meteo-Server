@@ -17,6 +17,17 @@ function changeMeteoId(userId, meteostationId) {
     )
 }
 
+function getMeteoIdByuserId(userId) {
+    return User.findOne({
+        attributes: [
+            'meteostationId'
+        ],
+        where: {
+            id: userId
+        }
+    })
+}
+
 
 function getUserById(userId) {
     return User.findOne({
