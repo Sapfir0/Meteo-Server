@@ -1,12 +1,17 @@
-const path = require('path')
+const dotenv = require("dotenv")
 
-const port = process.env.PORT || 5060;
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.load()
+}
+
+const path = require('path')
+const port = process.env.PORT;
 
 const mainDir = path.join(__dirname, "..")
 const viewsDir = path.join(__dirname, "..", "views/") //я уже забыл зачем тут слеш
 const imgDir = path.join(__dirname, "..", 'public', 'img') 
 
-const secretKey = 'keyboard cat'
+const secretKey = process.env.SECRET_KEY
 
 
 module.exports = {

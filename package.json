@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "logs": "heroku logs --tail -a meteo-server",
-    "test": "./node_modules/.bin/eslint  \"./**/*.js\" "
+    "test": "./node_modules/.bin/eslint  \"./**/*.js\" ",
+    "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,7 +23,8 @@
     "passport-local": "^1.0.0",
     "sequelize": "^5.8.6",
     "sequelize-cli": "^5.4.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "web-push": "^3.3.5"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

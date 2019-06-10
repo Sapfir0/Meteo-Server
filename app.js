@@ -8,6 +8,8 @@ const config = require('./config/config.js');
 const favicon = require('serve-favicon');
 
 app.use(logger('dev'));
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(express.static(path.join(__dirname, 'public')));
@@ -16,6 +18,9 @@ app.use(express.static('node_modules/chart.js/dist'))
 
 app.use(favicon(path.join(config.imgDir, 'favicon.ico')));
 
+//push
+
+//!push
 
 const { initAuthControllers } = require('./routes/index.js');
 const { loadPasportStrategies } = require('./controllers/users/users');

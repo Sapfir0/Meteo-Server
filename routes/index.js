@@ -35,7 +35,11 @@ function initAuthControllers(app, passport)  {
 
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
-
+    ///////////////////////
+    // const push = require("../controllers/push_notifications")
+    // app.post('/push/subscribe', push.subscribe);
+    // app.post('/push/unsubscribe', push.unsubscribe);
+    //----------Users API------------------------
     app.post('/register',urlencodedParser,userCreateValidator,
         passport.authenticate('local-signup', {
             successRedirect: '/datasPage',//не жди от этого чего-то
