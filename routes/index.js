@@ -23,6 +23,8 @@ function initAuthControllers(app, passport)  {
     app.get('/datasPage', isLoggedIn, sendHtml.datasPage);
     app.get('/register', sendHtml.register);
     app.get('/sign_In', sendHtml.sign_In);
+    app.get("/home", isLoggedIn, sendHtml.home)
+    app.get('/logout', sendHtml.logout)
 
 
     //---------- API ----------------------
@@ -33,10 +35,6 @@ function initAuthControllers(app, passport)  {
 
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
-    app.get("/home" , sendHtml.home)
-
-
-    app.get('/logout', sendHtml.logout)
 
     app.post('/register',urlencodedParser,userCreateValidator,
         passport.authenticate('local-signup', {

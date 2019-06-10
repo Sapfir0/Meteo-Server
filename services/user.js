@@ -1,7 +1,6 @@
 const { User } = require('../database/tables')
 
 
-
 function changeMeteoId(userId, meteostationId) {
     console.log(userId)
     console.log(meteostationId)

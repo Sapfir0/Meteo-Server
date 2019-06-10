@@ -1,4 +1,4 @@
-import { showHint, hideHint, checkValidation, errorHandler, passwordEqualRepasswor } from "./helpers.js"
+import { showHint, hideHint,  errorHandler } from "./helpers.js"
 import { validators } from "./errorStrings.js"
 
 
@@ -16,6 +16,29 @@ function start() {
     const submitBtn = document.querySelector("#submit")
 
 
+    function checkValidation(widget, errorSpan, strError, checkPassword=false) {
+        if (widget.validity.valid) {
+            hideHint(errorSpan)
+            if(checkPassword) 
+                passwordEqualRepassword()
+        }
+        else {
+            showHint(errorSpan, strError)
+        }
+    }
+
+    function passwordEqualRepassword() {
+        if (password.value == repassword.value) {
+            hideHint(repasswordError)
+            return true
+        }
+        else {
+            showHint(repasswordError, validators.strRepasswordError)
+            return false
+        }
+    }
+
+
 
     const widgets = [email,password,repassword]
     const errorsSpans = [emailError, passwordError, repasswordError]
@@ -23,7 +46,7 @@ function start() {
 
     // for(let i=0; i<widgets.length;i++) { //мне не нравится эта реализация , но пусть будет
     //     widgets[i].addEventListener('input', () => {
-    //         hideError(serverError)
+    //         hideHint(serverError)
     //         if (widgets[i] == password || widgets[i]== repassword) {
     //             checkValidation(widgets[i],errorsSpans[i],errorsStrings[i], true)
     //         }
@@ -34,32 +57,33 @@ function start() {
     // }
 
     email.addEventListener('input', () => {
-        hideError(serverError)
+        hideHint(serverError)
         checkValidation(email, emailError, validators.strEmailError)
     });
 
     password.addEventListener('input', () => {
-        hideError(serverError)
-        checkValidation(password, passwordError, validators.strPasswordError, true)
+        hideHint(serverError)
+        checkValidation(password, passwordError, validators.strPasswordError, true, repassword)
     })
 
 
     repassword.addEventListener('input', () => {
-        hideError(serverError)
-        checkValidation(repassword, repasswordError, validators.strRepasswordError, true)
+        hideHint(serverError)
+        checkValidation(repassword, repasswordError, validators.strRepasswordError, true, password)
+
     })
 
 
 
     submitBtn.addEventListener('click', () => {       
         if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
-            showError(emailError, validators.strEventEmailError)
+            showHint(emailError, validators.strEventEmailError)
         } else if(!password.value.match(validators.passwordRegExp) ) {
-            showError(passwordError, validators.strPasswordError)
+            showHint(passwordError, validators.strPasswordError)
         } else if(!repassword.value.match(validators.passwordRegExp) ) { //вторая регулярка не нужна
-            showError(repasswordError, validators.strRepasswordError)
+            showHint(repasswordError, validators.strRepasswordError)
         } else if( !passwordEqualRepassword() ) {
-            showError(passwordError, validators.strPasswordError)
+            showHint(passwordError, validators.strPasswordError)
         } else { // валидация на фронте пройдена, делаем запрос к серверу и смотрим на его ответ
             console.log("запрос")
             

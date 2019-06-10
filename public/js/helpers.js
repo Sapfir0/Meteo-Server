@@ -11,27 +11,27 @@ export function hideHint(widget) {
 }
 
 
-export function checkValidation(widget, errorSpan, strError, checkPassword=false) {
-    if (widget.validity.valid) {
-        hideHint(errorSpan)
-        if(checkPassword) 
-            passwordEqualRepassword()
-    }
-    else {
-        showHint(errorSpan, strError)
-    }
-}
+// export function checkValidation(widget, errorSpan, strError, checkPassword=false, compairWidget=undefined) {
+//     if (widget.validity.valid) {
+//         hideHint(errorSpan)
+//         if(checkPassword) 
+//            passwordEqualRepassword(widget, compairWidget)
+//     }
+//     else {
+//         showHint(errorSpan, strError)
+//     }
+// }
 
-export function passwordEqualRepassword() {
-    if (password.value == repassword.value) {
-        hideError(repasswordError)
-        return true
-    }
-    else {
-        showError(repasswordError, validators.strRepasswordError)
-        return false
-    }
-}
+// export function passwordEqualRepassword(widget, compairWidget, errorSpan, strError) {
+//     if (widget.value == compairWidget.value) {
+//         hideHint(compairWidget)
+//         return true
+//     }
+//     else {
+//         showHint(errorSpan, strError)
+//         return false
+//     }
+// }
 
 
 
