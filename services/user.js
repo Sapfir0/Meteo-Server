@@ -1,6 +1,19 @@
 const { User } = require('../database/tables')
 
 
+
+function changeMeteoId(userId, meteostationId) {
+    console.log(userId)
+    console.log(meteostationId)
+    return User.update({
+        where: {
+            id: userId
+        },
+        meteostationId
+    })
+}
+
+
 function getUserById(userId) {
     return User.findOne({
         where: {
@@ -27,5 +40,6 @@ function createUser(email, password) {
 module.exports = {
     createUser,
     getUserById,
-    getUserByEmail
+    getUserByEmail,
+    changeMeteoId
 }

@@ -1,5 +1,4 @@
 
-
 export const validators = { 
     strEmailError: 'Проверьте правильность введенного e-mail', 
     strPasswordError: 'Пароль должен содержать более 5 символов', 

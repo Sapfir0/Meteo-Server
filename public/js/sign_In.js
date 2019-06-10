@@ -52,7 +52,10 @@ function start() {
                         document.location.href = "/datasPage"
                     }
                     else {
-                        errorHandler(response.text().then(errorHandler))
+                        response.text().then(error => {
+                            console.log(error)
+                            errorHandler(serverError, error)
+                        })
                     }
                 }).catch((err) => {
                     console.error(err)

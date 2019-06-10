@@ -35,6 +35,6 @@ export function passwordEqualRepassword() {
 
 
 
-export function errorHandler(err) {
+export function errorHandler(serverError, err) {
     showHint(serverError, err)
 }

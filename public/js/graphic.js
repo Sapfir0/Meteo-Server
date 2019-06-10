@@ -13,7 +13,6 @@ export function createGraphics(graphicValues) {
         }
     }
 
-    //console.log(graphicValues)
     
     const temperatureInHomeArray = graphicValues.temperatureInHome;
     const humidityInHomeArray = graphicValues.humidityInHome;

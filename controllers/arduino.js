@@ -1,6 +1,6 @@
 //данные приходят в req.query
 const arduinoAPI = require("../services/handleArduinoDatas")
-
+const userApi = require("../services/user")
 
 function saveArduinoData(req, res, next) {
     //console.log(req.query)
@@ -9,7 +9,9 @@ function saveArduinoData(req, res, next) {
 }
 
 function updateMeteoId(req, res, next) {
-    arduinoAPI.changeMeteoId()
+    console.log(req.body)
+    userApi.changeMeteoId(req.user.id, req.body.meteostationId)
+    next()
 }
 
 

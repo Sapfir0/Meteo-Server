@@ -21,6 +21,18 @@ function start() {
     const errorsSpans = [emailError, passwordError, repasswordError]
     const errorsStrings = [validators.strEmailError, validators.strPasswordError,validators.strRepasswordError]
 
+    // for(let i=0; i<widgets.length;i++) { //мне не нравится эта реализация , но пусть будет
+    //     widgets[i].addEventListener('input', () => {
+    //         hideError(serverError)
+    //         if (widgets[i] == password || widgets[i]== repassword) {
+    //             checkValidation(widgets[i],errorsSpans[i],errorsStrings[i], true)
+    //         }
+    //         else {
+    //             checkValidation(widgets[i],errorsSpans[i],errorsStrings[i])
+    //         }
+    //     })
+    // }
+
     email.addEventListener('input', () => {
         hideError(serverError)
         checkValidation(email, emailError, validators.strEmailError)
@@ -65,7 +77,10 @@ function start() {
                 if (response.ok) {
                     document.location.href = "/datasPage"
                 } else {
-                    errorHandler(response.text().then(errorHandler))
+                    response.text().then(error => {
+                        console.log(error)
+                        errorHandler(serverError, error)
+                    })
                 }
             }).catch(err => {
                 console.error(err)

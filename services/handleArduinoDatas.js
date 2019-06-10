@@ -1,7 +1,4 @@
-const arduinoInit = require('../database/models/arduino')
-const models = require('../database/models');
-const Arduino = arduinoInit(models.sequelize, models.Sequelize)
-
+const { Arduino } = require("../database/tables")
 const { Op } = require('sequelize')
 
 function  writeArduinoValuesToSQL(arduinoData) {
@@ -31,11 +28,6 @@ function getFields(table) {
     })
 }
 
-function changeMeteoId(meteostationId) {
-    return Arduino.update({
-        meteostationId
-    })
-}
 
 async function getColumnArduinoFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
@@ -87,6 +79,5 @@ module.exports = {
     writeArduinoValuesToSQL,
     getColumnArduinoFromSQL,
     getLastArduinoValueFromSQL,
-    deleteOldArduinoValuesFromSQL,
-    changeMeteoId
+    deleteOldArduinoValuesFromSQL
 }
