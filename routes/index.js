@@ -28,8 +28,8 @@ function initAuthControllers(app, passport)  {
 
 
     //---------- API ----------------------
-     app.get('/meteostationData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
-     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
+    app.get('/meteostationData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
+    app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
     // //при посте новой записи, удаляем старые
     app.post('/updateMeteoId', urlencodedParser, handler.updateMeteoId, sendHtml.success)
 

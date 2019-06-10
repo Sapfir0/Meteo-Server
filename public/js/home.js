@@ -7,21 +7,22 @@ function start() {
     const meteoId = document.querySelector("#meteoId")
     const sendBtn = document.querySelector("#submit")
     const serverError = document.querySelector(".serverError")
-    const options = {
-        method: "post",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "meteostationId": meteoId.value
-        })
- 
-    }
+
 
 
     sendBtn.addEventListener('click', (event) => {
-        console.log("запрос")
+        console.log(meteoId.value)
 
+        const options = {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "meteostationId": meteoId.value
+            })
+     
+        }
         fetch("/updateMeteoId", options).then(response => {
             if (response.ok) {
                 document.location.href = "/datasPage"

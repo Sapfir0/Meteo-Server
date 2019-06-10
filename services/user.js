@@ -2,14 +2,18 @@ const { User } = require('../database/tables')
 
 
 function changeMeteoId(userId, meteostationId) {
+    // UPDATE user SET meteostationId=meteostationId WHERE id=userId
     console.log(userId)
     console.log(meteostationId)
     return User.update({
-        where: {
-            id: userId
-        },
-        meteostationId
-    })
+        meteostationId,
+    }, 
+        {
+            where: {
+                id: userId
+            }
+        }
+    )
 }
 
 
