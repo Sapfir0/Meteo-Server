@@ -11,7 +11,7 @@ const mainDir = path.join(__dirname, "..")
 const viewsDir = path.join(__dirname, "..", "views/") //я уже забыл зачем тут слеш
 const imgDir = path.join(__dirname, "..", 'public', 'img') 
 
-const secretKey = process.env.SECRET_KEY
+const secretKey = process.env.SECRET_KEY || "keyboard cat"
 
 
 module.exports = {
