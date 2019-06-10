@@ -33,8 +33,10 @@ function initAuthControllers(app, passport)  {
 
      app.get("/chartsValues", handler.getArrays) //для построения графиков
 
+    app.get("/home" , sendHtml.home)
 
 
+    app.get('/logout', sendHtml.logout)
 
     app.post('/register',urlencodedParser,userCreateValidator,
         passport.authenticate('local-signup', {

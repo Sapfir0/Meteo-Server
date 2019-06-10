@@ -1,11 +1,7 @@
-const validators = { // все еще не понимаю как вынести это все
-    strEmailError: 'Проверьте правильность введенного e-mail', 
-    strPasswordError: 'Пароль должен содержать более 5 символов', 
-    strEventEmailError: 'Вводи почту правильно', 
-    strRepasswordError: 'Введенные пароли не совпадают', 
-    emailRegExp: new RegExp('.+@.+\\..+'),
-    passwordRegExp: new RegExp('.{5,}')
-}
+import { showHint, hideHint, checkValidation, errorHandler } from "./helpers.js"
+
+import { validators } from "./errorStrings.js"
+
 
 
 document.addEventListener('DOMContentLoaded', start);
@@ -19,47 +15,25 @@ function start() {
     const password = document.querySelector('#password')
     const sendBtn = document.querySelector("#submit")
     
-
-    function showError(spanError, str) {
-        spanError.innerHTML = str;
-        spanError.className = 'error active';
-    }
-
-    function hideError(spanError) {
-        spanError.innerHTML = '';
-        spanError.className = 'error';
-    }
-
-    function checkValidation(widget, errorSpan, strError) {
-        if (widget.validity.valid) {
-            hideError(errorSpan)
-        }
-        else {
-            showError(errorSpan, strError)
-        }
-    }
     
     email.addEventListener('input', () => {
-        hideError(serverError)
+        hideHint(serverError)
         checkValidation(email, emailError, validators.strEmailError)
     });
 
     password.addEventListener('input', () => {
-        hideError(serverError)
+        hideHint(serverError)
         checkValidation(password, passwordError, validators.strPasswordError)
     })
 
-    function errorHandler(err) {
-        showError(serverError, err)
-    }
 
 
     sendBtn.addEventListener('click', (event) => {
             if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
-                showError(emailError, validators.strEventEmailError)
+                showHint(emailError, validators.strEventEmailError)
             }
             else if(!password.value.match(validators.passwordRegExp) ) {
-                showError(passwordError, validators.strPasswordError)
+                showHint(passwordError, validators.strPasswordError)
             }
             else { // валидация на фронте пройдена, делаем запрос к серверу и смотрим на его ответ
                 console.log("запрос")

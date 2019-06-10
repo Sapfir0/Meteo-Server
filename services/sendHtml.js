@@ -22,11 +22,22 @@ const datasPage = (req, res) => {
     res.sendFile(config.viewsDir + "datasPage.html")
 }
 
+const logout = (req, res ) => {
+    req.session.destroy(err => {
+        res.redirect('/');
+    });
+};
+
+const home = (req, res) => {
+    res.sendFile(config.viewsDir + "home.html")
+}
 
 module.exports = {
     index,
     success,
     register,
     sign_In,
-    datasPage
+    datasPage,
+    logout,
+    home
 }

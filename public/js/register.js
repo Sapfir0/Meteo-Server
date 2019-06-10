@@ -1,11 +1,6 @@
-const validators = { ////поправить
-    strEmailError: 'Проверьте правильность введенного e-mail', 
-    strPasswordError: 'Пароль должен содержать более 5 символов', 
-    strEventEmailError: 'Вводи почту правильно', 
-    strRepasswordError: 'Введенные пароли не совпадают', 
-    emailRegExp: new RegExp('.+@.+\\..+'),
-    passwordRegExp: new RegExp('.{5,}'),
-}
+import { showHint, hideHint, checkValidation, errorHandler, passwordEqualRepasswor } from "./helpers.js"
+import { validators } from "./errorStrings.js"
+
 
 document.addEventListener('DOMContentLoaded', start);
 
@@ -20,38 +15,6 @@ function start() {
     const repassword = document.getElementById("repassword")
     const submitBtn = document.querySelector("#submit")
 
-
-    function showError(widget, str) {
-        widget.innerHTML = str;
-        widget.className = 'error active';
-    }
-
-    function hideError(widget) {
-        widget.innerHTML = '';
-        widget.className = 'error';
-    }
-
-    function checkValidation(widget, errorSpan, strError, checkPassword=false) {
-        if (widget.validity.valid) {
-            hideError(errorSpan)
-            if(checkPassword) 
-                passwordEqualRepassword()
-        }
-        else {
-            showError(errorSpan, strError)
-        }
-    }
-
-    function passwordEqualRepassword() {
-        if (password.value == repassword.value) {
-            hideError(repasswordError)
-            return true
-        }
-        else {
-            showError(repasswordError, validators.strRepasswordError)
-            return false
-        }
-    }
 
 
     const widgets = [email,password,repassword]
@@ -74,9 +37,6 @@ function start() {
         checkValidation(repassword, repasswordError, validators.strRepasswordError, true)
     })
 
-    function errorHandler(err) {
-        showError(serverError, err)
-    }
 
 
     submitBtn.addEventListener('click', () => {       
