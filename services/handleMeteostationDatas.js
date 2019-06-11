@@ -29,7 +29,6 @@ function writeOutsideMeteostationParams(temperature, humidity, pressure,
 }
 
 
-
 function getFields(table) {
     //SHOW FIELDS FROM $table
     return [`${table}`].findAll({
@@ -38,17 +37,13 @@ function getFields(table) {
 }
 
 
+
 async function getColumnArduinoFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
         //запрос обновился
     const currentColumn = await MeteostationInside.findAll({
-        include:[{
-            model: MeteostationOutside,
-            where: {
-                meteostationId: {
-                    Sequelize.col('meteostationId') //чет этот блок не работает именно здесь
-                } 
-            }
+        include: [{
+            model: MeteostationOutside
         }],
         attributes: [column],
         where: {
@@ -64,10 +59,26 @@ async function getColumnArduinoFromSQL(column, meteostationId)  { // верне�
     return temp;
 }
 
+
+function getHomeParams(meteostationId) {
+    return MeteostationInside.findOne({
+        order: [
+            ['id', 'DESC']
+        ],
+        where: {
+            meteostationId
+        },
+        limit: 1
+    })
+}
+
 function getLastArduinoValueFromSQL(meteostationId) { 
     //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
 
-    return Meteostation.findOne({ 
+    return MeteostationInside.findOne({ 
+        include: [{
+            model: MeteostationOutside
+        }],
         order: [
             ['id', 'DESC']
         ],
@@ -81,7 +92,10 @@ function getLastArduinoValueFromSQL(meteostationId) {
 
 function deleteOldArduinoValuesFromSQL (meteostationId) {
     // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
-    return Meteostation.destroy({
+    return MeteostationInside.destroy({
+        include: [{
+            model: MeteostationOutside
+        }],
         where: {
             meteostationId,
             createdAt: {

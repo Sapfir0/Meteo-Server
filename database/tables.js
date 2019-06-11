@@ -1,11 +1,8 @@
 const models = require('./models');
 
-const meteostationInside = require('./models/meteostationInsideParams');
-const meteostationOutside = require('./models/meteostationOutsideParams');
-
 const User = models.users
-const MeteostationInside = meteostationInside
-const MeteostationOutside = meteostationOutside
+const MeteostationInside = models.meteostationInside
+const MeteostationOutside = models.meteostationOutside
 
 module.exports = {
     User, 
