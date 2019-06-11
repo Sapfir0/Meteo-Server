@@ -3,7 +3,27 @@ const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
 
 function saveArduinoData(req, res, next) {
-    arduinoAPI.writeArduinoValuesToSQL(req.query)
+    // как много присвоений, как же это исправить хм
+    const meteostationData = req.query;
+
+    const temperatureInHome = meteostationData.temperatureInHome
+    const humidityInHome = meteostationData.humidityInHome 
+    const sansity = meteostationData.sansity 
+
+    const temperature = meteostationData.temperature 
+    const humidity = meteostationData.humidity 
+    const pressure = meteostationData.pressure 
+    const engWeatherDescription = meteostationData.engWeatherDescription 
+    const weatherId = meteostationData.weatherId 
+    const windSpeed =meteostationData.windSpeed 
+    const windDeg= meteostationData.windDeg 
+    const icon= meteostationData.icon 
+    const meteostationId= meteostationData.meteostationId
+    
+    arduinoAPI.writeInsideMeteostationParams(temperatureInHome, humidityInHome, sansity, meteostationId)
+    arduinoAPI.writeOutsideMeteostationParams(temperature, humidity, pressure, 
+        engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId)
+    // запросы выше можно делать параллельно
     next()
 }
 

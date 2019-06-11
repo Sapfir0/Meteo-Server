@@ -1,25 +1,34 @@
-const { Meteostation } = require("../database/tables")
-const { Op } = require('sequelize')
+const { MeteostationInside, MeteostationOutside } = require('../database/tables')
 
-function  writeArduinoValuesToSQL(arduinoData) {
-    console.log(arduinoData)
-    //ВАЖНО, надо учитывать все эти поля на ардуинке
-    return Meteostation.create({
-        temperatureInHome: arduinoData.temperatureInHome,
-        humidityInHome: arduinoData.humidityInHome,
-        temperature: arduinoData.temperature,
-        humidity: arduinoData.humidity,
-        pressure: arduinoData.pressure,
-        engWeatherDescription: arduinoData.engWeatherDescription,
-        arduinoTimestamp: arduinoData.CURRENTTIMESTAMP,
-        sansity: arduinoData.sansity,
-        weatherId: arduinoData.weatherId,
-        windSpeed:arduinoData.windSpeed,
-        windDeg: arduinoData.windDeg,
-        icon: arduinoData.icon,
-        meteostationId: arduinoData.meteostationId
+const { Op } = require('sequelize')
+const {Sequelize} = require('sequelize')
+
+function writeInsideMeteostationParams(temperature, humidity, sansity, meteostationId) {
+    return MeteostationInside.create({
+        temperature,
+        humidity,
+        sansity,
+        meteostationId
     })
 }
+
+function writeOutsideMeteostationParams(temperature, humidity, pressure, 
+    engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId) {
+    
+    return MeteostationOutside.create({
+        temperature,
+        humidity,
+        pressure,
+        engWeatherDescription,
+        weatherId,
+        windSpeed,
+        windDeg,
+        icon,
+        meteostationId
+    })
+}
+
+
 
 function getFields(table) {
     //SHOW FIELDS FROM $table
@@ -31,14 +40,22 @@ function getFields(table) {
 
 async function getColumnArduinoFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
-    
-    const currentColumn = await Meteostation.findAll({
+        //запрос обновился
+    const currentColumn = await MeteostationInside.findAll({
+        include:[{
+            model: MeteostationOutside,
+            where: {
+                meteostationId: {
+                    Sequelize.col('meteostationId') //чет этот блок не работает именно здесь
+                } 
+            }
+        }],
         attributes: [column],
         where: {
             meteostationId
         }
     })
-
+    console.log(currentColumn)
     var temp=[]
     for(let i=0; i<currentColumn.length; i++) {
         temp.push(currentColumn[i].dataValues[`${column}`]) 
@@ -76,8 +93,10 @@ function deleteOldArduinoValuesFromSQL (meteostationId) {
 
 
 module.exports = {
-    writeArduinoValuesToSQL,
+    //writeArduinoValuesToSQL,
     getColumnArduinoFromSQL,
     getLastArduinoValueFromSQL,
-    deleteOldArduinoValuesFromSQL
+    deleteOldArduinoValuesFromSQL,
+    writeInsideMeteostationParams,
+    writeOutsideMeteostationParams
 }
