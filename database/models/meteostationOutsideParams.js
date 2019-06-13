@@ -1,3 +1,5 @@
+const meteostation = require("./meteostation")
+
 module.exports = function(sequelize, Sequelize) {
     var MeteostationOutside = sequelize.define('meteostationOutside', {
         id: { 
@@ -39,10 +41,10 @@ module.exports = function(sequelize, Sequelize) {
             allowNull: false, 
             unique: true,
             references: {
-                model: 'meteostation',
+                model: meteostation,
                 key: 'id'
             }
-        } //если 0, то это постман(хотя щас я сделал небесопасно)
+        } 
 
     });
 

@@ -6,14 +6,21 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.INTEGER 
         },
         meteostationInside: { 
-
-
+            type: Sequelize.INTEGER
         },
         meteostationOutside: {
-            
-        } 
-
-    });
+            type: Sequelize.INTEGER
+        }
+    }, {
+        classMethods: {
+            associate: function(models) {
+                Meteostation.hasMany(models.meteostationInside)
+                Meteostation.hasMany(models.meteostationOutside)
+            }
+        }
+    } 
+    
+    );
 
     
 
