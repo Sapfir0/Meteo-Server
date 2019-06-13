@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
 
-        const openweathermapUrl = "http://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
+        const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
         weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
     }
 
