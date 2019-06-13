@@ -14,14 +14,15 @@ module.exports = function(sequelize, Sequelize) {
         },
         password: { 
             type: Sequelize.STRING, 
-            allowNull: false 
+            allowNull: false,
+            len: [5,50],
         },
         meteostationId: { 
             type: Sequelize.INTEGER,
-            references: {
-                model: 'meteostation',
-                key: 'id'
-            }
+            // references: {
+            //     model: 'meteostation',
+            //     key: 'id'
+            // }
         }
     });
 

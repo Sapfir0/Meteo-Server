@@ -1,4 +1,3 @@
-const meteostation = require("./meteostation")
 
 
 module.exports = function (sequelize, Sequelize) {
@@ -28,10 +27,10 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.INTEGER, 
             allowNull: false, 
             unique: true,
-            references: {
-                model: meteostation,
-                key: 'id'
-            }
+            // references: {
+            //     model: meteostation,
+            //     key: 'id'
+            // }
         } 
 
     });

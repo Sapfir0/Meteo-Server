@@ -36,7 +36,7 @@ function updateMeteoId(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperatureInHome", "humidityInHome", "createdAt" ]
+    const columns = ["temperature", "humidity", "createdAt" ]
     
     let finalJson= new Object;
 
@@ -54,7 +54,7 @@ function getArrays(req, res, next) {
         const userId = req.user.meteostationId
 
         for(let i=0; i<columns.length; i++) {
-            let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i], userId)
+            let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
             finalJson[columns[i]] = item
         }
         return finalJson;
@@ -71,19 +71,20 @@ async function getArduinoData(req, res, next) {
     }
 
     try {
-        const ard = await arduinoAPI.getLastArduinoValueFromSQL(userId);
+        const ard = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
         return res.json(ard.dataValues)
     }
     catch(error) {
         console.error(error)
     }
+
 }
 
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
     const meteoId = req.query.meteostationId
-    console.log(meteoId)
-    arduinoAPI.deleteOldArduinoValuesFromSQL(meteoId)
+    arduinoAPI.deleteOldMeteostationInsideFromSQL(meteoId)
+    arduinoAPI.deleteOldMeteostationOutsideFromSQL(meteoId)
     next()
 }
 

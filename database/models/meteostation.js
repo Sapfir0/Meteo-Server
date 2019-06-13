@@ -11,15 +11,7 @@ module.exports = function (sequelize, Sequelize) {
         meteostationOutside: {
             type: Sequelize.INTEGER
         }
-    }, {
-        classMethods: {
-            associate: function(models) {
-                Meteostation.hasMany(models.meteostationInside)
-                Meteostation.hasMany(models.meteostationOutside)
-            }
-        }
     } 
-    
     );
 
     
