@@ -7,7 +7,10 @@ module.exports = function (sequelize, Sequelize) {
         },
         temperature: { 
             type: Sequelize.DOUBLE, 
-            allowNull: false 
+            allowNull: false,
+            references: {
+                model: meteostation
+            } 
         },
         humidity: { 
             type: Sequelize.DOUBLE, 
@@ -25,10 +28,10 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.INTEGER, 
             allowNull: false, 
             unique: true,
-            // references: {
-            //     model: 'meteostationOutside',
-            //     key: 'meteostationId'
-            // }
+            references: {
+                model: 'meteostation',
+                key: 'id'
+            }
         } //если 0, то это постман(хотя щас я сделал небесопасно)
 
     });

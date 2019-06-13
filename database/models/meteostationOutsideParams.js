@@ -37,7 +37,11 @@ module.exports = function(sequelize, Sequelize) {
         meteostationId: { 
             type: Sequelize.INTEGER, 
             allowNull: false, 
-            unique: true 
+            unique: true,
+            references: {
+                model: 'meteostation',
+                key: 'id'
+            }
         } //если 0, то это постман(хотя щас я сделал небесопасно)
 
     });
