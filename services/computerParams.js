@@ -1,19 +1,20 @@
 const { ComputerParams } = require('../database/tables')
 
 
-function writeComputerParams(hddTemp, CPUtemp, CPUcurLoad,CPU5min, 
-    CPU15minLoad, CPUloadIostat,unusedRAM, GPUtemp, GPUload, PC_Id) {
-    
+function writeComputerParams(HDD_temp, CPU_temp, CPU_currentLoad,
+    CPU_5minute_load, CPU_15minute_load, CPU_load_iostat, unused_RAM, 
+    GPU_temp, GPU_load, PC_Id) {
+
     return ComputerParams.create({
-        HDD_temp: hddTemp, 
-        CPU_temp: CPUtemp, 
-        CPU_currentLoad: CPUcurLoad,
-        CPU_5minute_load: CPU5min, 
-        CPU_15minute_load: CPU15minLoad, 
-        CPU_load_iostat: CPUloadIostat,
-        unused_RAM: unusedRAM, 
-        GPU_temp: GPUtemp,
-        GPU_load: GPUload,
+        HDD_temp, 
+        CPU_temp, 
+        CPU_currentLoad,
+        CPU_5minute_load, 
+        CPU_15minute_load, 
+        CPU_load_iostat,
+        unused_RAM, 
+        GPU_temp,
+        GPU_load,
         PC_Id
     })
 }

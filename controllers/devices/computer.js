@@ -2,14 +2,22 @@
 const arduinoAPI = require("../../services/computerParams")
 const userApi = require("../../services/user")
 
-function saveArduinoData(req, res, next) {
+function saveComputerData(req, res, next) {
     // как много присвоений, как же это исправить хм
     const computerData = req.query;
     console.log(req)
     console.log(computerData)
+    const HDD_temp = req.body.HDD_temp
+    const CPU_temp =req.body.CPU_temp
+    const CPU_currentLoad =req.body.CPU_currentLoad 
+    const CPU_5minute_load =req.body.CPU_5minute_load
+    const CPU_15minute_load =req.body.CPU_15minute_load
+    const CPU_load_iostat =req.body.CPU_load_iostat
+    const PC_id=req.body.PC_id
     
-    
-    //arduinoAPI.writeComputerParams()
+    arduinoAPI.writeComputerParams(HDD_temp, CPU_temp, 
+        CPU_currentLoad, CPU_5minute_load, CPU_15minute_load,
+        CPU_load_iostat, PC_id)
 
     next()
 }
@@ -76,6 +84,6 @@ function updatePC_Id(req, res, next) {
 // }
 
 module.exports = {
-    saveArduinoData,
+    saveComputerData,
     updatePC_Id
 }
