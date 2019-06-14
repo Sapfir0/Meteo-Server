@@ -36,7 +36,7 @@ function updateMeteoId(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperature", "humidity", "createdAt" ]
+    const columns = ["temperatureH", "humidityH", "createdAt" ]
     
     let finalJson= new Object;
 
@@ -54,8 +54,14 @@ function getArrays(req, res, next) {
         const userId = req.user.meteostationId
 
         for(let i=0; i<columns.length; i++) {
-            let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
-            finalJson[columns[i]] = item
+            try {
+                let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
+                finalJson[columns[i]] = item
+            }
+            catch(error) {
+                console.log(error)
+            }
+
         }
         return finalJson;
     }
@@ -73,7 +79,7 @@ async function getMeteostationData(req, res, next) {
     try {
         const inside = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
         const outside = await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
-        const meteostation = await Object.assign(inside, outside)
+        const meteostation = Object.assign(inside, outside)
         console.log("инсайд")
         console.log(inside.dataValues)
         console.log("аутсайд")

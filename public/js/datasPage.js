@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
+        console.log(graphicValues)
         return graphicValues;
     }
 

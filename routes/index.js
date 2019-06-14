@@ -39,7 +39,7 @@ function initAuthControllers(app, passport)  {
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
     
-    app.post("/computerLoadParams", computerController.saveArduinoData)
+    app.post("/computerLoadParams", computerController.saveComputerData)
 
     ///////////////////////
     // const push = require("../controllers/push_notifications")

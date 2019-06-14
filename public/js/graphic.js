@@ -14,8 +14,8 @@ export function createGraphics(graphicValues) {
     }
 
     
-    const temperatureInHomeArray = graphicValues.temperatureInHome;
-    const humidityInHomeArray = graphicValues.humidityInHome;
+    const temperatureInHomeArray = graphicValues.temperatureH;
+    const humidityInHomeArray = graphicValues.humidityH;
     const createdAtArray = graphicValues.createdAt;
     
     for (let i = 0; i < createdAtArray.length; i++) {
