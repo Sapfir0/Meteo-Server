@@ -39,8 +39,6 @@ loadPasportStrategies(passport, models.user)
 
 
 
-
-
 models.sequelize
     .sync()
     .then(() => {

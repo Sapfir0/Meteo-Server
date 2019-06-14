@@ -3,6 +3,9 @@ const debug = require("../services/debug")
 
 const sendHtml = require("../services/sendHtml")
 const handler = require("../controllers/devices/meteostation")
+const computer = require("../services/computerParams")
+const computerController = require("../controllers/devices/computer")
+
 
 //  проверка логирования
 const { isLoggedIn, loggedCheker } = require('../controllers/users/logged.js');
@@ -28,14 +31,16 @@ function initAuthControllers(app, passport)  {
 
 
     //---------- API ----------------------
-    app.get('/meteostationData', handler.getArduinoData) //сюда обращается клиент для получения инфы о датчиках 
+    app.get('/meteostationData', handler.getMeteostationData) //сюда обращается клиент для получения инфы о датчиках 
     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
     // //при посте новой записи, удаляем старые
     app.post('/updateMeteoId', urlencodedParser, handler.updateMeteoId, sendHtml.success)
-
+    
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
     
+    app.post("/computerLoadParams", computerController.saveComputerData)
+
     ///////////////////////
     // const push = require("../controllers/push_notifications")
     // app.post('/push/subscribe', push.subscribe);

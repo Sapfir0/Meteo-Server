@@ -1,44 +1,43 @@
-const { Meteostation } = require("../database/tables")
+const { MeteostationInside, MeteostationOutside } = require('../database/tables')
+
 const { Op } = require('sequelize')
+const {Sequelize} = require('sequelize')
 
-function  writeArduinoValuesToSQL(arduinoData) {
-    console.log(arduinoData)
-    //ВАЖНО, надо учитывать все эти поля на ардуинке
-    return Meteostation.create({
-        temperatureInHome: arduinoData.temperatureInHome,
-        humidityInHome: arduinoData.humidityInHome,
-        temperature: arduinoData.temperature,
-        humidity: arduinoData.humidity,
-        pressure: arduinoData.pressure,
-        engWeatherDescription: arduinoData.engWeatherDescription,
-        arduinoTimestamp: arduinoData.CURRENTTIMESTAMP,
-        sansity: arduinoData.sansity,
-        weatherId: arduinoData.weatherId,
-        windSpeed:arduinoData.windSpeed,
-        windDeg: arduinoData.windDeg,
-        icon: arduinoData.icon,
-        meteostationId: arduinoData.meteostationId
+function writeMeteostationInsideParams(temperatureH, humidityH, sansityH, meteostationId) {
+    return MeteostationInside.create({
+        temperatureH,
+        humidityH,
+        sansityH,
+        meteostationId
     })
 }
 
-function getFields(table) {
-    //SHOW FIELDS FROM $table
-    return [`${table}`].findAll({
-        
-    })
-}
-
-
-async function getColumnArduinoFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
-    //SELECT column FROM TABLE; // где meteostationId == meteostationId
+function writeMeteostationOutsideParams(temperature, humidity, pressure, 
+    engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId) {
     
-    const currentColumn = await Meteostation.findAll({
+    return MeteostationOutside.create({
+        temperature,
+        humidity,
+        pressure,
+        engWeatherDescription,
+        weatherId,
+        windSpeed,
+        windDeg,
+        icon,
+        meteostationId
+    })
+}
+
+
+async function getColumnMeteostationInsideFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
+    //SELECT column FROM TABLE; // где meteostationId == meteostationId
+    const currentColumn = await MeteostationInside.findAll({
         attributes: [column],
         where: {
             meteostationId
         }
     })
-
+    //console.log(currentColumn)
     var temp=[]
     for(let i=0; i<currentColumn.length; i++) {
         temp.push(currentColumn[i].dataValues[`${column}`]) 
@@ -47,10 +46,64 @@ async function getColumnArduinoFromSQL(column, meteostationId)  { // верне�
     return temp;
 }
 
-function getLastArduinoValueFromSQL(meteostationId) { 
-    //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
+async function getColumnMeteostationOutsideFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
+    //SELECT column FROM TABLE; // где meteostationId == meteostationId
+    const currentColumn = await MeteostationInside.findAll({
+        attributes: [column],
+        where: {
+            meteostationId
+        }
+    })
+    //console.log(currentColumn)
+    var temp=[]
+    for(let i=0; i<currentColumn.length; i++) {
+        temp.push(currentColumn[i].dataValues[`${column}`]) 
+    }
+    // console.log(temp)
+    return temp;
+}
 
-    return Meteostation.findOne({ 
+
+async function getMeteostationInsideParams(meteostationId) {
+    return MeteostationInside.findOne({
+        order: [
+            ['id', 'DESC']
+        ],
+        where: {
+            meteostationId
+        },
+        limit: 1
+    })
+}
+
+async function getMeteostationOutsideParams(meteostationId) {
+    return MeteostationOutside.findOne({
+        order: [
+            ['id', 'DESC']
+        ],
+        where: {
+            meteostationId
+        },
+        limit: 1
+    })
+}
+
+function getLastMeteostationInsideFromSQL(meteostationId) { 
+    //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
+    return MeteostationInside.findOne({ 
+        order: [
+            ['id', 'DESC']
+        ],
+        where: {
+            meteostationId
+        },
+        limit: 1
+    })
+}
+
+function getLastMeteostationOutsideFromSQL(meteostationId) { 
+    //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
+    return MeteostationOutside.findOne({ 
         order: [
             ['id', 'DESC']
         ],
@@ -62,9 +115,21 @@ function getLastArduinoValueFromSQL(meteostationId) {
 
 }
 
-function deleteOldArduinoValuesFromSQL (meteostationId) {
+function deleteOldMeteostationOutsideFromSQL (meteostationId) {
     // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
-    return Meteostation.destroy({
+    return MeteostationOutside.destroy({
+        where: {
+            meteostationId,
+            createdAt: {
+                [Op.lt]: new Date( new Date() - 1000*60*60*12) //в микросекундах // 12ч
+            }
+        }
+    })
+}
+
+function deleteOldMeteostationInsideFromSQL (meteostationId) {
+    // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
+    return MeteostationInside.destroy({
         where: {
             meteostationId,
             createdAt: {
@@ -75,9 +140,16 @@ function deleteOldArduinoValuesFromSQL (meteostationId) {
 }
 
 
+
 module.exports = {
-    writeArduinoValuesToSQL,
-    getColumnArduinoFromSQL,
-    getLastArduinoValueFromSQL,
-    deleteOldArduinoValuesFromSQL
+    writeMeteostationInsideParams,
+    writeMeteostationOutsideParams,
+    deleteOldMeteostationInsideFromSQL,
+    deleteOldMeteostationOutsideFromSQL,
+    getColumnMeteostationInsideFromSQL,
+    getColumnMeteostationOutsideFromSQL,
+    getLastMeteostationInsideFromSQL,
+    getLastMeteostationOutsideFromSQL,
+    getMeteostationInsideParams,
+    getMeteostationOutsideParams
 }

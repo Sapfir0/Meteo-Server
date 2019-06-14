@@ -3,7 +3,27 @@ const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
 
 function saveArduinoData(req, res, next) {
-    arduinoAPI.writeArduinoValuesToSQL(req.query)
+    // как много присвоений, как же это исправить хм
+    const meteostationData = req.query;
+
+    const temperatureInHome = meteostationData.temperatureInHome
+    const humidityInHome = meteostationData.humidityInHome 
+    const sansity = meteostationData.sansity 
+
+    const temperature = meteostationData.temperature 
+    const humidity = meteostationData.humidity 
+    const pressure = meteostationData.pressure 
+    const engWeatherDescription = meteostationData.engWeatherDescription 
+    const weatherId = meteostationData.weatherId 
+    const windSpeed =meteostationData.windSpeed 
+    const windDeg= meteostationData.windDeg 
+    const icon= meteostationData.icon 
+    const meteostationId= meteostationData.meteostationId
+    
+    arduinoAPI.writeMeteostationInsideParams(temperatureInHome, humidityInHome, sansity, meteostationId)
+    arduinoAPI.writeMeteostationOutsideParams(temperature, humidity, pressure, 
+        engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId)
+    // запросы выше можно делать параллельно
     next()
 }
 
@@ -16,7 +36,7 @@ function updateMeteoId(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperatureInHome", "humidityInHome", "createdAt" ]
+    const columns = ["temperatureH", "humidityH", "createdAt" ]
     
     let finalJson= new Object;
 
@@ -34,8 +54,14 @@ function getArrays(req, res, next) {
         const userId = req.user.meteostationId
 
         for(let i=0; i<columns.length; i++) {
-            let item = await arduinoAPI.getColumnArduinoFromSQL(columns[i], userId)
-            finalJson[columns[i]] = item
+            try {
+                let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
+                finalJson[columns[i]] = item
+            }
+            catch(error) {
+                console.log(error)
+            }
+
         }
         return finalJson;
     }
@@ -44,32 +70,37 @@ function getArrays(req, res, next) {
 }
 
 
-async function getArduinoData(req, res, next) {
+async function getMeteostationData(req, res, next) {
     const userId = req.user.meteostationId
     if (userId == null || userId == undefined ) {
         return;
     }
 
     try {
-        const ard = await arduinoAPI.getLastArduinoValueFromSQL(userId);
-        return res.json(ard.dataValues)
+        const inside = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
+        const outside =  await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
+        Object.assign(inside.dataValues, outside.dataValues)
+        
+        return res.json(inside.dataValues)
     }
     catch(error) {
         console.error(error)
     }
+    next()
 }
+
 
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
     const meteoId = req.query.meteostationId
-    console.log(meteoId)
-    arduinoAPI.deleteOldArduinoValuesFromSQL(meteoId)
+    arduinoAPI.deleteOldMeteostationInsideFromSQL(meteoId)
+    arduinoAPI.deleteOldMeteostationOutsideFromSQL(meteoId)
     next()
 }
 
 module.exports = {
     saveArduinoData,
-    getArduinoData,
+    getMeteostationData,
     deleteOldArticles,
     getArrays,
     updateMeteoId

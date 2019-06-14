@@ -67,9 +67,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/meteostationData");
         const arduinoValues = await response.json();
-
-        temperatureInHome.innerHTML = arduinoValues.temperatureInHome + " °C"
-        humidityInHome.innerHTML = arduinoValues.humidityInHome + "%"
+        console.log("ПРОИЗОШЕЛ ВЫЗОВ")
+        console.log(arduinoValues)
+        temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
+        humidityInHome.innerHTML = arduinoValues.humidityH + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
+        console.log(graphicValues)
         return graphicValues;
     }
 

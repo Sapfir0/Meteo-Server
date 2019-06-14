@@ -1,4 +1,4 @@
-import { showHint, hideHint,  errorHandler } from "./helpers.js"
+import { showHint, hideHint,  errorHandler } from "../helpers.js"
 import { validators } from "./errorStrings.js"
 
 
