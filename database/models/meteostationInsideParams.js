@@ -7,20 +7,20 @@ module.exports = function (sequelize, Sequelize) {
             primaryKey: true, 
             type: Sequelize.INTEGER 
         },
-        temperature: { 
+        temperatureH: { 
             type: Sequelize.DOUBLE, 
             allowNull: false,
         },
-        humidity: { 
+        humidityH: { 
             type: Sequelize.DOUBLE, 
             allowNull: false 
         },
-        sansity: { 
+        sansityH: { 
             type: Sequelize.DOUBLE, 
             allowNull: false, 
             defaultValue: 0 
         },
-        sansityQuality: { 
+        sansityQualityH: { 
             type: Sequelize.STRING 
         }, //
         meteostationId: { 

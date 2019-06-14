@@ -5,6 +5,7 @@ const userApi = require("../../services/user")
 function saveArduinoData(req, res, next) {
     // как много присвоений, как же это исправить хм
     const computerData = req.query;
+    console.log(req)
     console.log(computerData)
     
     
@@ -13,12 +14,12 @@ function saveArduinoData(req, res, next) {
     next()
 }
 
-function updateMeteoId(req, res, next) {
+function updatePC_Id(req, res, next) {
     console.log(req.body)
     userApi.changePC_id(req.user.id, req.body.PC_id)
     next()
 }
-
+/////////////// когда допишу питон, доделаю
 
 // function getArrays(req, res, next) {  
     
@@ -76,5 +77,5 @@ function updateMeteoId(req, res, next) {
 
 module.exports = {
     saveArduinoData,
-
+    updatePC_Id
 }

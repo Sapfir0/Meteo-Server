@@ -20,8 +20,8 @@ function saveArduinoData(req, res, next) {
     const icon= meteostationData.icon 
     const meteostationId= meteostationData.meteostationId
     
-    arduinoAPI.writeInsideMeteostationParams(temperatureInHome, humidityInHome, sansity, meteostationId)
-    arduinoAPI.writeOutsideMeteostationParams(temperature, humidity, pressure, 
+    arduinoAPI.writeMeteostationInsideParams(temperatureInHome, humidityInHome, sansity, meteostationId)
+    arduinoAPI.writeMeteostationOutsideParams(temperature, humidity, pressure, 
         engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId)
     // запросы выше можно делать параллельно
     next()
@@ -64,21 +64,31 @@ function getArrays(req, res, next) {
 }
 
 
-async function getArduinoData(req, res, next) {
+async function getMeteostationData(req, res, next) {
     const userId = req.user.meteostationId
     if (userId == null || userId == undefined ) {
         return;
     }
 
     try {
-        const ard = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
-        return res.json(ard.dataValues)
+        const inside = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
+        const outside = await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
+        const meteostation = await Object.assign(inside, outside)
+        console.log("инсайд")
+        console.log(inside.dataValues)
+        console.log("аутсайд")
+        console.log(outside.dataValues)
+        console.log("всего")
+        console.log(meteostation.dataValues)
+
+        return res.json(meteostation.dataValues)
     }
     catch(error) {
         console.error(error)
     }
-
+    next()
 }
+
 
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
@@ -90,7 +100,7 @@ function deleteOldArticles(req,res,next) {
 
 module.exports = {
     saveArduinoData,
-    getArduinoData,
+    getMeteostationData,
     deleteOldArticles,
     getArrays,
     updateMeteoId

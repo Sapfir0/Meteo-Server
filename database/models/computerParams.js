@@ -6,22 +6,28 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.INTEGER 
         },
         HDD_temp: { 
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE,
+            allowNull: false 
         },
         CPU_temp: {
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE,
+            allowNull: false 
         },
         CPU_currentLoad: {
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE,
+            allowNull: false 
         },
         CPU_5minute_load: {
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE,
+            allowNull: false 
         },
         CPU_15minute_load: {
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE,
+            allowNull: false 
         },
         CPU_load_iostat: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.DOUBLE,
+            allowNull: false 
             //от 0 до 100
         },
         unused_RAM: {

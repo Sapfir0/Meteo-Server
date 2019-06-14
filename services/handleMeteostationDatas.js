@@ -3,11 +3,11 @@ const { MeteostationInside, MeteostationOutside } = require('../database/tables'
 const { Op } = require('sequelize')
 const {Sequelize} = require('sequelize')
 
-function writeMeteostationInsideParams(temperature, humidity, sansity, meteostationId) {
+function writeMeteostationInsideParams(temperatureH, humidityH, sansityH, meteostationId) {
     return MeteostationInside.create({
-        temperature,
-        humidity,
-        sansity,
+        temperatureH,
+        humidityH,
+        sansityH,
         meteostationId
     })
 }
@@ -37,7 +37,7 @@ async function getColumnMeteostationInsideFromSQL(column, meteostationId)  { // 
             meteostationId
         }
     })
-    console.log(currentColumn)
+    //console.log(currentColumn)
     var temp=[]
     for(let i=0; i<currentColumn.length; i++) {
         temp.push(currentColumn[i].dataValues[`${column}`]) 
@@ -54,7 +54,7 @@ async function getColumnMeteostationOutsideFromSQL(column, meteostationId)  { //
             meteostationId
         }
     })
-    console.log(currentColumn)
+    //console.log(currentColumn)
     var temp=[]
     for(let i=0; i<currentColumn.length; i++) {
         temp.push(currentColumn[i].dataValues[`${column}`]) 
@@ -64,7 +64,7 @@ async function getColumnMeteostationOutsideFromSQL(column, meteostationId)  { //
 }
 
 
-function getMeteostationInsideParams(meteostationId) {
+async function getMeteostationInsideParams(meteostationId) {
     return MeteostationInside.findOne({
         order: [
             ['id', 'DESC']
@@ -76,7 +76,7 @@ function getMeteostationInsideParams(meteostationId) {
     })
 }
 
-function getMeteostationOutsideParams(meteostationId) {
+async function getMeteostationOutsideParams(meteostationId) {
     return MeteostationOutside.findOne({
         order: [
             ['id', 'DESC']
@@ -142,6 +142,8 @@ function deleteOldMeteostationInsideFromSQL (meteostationId) {
 
 
 module.exports = {
+    writeMeteostationInsideParams,
+    writeMeteostationOutsideParams,
     deleteOldMeteostationInsideFromSQL,
     deleteOldMeteostationOutsideFromSQL,
     getColumnMeteostationInsideFromSQL,
