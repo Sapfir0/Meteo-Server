@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const arduinoValues = await response.json();
         console.log("ПРОИЗОШЕЛ ВЫЗОВ")
         console.log(arduinoValues)
-        temperatureInHome.innerHTML = arduinoValues.temperatureInHome + " °C"
-        humidityInHome.innerHTML = arduinoValues.humidityInHome + "%"
+        temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
+        humidityInHome.innerHTML = arduinoValues.humidityH + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."

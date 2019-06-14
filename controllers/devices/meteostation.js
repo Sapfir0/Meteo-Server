@@ -78,16 +78,10 @@ async function getMeteostationData(req, res, next) {
 
     try {
         const inside = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
-        const outside = await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
-        const meteostation = Object.assign(inside, outside)
-        console.log("инсайд")
-        console.log(inside.dataValues)
-        console.log("аутсайд")
-        console.log(outside.dataValues)
-        console.log("всего")
-        console.log(meteostation.dataValues)
-
-        return res.json(meteostation.dataValues)
+        const outside =  await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
+        Object.assign(inside.dataValues, outside.dataValues)
+        
+        return res.json(inside.dataValues)
     }
     catch(error) {
         console.error(error)
