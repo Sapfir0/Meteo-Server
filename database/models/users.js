@@ -23,6 +23,9 @@ module.exports = function(sequelize, Sequelize) {
             //     model: 'meteostation',
             //     key: 'id'
             // }
+        },
+        PC_id: {
+            type: Sequelize.INTEGER,
         }
     });
 
