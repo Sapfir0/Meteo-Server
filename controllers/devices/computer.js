@@ -1,5 +1,7 @@
 const computerAPI = require("../../services/computerParams")
 const userApi = require("../../services/user")
+const { ComputerParams } = require('../../database/tables')
+const helper = require("../../services/helper")
 
 function saveComputerData(req, res, next) {
     // как много присвоений, как же это исправить хм
@@ -37,13 +39,12 @@ function getArrays(req, res, next) {
         return res.json(column)
     })
 
-    //переписать код выше на авейты
 
     async function helper() {
         const userId = req.user.PC_Id
 
         for(let i=0; i<columns.length; i++) {
-            let item = await computerAPI.getColumnComputerParams(columns[i], userId) // мы строим графики только по инсайду, на 
+            let item = await helper.getColumnDatasFromSQL(ComputerParams, columns[i], userId) 
             finalJson[columns[i]] = item
         }
         return finalJson;
@@ -60,7 +61,7 @@ async function getComputerData(req, res, next) {
     }
 
     try {
-        const comp = await computerAPI.getComputerParams(userId);
+        const comp = await helper.getLastDatasFromSQL(ComputerParams, userId);
         console.log(comp.dataValues)
         return res.json(comp.dataValues)
     }
@@ -72,7 +73,7 @@ async function getComputerData(req, res, next) {
 
 function deleteOldDatas(req,res,next) {
     const PC_Id = req.body.PC_Id
-    computerAPI.deleteOldComputerParams(PC_Id)
+    helper.deleteOldDatasFromSQL(ComputerParams, PC_Id)
     next()
 }
 

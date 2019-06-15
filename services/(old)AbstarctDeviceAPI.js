@@ -12,7 +12,7 @@ class AbstractDeviceAPI {
         }
         console.log(arguments)
         
-        `${this.dbPointer}`.create({ // да и мб это тоже надо обрачивать
+        this.dbPointer.create({ // да и мб это тоже надо обрачивать
             realArgs //очень не уверен, что переданный сюда массив добавит все его элементы в бд
         })
     }
