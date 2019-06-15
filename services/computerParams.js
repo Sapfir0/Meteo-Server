@@ -1,4 +1,5 @@
 const { ComputerParams } = require('../database/tables')
+const { Op } = require('sequelize')
 
 
 function writeComputerParams(HDD_temp, CPU_temp, CPU_currentLoad,
@@ -47,9 +48,22 @@ async function getColumnComputerParams(column, PC_Id)  { // вернет все 
     return temp;
 }
 
+function deleteOldComputerParams(PC_Id) {
+    // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
+    return  ComputerParams.destroy({
+        where: {
+            PC_Id,
+            createdAt: {
+                [Op.lt]: new Date( new Date() - 1000*60*60*12) //в микросекундах // 12ч
+            }
+        }
+    })
+}
+
 
 module.exports = {
     writeComputerParams,
     getComputerParams,
-    getColumnComputerParams
+    getColumnComputerParams,
+    deleteOldComputerParams
 }

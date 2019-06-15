@@ -17,6 +17,18 @@ function changeMeteoId(userId, meteostationId) {
     )
 }
 
+function changePC_id(userId, PC_id) {
+    return User.update({
+        PC_id,
+    }, 
+        {
+            where: {
+                id: userId
+            }
+        }
+    )
+}
+
 function getMeteoIdByuserId(userId) {
     return User.findOne({
         attributes: [
@@ -66,5 +78,6 @@ module.exports = {
     getUserByEmail,
     changeMeteoId,
     generateHash,
-    isValidPassword
+    isValidPassword,
+    changePC_id
 }

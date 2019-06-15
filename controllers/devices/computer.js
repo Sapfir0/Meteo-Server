@@ -1,5 +1,5 @@
 //данные приходят в req.query
-const arduinoAPI = require("../../services/computerParams")
+const computerAPI = require("../../services/computerParams")
 const userApi = require("../../services/user")
 
 function saveComputerData(req, res, next) {
@@ -15,7 +15,7 @@ function saveComputerData(req, res, next) {
     const CPU_load_iostat =req.body.CPU_load_iostat
     const PC_id=req.body.PC_id
     
-    arduinoAPI.writeComputerParams(HDD_temp, CPU_temp, 
+    computerAPI.writeComputerParams(HDD_temp, CPU_temp, 
         CPU_currentLoad, CPU_5minute_load, CPU_15minute_load,
         CPU_load_iostat, PC_id)
 
@@ -27,63 +27,61 @@ function updatePC_Id(req, res, next) {
     userApi.changePC_id(req.user.id, req.body.PC_id)
     next()
 }
+
 /////////////// когда допишу питон, доделаю
 
-// function getArrays(req, res, next) {  
+function getArrays(req, res, next) {  
     
-//     const columns = ["temperature", "humidity", "createdAt" ]
+    const columns = ["CPU_load_iostat", "CPU_temp", "createdAt" ]
     
-//     let finalJson= new Object;
+    let finalJson= new Object;
 
-//     // const column = await helper();
-//     // return res.json(column)
+    helper().then( (column) =>{
+        return res.json(column)
+    })
 
-//     helper().then( (column) =>{
-//         return res.json(column)
-//     })
+    //переписать код выше на авейты
 
+    async function helper() {
+        const userId = req.user.PC_Id
 
-//     //переписать код выше на авейты
-
-//     async function helper() {
-//         const userId = req.user.meteostationId
-
-//         for(let i=0; i<columns.length; i++) {
-//             let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
-//             finalJson[columns[i]] = item
-//         }
-//         return finalJson;
-//     }
+        for(let i=0; i<columns.length; i++) {
+            let item = await computerAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
+            finalJson[columns[i]] = item
+        }
+        return finalJson;
+    }
 
 
-// }
+}
 
+async function getComputerData(req, res, next) {
+    const userId = req.user.PC_Id
+    if (userId == null || userId == undefined ) {
+        return;
+    }
 
-// async function getArduinoData(req, res, next) {
-//     const userId = req.user.meteostationId
-//     if (userId == null || userId == undefined ) {
-//         return;
-//     }
+    try {
+        const ard = await computerAPI.getLastMeteostationInsideFromSQL(userId);
+        console.log(ard.dataValues)
+        return res.json(ard.dataValues)
+    }
+    catch(error) {
+        console.error("Computer last data error")
+    }
 
-//     try {
-//         const ard = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
-//         return res.json(ard.dataValues)
-//     }
-//     catch(error) {
-//         console.error(error)
-//     }
+}
 
-// }
-
-// function deleteOldArticles(req,res,next) {
-//     //запрашиваю айди метеостанции
-//     const meteoId = req.query.meteostationId
-//     arduinoAPI.deleteOldMeteostationInsideFromSQL(meteoId)
-//     arduinoAPI.deleteOldMeteostationOutsideFromSQL(meteoId)
-//     next()
-// }
+function deleteOldDatas(req,res,next) {
+    const PC_Id = req.query.PC_Id
+    computerAPI.deleteOldComputerParams(PC_Id)
+    next()
+}
 
 module.exports = {
     saveComputerData,
-    updatePC_Id
+    updatePC_Id,
+    getArrays,
+    deleteOldDatas,
+    getComputerData
 }

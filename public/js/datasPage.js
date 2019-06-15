@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             hideHint(hints[i])
         })
     }
-
+    getlastComputerParams()
 
     // -------- быдло функции    
 
@@ -79,6 +79,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const openweathermapUrl = "http://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
         weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
+    }
+
+    async function getlastComputerParams() { 
+        console.log("ПРОИЗОШЕЛ ВЫЗОВ 2")
+
+        const response = await fetch("/computerLoadParams");
+        const computerValues = await response.json();
+        console.log(computerValues);
     }
 
     async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)

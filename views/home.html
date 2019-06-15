@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script type="module" src="/js/home.js"></script>
-    <script type="module" src="/js/client.js"></script>
+    <!-- <script type="module" src="/js/client.js"></script> -->
 
 </head>
 <body>
@@ -14,7 +14,14 @@
     <p>Meteostation ID</p>
     <input id="meteoId" name="meteoId" placeholder="Type meteoId" required="required" pattern=".+@.+\..+" />      
     <span class="meteoIdError" aria-live="polite"></span>
-    <button class="welcome" id="submit">Привязать</button>
+    <button class="welcome" id="sendMeteoIdBtn">Привязать</button>
+    <span class="serverError" aria-live="polite"></span>
+
+
+    <p>PC ID</p>
+    <input id="PC_Id" name="PC_Id" placeholder="Type PC Id" required="required" pattern=".+@.+\..+" />      
+    <span class="PC_IdError" aria-live="polite"></span>
+    <button class="welcome" id="sendPC_IdBtn">Привязать</button>
     <span class="serverError" aria-live="polite"></span>
 
 

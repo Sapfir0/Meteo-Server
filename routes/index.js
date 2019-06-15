@@ -35,11 +35,13 @@ function initAuthControllers(app, passport)  {
     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
     // //при посте новой записи, удаляем старые
     app.post('/updateMeteoId', urlencodedParser, handler.updateMeteoId, sendHtml.success)
-    
+    app.post('/updatePC_Id', urlencodedParser, computerController.updatePC_Id, sendHtml.success)
+
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
     
-    app.post("/computerLoadParams", computerController.saveComputerData)
+    app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)
+    app.get("/computerLoadParams", computerController.getComputerData)
 
     ///////////////////////
     // const push = require("../controllers/push_notifications")
