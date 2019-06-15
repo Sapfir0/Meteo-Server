@@ -33,13 +33,12 @@ img {
 }
 
 
-.chart-container {
+ .chart-container {
   display: block;
-}
+  width: 660px;
+} 
 
-.chart-container {
-  width: 30%;
-}
+
 @media screen and (max-width: 650px) {
   .chart-container {
     width: 100%;

@@ -1,23 +1,10 @@
+let datasForCharts
+let options
 
 export function createGraphics(graphicValues) {
-    let datasForCharts
-    let options = {	
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Температурный режим'
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        // tooltips: {
-        //     mode: 'index',
-        //     intersect: false,
-        // },
-    }
-    const temperatureGraphic = document.getElementById('temperatureGraphic');
-    const humidityGraphic = document.getElementById('humidityGraphic');
+
+    const temperatureGraphic = document.getElementById('temperatureGraphic').getContext('2d');
+    const humidityGraphic = document.getElementById('humidityGraphic').getContext('2d');
     console.log(graphicValues)
     
     const temperatureInHomeArray = graphicValues.temperatureH;
@@ -30,29 +17,62 @@ export function createGraphics(graphicValues) {
 
 
     datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки")
+    options = setOptionForGraphic("Температура")
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
     datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
+    options = setOptionForGraphic("Влажность")
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
 
 }
 
 export function createComputerGraphic(graphicValues) {
-    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic')
-    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic')
-    
+    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic').getContext('2d');
+    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic').getContext('2d');
     console.log(graphicValues)
 
-    // var config = setDatasForPieGraphic(graphicValues.CPU_load_iostat_graphic) 
-    // chartNewPieGraphic(CPU_load_iostat_graphic, config, options )
-    // console.log(datasForCharts)
+    var data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
+    const labels = ["Занято", "Свободно"]
+    datasForCharts = setDatasForPieGraphic(data, labels) 
+    options = setOptionForGraphic("Нагруженность цпу")
+    chartNewPieGraphic(CPU_load_iostat_graphic, datasForCharts, options )
+    console.log(datasForCharts)
 }
 
-export function setDatasForPieGraphic(data) {
+export function setDatasForPieGraphic(data, labels) {
+    let datasForCharts = {
+        labels: labels, // подпись на оси Х
+        datasets: [{
+            data: data, // точки для графика
+            backgroundColor: [
+                'rgba(255,203,59,1)',
+                'rgba(96,255,28, 1)'
+            ]
+        }]
+    };
 
+    return datasForCharts;
 }
 
+function setOptionForGraphic(text) {
+    let options = {	
+        responsive: true,
+        title: {
+            display: true,
+            text: text
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        // tooltips: {
+        //     mode: 'index',
+        //     intersect: false,
+        // },
+    }
+    return options
+}
 
 
 export function setDatasForGraphic(labels, data, label) {
@@ -61,8 +81,6 @@ export function setDatasForGraphic(labels, data, label) {
         datasets: [{
             label: label, // подпись самого графика
             data: data // точки для графика
-
-
         }]
     };
 

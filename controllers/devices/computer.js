@@ -27,7 +27,6 @@ function updatePC_Id(req, res, next) {
     next()
 }
 
-/////////////// когда допишу питон, доделаю
 
 function getArrays(req, res, next) {  
     
