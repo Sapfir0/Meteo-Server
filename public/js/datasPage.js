@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastComputerParams() { 
         console.log("ПРОИЗОШЕЛ ВЫЗОВ 2")
 
-         const response = await fetch("/computerLoadParams");
+        const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
         console.log(computerValues);
     }

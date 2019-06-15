@@ -24,7 +24,7 @@ module.exports = function(sequelize, Sequelize) {
             //     key: 'id'
             // }
         },
-        PC_id: {
+        PC_Id: {
             type: Sequelize.INTEGER,
         }
     });

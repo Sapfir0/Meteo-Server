@@ -3,8 +3,8 @@ const { Op } = require('sequelize')
 
 
 function writeComputerParams(HDD_temp, CPU_temp, CPU_currentLoad,
-    CPU_5minute_load, CPU_15minute_load, CPU_load_iostat, unused_RAM, 
-    GPU_temp, GPU_load, PC_Id) {
+    CPU_5minute_load, CPU_15minute_load, CPU_load_iostat, PC_Id ,  //unused_RAM, GPU_temp, GPU_load
+    ) {
 
     return ComputerParams.create({
         HDD_temp, 
@@ -13,14 +13,15 @@ function writeComputerParams(HDD_temp, CPU_temp, CPU_currentLoad,
         CPU_5minute_load, 
         CPU_15minute_load, 
         CPU_load_iostat,
-        unused_RAM, 
-        GPU_temp,
-        GPU_load,
         PC_Id
+        // unused_RAM, 
+        // GPU_temp,
+        // GPU_load
     })
 }
 
 function getComputerParams(PC_Id) {
+    console.log(PC_Id)
     return ComputerParams.findOne({
         order: [
             ['id', 'DESC']

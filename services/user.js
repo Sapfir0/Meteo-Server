@@ -17,20 +17,9 @@ function changeMeteoId(userId, meteostationId) {
     )
 }
 
-function getMeteoIdByuserId(userId) {
-    return User.findOne({
-        attributes: [
-            'meteostationId'
-        ],
-        where: {
-            id: userId
-        }
-    })
-}
-
-function changePC_id(userId, PC_id) {
+function changePC_id(userId, PC_Id) {
     return User.update({
-        PC_id,
+        PC_Id,
     }, 
         {
             where: {
