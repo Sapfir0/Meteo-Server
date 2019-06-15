@@ -52,36 +52,7 @@ export function createComputerGraphic(graphicValues) {
 }
 
 export function setDatasForPieGraphic(data) {
-	var randomScalingFactor = function() {
-        return Math.round(Math.random() * 100);
-    };
 
-    var config = {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                ],
-                label: 'Dataset 1'
-            }],
-            labels: [
-                'Red',
-                'Orange',
-                'Yellow',
-                'Green',
-                'Blue'
-            ]
-        },
-        options: {
-            responsive: true
-        }
-    };
-    return config
 }
 
 
