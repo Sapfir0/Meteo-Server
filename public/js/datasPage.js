@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let weatherDescription; // dynamic string, got from arduino
     getlastArduinoValues()
 
-    const graphicValues = await getGraphicValues()
+    const graphicValues = await getMeteostationGraphicValues()
     createGraphics(graphicValues);
 
     // hints
@@ -60,9 +60,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             hideHint(hints[i])
         })
     }
-    getlastComputerParams()
+    
 
 
+    const computerGraphicValues = await getlastComputerParams()
+    createGraphics(computerGraphicValues);
+
+    
     // -------- быдло функции    
 
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
@@ -88,9 +92,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
         console.log(computerValues);
+        return computerValues
     }
 
-    async function getGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
+    async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
         console.log(graphicValues)

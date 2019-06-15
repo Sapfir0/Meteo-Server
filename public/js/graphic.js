@@ -2,7 +2,10 @@
 export function createGraphics(graphicValues) {
     const temperatureGraphic = document.getElementById('temperatureGraphic');
     const humidityGraphic = document.getElementById('humidityGraphic');
-    
+    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic')
+    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic')
+
+
     let datasForCharts
     let options = {
         title: {
@@ -29,6 +32,8 @@ export function createGraphics(graphicValues) {
     datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
+    datasForCharts = setDatasForGraphic(createdAtArray, CPU_load_iostat_graphic  ) 
+    chartNewPieGraphic(CPU_load_iostat_graphic, datasForCharts, options )
 }
 
 export function setDatasForGraphic(labels, data, label) {
@@ -54,9 +59,19 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
         options: options,
     });
 
+}
+
+export function chartNewPieGraphic(ctx, datasForCharts, options) {
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: datasForCharts,
+        options: options,
+    });
+
     //chart.canvas.parentNode.style.height = '128px'; //ВАЖНО СМОТРИ СЮДА
 
 }
+
 
 //это не хорошо, но готовые функции есть только для инглиша
 export function dateToStr(date) {
