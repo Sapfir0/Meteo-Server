@@ -5,6 +5,7 @@ body {
 
 }
 
+
 .block {
   width: 230px;
 }
@@ -33,9 +34,7 @@ img {
 
 
 .chart-container {
-  position: relative;  
-  height: auto; 
-  min-height: 256px;
+  display: block;
 }
 
 .chart-container {

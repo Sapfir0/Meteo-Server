@@ -28,7 +28,6 @@ function saveArduinoData(req, res, next) {
 }
 
 function updateMeteoId(req, res, next) {
-    console.log(req.body)
     userApi.changeMeteoId(req.user.id, req.body.meteostationId)
     next()
 }

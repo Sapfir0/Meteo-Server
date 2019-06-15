@@ -49,6 +49,7 @@ async function getColumnComputerParams(column, PC_Id)  { // вернет все 
     return temp;
 }
 
+
 function deleteOldComputerParams(PC_Id) {
     // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
     return  ComputerParams.destroy({

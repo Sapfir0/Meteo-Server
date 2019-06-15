@@ -1,4 +1,4 @@
-import { createGraphics, setDatasForGraphic, chartNewLineGraphic, dateToStr } from "./graphic.js"
+import { createGraphics, setDatasForGraphic, chartNewLineGraphic, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
 
 
@@ -62,9 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
 
-
     const computerGraphicValues = await getlastComputerParams()
-    createGraphics(computerGraphicValues);
+    createComputerGraphic(computerGraphicValues);
 
     
     // -------- быдло функции    
@@ -72,8 +71,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/meteostationData");
         const arduinoValues = await response.json();
-        console.log("ПРОИЗОШЕЛ ВЫЗОВ")
-        console.log(arduinoValues)
+        // console.log("ПРОИЗОШЕЛ ВЫЗОВ")
+        // console.log(arduinoValues)
         temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityH + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
@@ -87,18 +86,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function getlastComputerParams() { 
-        console.log("ПРОИЗОШЕЛ ВЫЗОВ 2")
+        // console.log("ПРОИЗОШЕЛ ВЫЗОВ 2")
 
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
-        console.log(computerValues);
+        //console.log(computerValues);
         return computerValues
     }
 
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
-        console.log(graphicValues)
+        // console.log(graphicValues)
         return graphicValues;
     }
 

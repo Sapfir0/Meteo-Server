@@ -21,11 +21,6 @@ function saveComputerData(req, res, next) {
 }
 
 function updatePC_Id(req, res, next) {
-    console.log("BODDDDDY")
-    console.log(req.body)
-    console.log("PC ID")
-    console.log(req.body.PC_Id)
-
     userApi.changePC_id(req.user.id, req.body.PC_Id)
     next()
 }

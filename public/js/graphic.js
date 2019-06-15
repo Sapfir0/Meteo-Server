@@ -1,20 +1,25 @@
+let datasForCharts
+let options = {	
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Температурный режим'
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    },
+    // tooltips: {
+    //     mode: 'index',
+    //     intersect: false,
+    // },
+}
 
 export function createGraphics(graphicValues) {
     const temperatureGraphic = document.getElementById('temperatureGraphic');
     const humidityGraphic = document.getElementById('humidityGraphic');
-    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic')
-    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic')
 
 
-    let datasForCharts
-    let options = {
-        title: {
-            responsive: true,
-            maintainAspectRatio: false,
-            display: true,
-            text: 'Температурный режим'
-        }
-    }
 
     
     const temperatureInHomeArray = graphicValues.temperatureH;
@@ -32,9 +37,54 @@ export function createGraphics(graphicValues) {
     datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
-    datasForCharts = setDatasForGraphic(createdAtArray, CPU_load_iostat_graphic  ) 
-    chartNewPieGraphic(CPU_load_iostat_graphic, datasForCharts, options )
+
 }
+
+export function createComputerGraphic(graphicValues) {
+    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic')
+    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic')
+    
+    console.log(graphicValues)
+
+    var config = setDatasForPieGraphic(graphicValues.CPU_load_iostat_graphic) 
+    chartNewPieGraphic(CPU_load_iostat_graphic, config, options )
+    console.log(datasForCharts)
+}
+
+export function setDatasForPieGraphic(data) {
+	var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100);
+    };
+
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                'Red',
+                'Orange',
+                'Yellow',
+                'Green',
+                'Blue'
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    };
+    return config
+}
+
+
 
 export function setDatasForGraphic(labels, data, label) {
     let datasForCharts = {
@@ -42,8 +92,7 @@ export function setDatasForGraphic(labels, data, label) {
         datasets: [{
             label: label, // подпись самого графика
             data: data // точки для графика
-            // borderColor: 'gray',
-            // backgroundColor: 'orange',
+
 
         }]
     };
