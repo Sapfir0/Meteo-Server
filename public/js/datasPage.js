@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         const response = await fetch("/meteostationData");
         const arduinoValues = await response.json();
-        // console.log("ПРОИЗОШЕЛ ВЫЗОВ")
         // console.log(arduinoValues)
         temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityH + "%"
@@ -86,11 +85,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function getlastComputerParams() { 
-        // console.log("ПРОИЗОШЕЛ ВЫЗОВ 2")
 
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
-        console.log(computerValues); 
+        //console.log(computerValues); 
         const createdAtCpu = document.querySelector(".createdAtCpu")
         createdAtCpu.innerHTML = dateToStr(new Date(computerValues.createdAt))
 

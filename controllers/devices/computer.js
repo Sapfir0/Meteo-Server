@@ -32,12 +32,12 @@ function getArrays(req, res, next) {
     
     let finalJson= new Object;
 
-    helper().then( (column) =>{
+    getter().then( (column) =>{
         return res.json(column)
     })
 
 
-    async function helper() {
+    async function getter() {
         const userId = req.user.PC_Id
 
         for(let i=0; i<columns.length; i++) {
