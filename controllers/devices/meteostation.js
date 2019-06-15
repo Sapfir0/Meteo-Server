@@ -55,7 +55,7 @@ function getArrays(req, res, next) {
 
         for(let i=0; i<columns.length; i++) {
             try {
-                let item = await arduinoAPI.getColumnMeteostationInsideFromSQL(columns[i], userId) // мы строим графики только по инсайду, на 
+                let item = await arduinoAPI.getColumnMeteostationFromSQL(MeteostationInside, columns[i], userId) // мы строим графики только по инсайду, на 
                 finalJson[columns[i]] = item
             }
             catch(error) {

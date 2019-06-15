@@ -29,9 +29,9 @@ function writeMeteostationOutsideParams(temperature, humidity, pressure,
 }
 
 
-async function getColumnMeteostationInsideFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
+async function getColumnMeteostationFromSQL(model, column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
-    const currentColumn = await MeteostationInside.findAll({
+    const currentColumn = await model.findAll({
         attributes: [column],
         where: {
             meteostationId
@@ -46,47 +46,6 @@ async function getColumnMeteostationInsideFromSQL(column, meteostationId)  { // 
     return temp;
 }
 
-async function getColumnMeteostationOutsideFromSQL(column, meteostationId)  { // вернет все значения у заданного столбца 
-    //SELECT column FROM TABLE; // где meteostationId == meteostationId
-    const currentColumn = await MeteostationInside.findAll({
-        attributes: [column],
-        where: {
-            meteostationId
-        }
-    })
-    //console.log(currentColumn)
-    var temp=[]
-    for(let i=0; i<currentColumn.length; i++) {
-        temp.push(currentColumn[i].dataValues[`${column}`]) 
-    }
-    // console.log(temp)
-    return temp;
-}
-
-
-async function getMeteostationInsideParams(meteostationId) {
-    return MeteostationInside.findOne({
-        order: [
-            ['id', 'DESC']
-        ],
-        where: {
-            meteostationId
-        },
-        limit: 1
-    })
-}
-
-async function getMeteostationOutsideParams(meteostationId) {
-    return MeteostationOutside.findOne({
-        order: [
-            ['id', 'DESC']
-        ],
-        where: {
-            meteostationId
-        },
-        limit: 1
-    })
-}
 
 function getLastMeteostationFromSQL(model, params) { 
     //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
@@ -121,9 +80,7 @@ module.exports = {
     writeMeteostationInsideParams,
     writeMeteostationOutsideParams,
     deleteOldMeteostationFromSQL,
-    getColumnMeteostationInsideFromSQL,
-    getColumnMeteostationOutsideFromSQL,
+    getColumnMeteostationFromSQL,
     getLastMeteostationFromSQL,
-    getMeteostationInsideParams,
-    getMeteostationOutsideParams
+
 }
