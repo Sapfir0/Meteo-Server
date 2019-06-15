@@ -32,7 +32,7 @@ export function createComputerGraphic(graphicValues) {
     const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic').getContext('2d');
     console.log(graphicValues)
 
-    var data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
+    const data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
     const labels = ["Занято", "Свободно"]
     datasForCharts = setDatasForPieGraphic(data, labels) 
     options = setOptionForGraphic("Нагруженность цпу")
@@ -46,8 +46,8 @@ export function setDatasForPieGraphic(data, labels) {
         datasets: [{
             data: data, // точки для графика
             backgroundColor: [
-                'rgba(255,203,59,1)',
-                'rgba(96,255,28, 1)'
+                '#ffcd56',
+                '#4bc0c0'
             ]
         }]
     };

@@ -38,6 +38,9 @@ img {
   width: 660px;
 } 
 
+.createdAtCpu {
+}
+
 
 @media screen and (max-width: 650px) {
   .chart-container {

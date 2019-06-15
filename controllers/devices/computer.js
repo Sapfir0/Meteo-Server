@@ -5,8 +5,6 @@ const helper = require("../../services/helper")
 
 function saveComputerData(req, res, next) {
     // как много присвоений, как же это исправить хм
-    //const computerData = req.body;
-    console.log(req.body.PC_Id)
     const HDD_temp = req.body.HDD_temp
     const CPU_temp =req.body.CPU_temp
     const CPU_currentLoad =req.body.CPU_currentLoad 
@@ -61,7 +59,6 @@ async function getComputerData(req, res, next) {
 
     try {
         const comp = await helper.getLastDatasFromSQL(ComputerParams, userId);
-        console.log(comp.dataValues)
         return res.json(comp.dataValues)
     }
     catch(error) {
