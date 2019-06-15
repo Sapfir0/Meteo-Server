@@ -38,8 +38,10 @@ function initAuthControllers(app, passport)  {
     
     app.get("/chartsValues", handler.getArrays) //для построения графиков
 
-    
-    app.post("/computerLoadParams", computerController.saveComputerData)
+    app.post('/updatePC_Id', urlencodedParser, computerController.updatePC_Id, sendHtml.success)
+
+    app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)
+    app.get("/computerLoadParams", computerController.getComputerData)
 
     ///////////////////////
     // const push = require("../controllers/push_notifications")

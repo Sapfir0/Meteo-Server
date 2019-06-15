@@ -5,12 +5,15 @@ document.addEventListener('DOMContentLoaded', start);
 
 function start() { 
     const meteoId = document.querySelector("#meteoId")
-    const sendBtn = document.querySelector("#submit")
+    const PC_Id = document.querySelector("#PC_Id")
+
+    const sendMeteoIdBtn = document.querySelector("#sendMeteoIdBtn")
+    const sendPC_IdBtn = document.querySelector("#sendPC_IdBtn")    
     const serverError = document.querySelector(".serverError")
 
 
 
-    sendBtn.addEventListener('click', (event) => {
+    sendMeteoIdBtn.addEventListener('click', (event) => {
         console.log(meteoId.value)
 
         const options = {
@@ -38,6 +41,36 @@ function start() {
         })
     
 },false);
+
+    sendPC_IdBtn.addEventListener('click', (event) => {
+    console.log(sendPC_IdBtn.value)
+
+    const options = {
+        method: "post",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "PC_Id": PC_Id.value
+        })
+ 
+    }
+    fetch("/updatePC_Id", options).then(response => {
+        if (response.ok) {
+            document.location.href = "/datasPage"
+        }
+        else {
+            response.text().then(error => {
+                console.log(error)
+                errorHandler(serverError, error)
+            })
+        }
+    }).catch((err) => {
+        console.error(err)
+    })
+
+    },false);
+
 
 
 }

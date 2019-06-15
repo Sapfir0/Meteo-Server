@@ -39,7 +39,7 @@ module.exports = function (sequelize, Sequelize) {
         GPU_load: {
             type: Sequelize.INTEGER,
         },
-        PC_id: {
+        PC_Id: {
             type: Sequelize.INTEGER,
         }
 

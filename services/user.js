@@ -28,6 +28,19 @@ function getMeteoIdByuserId(userId) {
     })
 }
 
+function changePC_id(userId, PC_id) {
+    return User.update({
+        PC_id,
+    }, 
+        {
+            where: {
+                id: userId
+            }
+        }
+    )
+}
+
+
 
 function getUserById(userId) {
     return User.findOne({
@@ -66,5 +79,6 @@ module.exports = {
     getUserByEmail,
     changeMeteoId,
     generateHash,
-    isValidPassword
+    isValidPassword,
+    changePC_id
 }

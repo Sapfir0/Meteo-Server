@@ -59,7 +59,7 @@ function getArrays(req, res, next) {
                 finalJson[columns[i]] = item
             }
             catch(error) {
-                console.log(error)
+                console.error("Meteostation column error")
             }
 
         }
@@ -84,7 +84,7 @@ async function getMeteostationData(req, res, next) {
         return res.json(inside.dataValues)
     }
     catch(error) {
-        console.error(error)
+        console.error("Meteostation last data error")
     }
     next()
 }
