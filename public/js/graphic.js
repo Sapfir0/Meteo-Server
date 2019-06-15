@@ -1,26 +1,24 @@
-let datasForCharts
-let options = {	
-    responsive: true,
-    title: {
-        display: true,
-        text: 'Температурный режим'
-    },
-    hover: {
-        mode: 'nearest',
-        intersect: true
-    },
-    // tooltips: {
-    //     mode: 'index',
-    //     intersect: false,
-    // },
-}
 
 export function createGraphics(graphicValues) {
+    let datasForCharts
+    let options = {	
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Температурный режим'
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        // tooltips: {
+        //     mode: 'index',
+        //     intersect: false,
+        // },
+    }
     const temperatureGraphic = document.getElementById('temperatureGraphic');
     const humidityGraphic = document.getElementById('humidityGraphic');
-
-
-
+    console.log(graphicValues)
     
     const temperatureInHomeArray = graphicValues.temperatureH;
     const humidityInHomeArray = graphicValues.humidityH;
@@ -46,9 +44,9 @@ export function createComputerGraphic(graphicValues) {
     
     console.log(graphicValues)
 
-    var config = setDatasForPieGraphic(graphicValues.CPU_load_iostat_graphic) 
-    chartNewPieGraphic(CPU_load_iostat_graphic, config, options )
-    console.log(datasForCharts)
+    // var config = setDatasForPieGraphic(graphicValues.CPU_load_iostat_graphic) 
+    // chartNewPieGraphic(CPU_load_iostat_graphic, config, options )
+    // console.log(datasForCharts)
 }
 
 export function setDatasForPieGraphic(data) {

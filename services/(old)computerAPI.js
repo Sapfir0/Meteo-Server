@@ -1,4 +1,4 @@
-const { AbstractDeviceAPI } = require("./(old)AbstarctDeviceAPI")
+const { AbstractDeviceAPI } = require("./(old)AbstractDeviceAPI")
 
 class ComputerAPI extends AbstractDeviceAPI {
     constructor() {

@@ -34,6 +34,7 @@ function deleteOldDatasFromSQL(model, id, time=1000*60*60*12) {
 
 async function getColumnDatasFromSQL(model, column, meteostationId)  { // вернет все значения у заданного столбца 
     //SELECT column FROM TABLE; // где meteostationId == meteostationId
+
     const currentColumn = await model.findAll({
         attributes: [column],
         where: {
