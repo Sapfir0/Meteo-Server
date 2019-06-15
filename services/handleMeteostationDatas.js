@@ -88,52 +88,28 @@ async function getMeteostationOutsideParams(meteostationId) {
     })
 }
 
-function getLastMeteostationInsideFromSQL(meteostationId) { 
+function getLastMeteostationFromSQL(model, params) { 
     //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
-    return MeteostationInside.findOne({ 
+    console.log(model);
+    
+    return model.findOne({ 
         order: [
             ['id', 'DESC']
         ],
         where: {
-            meteostationId
-        },
-        limit: 1
-    })
-}
-
-function getLastMeteostationOutsideFromSQL(meteostationId) { 
-    //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
-    return MeteostationOutside.findOne({ 
-        order: [
-            ['id', 'DESC']
-        ],
-        where: {
-            meteostationId
+            ...params
         },
         limit: 1
     })
 
 }
 
-function deleteOldMeteostationOutsideFromSQL (meteostationId) {
-    // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
-    return MeteostationOutside.destroy({
+function deleteOldMeteostationFromSQL(model, id, time=1000*60*60*12) {
+    return model.destroy({
         where: {
-            meteostationId,
+            meteostationId: id,
             createdAt: {
-                [Op.lt]: new Date( new Date() - 1000*60*60*12) //в микросекундах // 12ч
-            }
-        }
-    })
-}
-
-function deleteOldMeteostationInsideFromSQL (meteostationId) {
-    // "DELETE  FROM `table` WHERE created_at < (NOW() - INTERVAL 30 DAY)")
-    return MeteostationInside.destroy({
-        where: {
-            meteostationId,
-            createdAt: {
-                [Op.lt]: new Date( new Date() - 1000*60*60*12) //в микросекундах // 12ч
+                [Op.lt]: new Date( new Date() - time) //в микросекундах // 12ч
             }
         }
     })
@@ -144,12 +120,10 @@ function deleteOldMeteostationInsideFromSQL (meteostationId) {
 module.exports = {
     writeMeteostationInsideParams,
     writeMeteostationOutsideParams,
-    deleteOldMeteostationInsideFromSQL,
-    deleteOldMeteostationOutsideFromSQL,
+    deleteOldMeteostationFromSQL,
     getColumnMeteostationInsideFromSQL,
     getColumnMeteostationOutsideFromSQL,
-    getLastMeteostationInsideFromSQL,
-    getLastMeteostationOutsideFromSQL,
+    getLastMeteostationFromSQL,
     getMeteostationInsideParams,
     getMeteostationOutsideParams
 }

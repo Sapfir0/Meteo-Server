@@ -1,6 +1,7 @@
 //данные приходят в req.query
 const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
+const { MeteostationInside, MeteostationOutside } = require('../../database/tables')
 
 function saveArduinoData(req, res, next) {
     // как много присвоений, как же это исправить хм
@@ -76,8 +77,8 @@ async function getMeteostationData(req, res, next) {
     }
 
     try {
-        const inside = await arduinoAPI.getLastMeteostationInsideFromSQL(userId);
-        const outside =  await arduinoAPI.getLastMeteostationOutsideFromSQL(userId);     
+        const inside = await arduinoAPI.getLastMeteostationFromSQL(MeteostationInside,userId);
+        const outside =  await arduinoAPI.getLastMeteostationFromSQL(MeteostationOutside,userId);     
         Object.assign(inside.dataValues, outside.dataValues)
         
         return res.json(inside.dataValues)
@@ -92,8 +93,8 @@ async function getMeteostationData(req, res, next) {
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
     const meteoId = req.query.meteostationId
-    arduinoAPI.deleteOldMeteostationInsideFromSQL(meteoId)
-    arduinoAPI.deleteOldMeteostationOutsideFromSQL(meteoId)
+    arduinoAPI.deleteOldMeteostationFromSQL(MeteostationInside,meteoId)
+    arduinoAPI.deleteOldMeteostationFromSQL(MeteostationOutside,meteoId )
     next()
 }
 

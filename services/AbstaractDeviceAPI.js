@@ -17,14 +17,17 @@ class AbstractDeviceAPI {
         })
     }
 
-    getLastDeviceParams(deviceId) {
-        console.log(deviceId)
+    getLastDeviceParams(typeOfId, deviceId) { // строка вроде meteoId, сама эта переменная(извлчем значнеие тут)
+        console.log([`${typeOfId}`])
+        console.log([`${deviceId}`])
+        console.log(`${this.dbPointer}`)
+        
         return `${this.dbPointer}`.findOne({
             order: [
                 ['id', 'DESC']
             ],
             where: {
-                deviceId // ? н уверен что будет работать
+                [`${typeOfId}`] : deviceId // ? не уверен что будет работать
             },
             limit: 1
         })
@@ -42,12 +45,12 @@ class AbstractDeviceAPI {
         })
     }
 
-    getColumnDeviceParams(column, deviceId) {// вернет все значения у заданного столбца 
+    getColumnDeviceParams(column, typeOfId, deviceId) {// вернет все значения у заданного столбца 
         //метод должен быть асигн
         const currentColumn = await `${this.dbPointer}`.findAll({
             attributes: [column],
             where: {
-                deviceId
+                [`${typeOfId}`] : deviceId 
             }
         })
         console.log(currentColumn)

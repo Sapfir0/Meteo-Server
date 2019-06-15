@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
-        //console.log(computerValues);
+        console.log(computerValues);
         return computerValues
     }
 
