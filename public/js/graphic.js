@@ -11,7 +11,7 @@ export function createGraphics(graphicValues) {
     const humidityInHomeArray = graphicValues.humidityH;
     const createdAtArray = graphicValues.createdAt;
     const temperatureArray = graphicValues.temperature
-    const humidityArray = graphicValues.humidityH;
+    const humidityArray = graphicValues.humidity;
 
     
     for (let i = 0; i < createdAtArray.length; i++) {
@@ -20,13 +20,13 @@ export function createGraphics(graphicValues) {
   
     
     
-    datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
+    datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
     var borders =  findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
     options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
     borders =  findMaxMinArraysValues(humidityInHomeArray, humidityArray)
-    datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
+    datasForCharts = setDatasForHumidityGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
     options = setOptionForLineGraphic("Влажность", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
@@ -87,14 +87,34 @@ export function setDatasForBarGraphic(data, labels, label) {
     return datasForCharts;
 }
 
-export function setDatasForGraphic(labels, data, label, data2, label2) {
+export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
         datasets: [{
             label: label, // подпись самого графика
             // fill:false,
             data: data, // точки для графика,', 
-            backgroundColor: '#f0f0f0' ,
+            backgroundColor: 'rgba(246,232,233, 0.5)' 
+        },
+        {
+            label: label2, // подпись самого графика
+            // fill:false,
+            data: data2, // точки для графика,', 
+            backgroundColor: 'rgba(148,185,17, 0.5)' 
+        }]
+    };
+
+    return datasForCharts;
+}
+
+export function setDatasForTemperatureGraphic(labels, data, label, data2, label2) {
+    let datasForCharts = {
+        labels: labels, // подпись на оси Х
+        datasets: [{
+            label: label, // подпись самого графика
+            // fill:false,
+            data: data, // точки для графика,', 
+            backgroundColor: 'rgba(246,232,233, 0.5)' ,
             pointBackgroundColor: function(context) {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
@@ -107,7 +127,7 @@ export function setDatasForGraphic(labels, data, label, data2, label2) {
             label: label2, // подпись самого графика
             // fill:false,
             data: data2, // точки для графика,', 
-            backgroundColor: '#ffffff' ,
+            backgroundColor: 'rgba(148,185,17, 0.5)' ,
             pointBackgroundColor: function(context) {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
