@@ -3,12 +3,11 @@ const debug = require("../services/debug")
 
 const sendHtml = require("../services/sendHtml")
 const handler = require("../controllers/devices/meteostation")
-const computer = require("../services/computerParams")
 const computerController = require("../controllers/devices/computer")
 
 
 //  проверка логирования
-const { isLoggedIn, loggedCheker } = require('../controllers/users/logged.js');
+const { isLoggedIn, loggedChekerd } = require('../controllers/users/logged.js');
 
 const {
     userCreateValidator,

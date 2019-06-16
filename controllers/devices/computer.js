@@ -69,7 +69,7 @@ async function getComputerData(req, res, next) {
 
 function deleteOldDatas(req,res,next) {
     const PC_Id = req.body.PC_Id
-    helper.deleteOldDatasFromSQL(ComputerParams, PC_Id)
+    helper.deleteOldDatasFromSQL(ComputerParams, PC_Id, 1000*60*60)
     next()
 }
 

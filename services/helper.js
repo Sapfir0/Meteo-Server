@@ -1,5 +1,4 @@
 const { Op } = require('sequelize')
-const {Sequelize} = require('sequelize')
 
 
 function getLastDatasFromSQL(model, params) { 

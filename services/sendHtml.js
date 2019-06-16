@@ -11,11 +11,21 @@ const success = (req, res) => {
 }
 
 const sign_In = (req, res  ) => {
-    res.sendFile(config.viewsDir + "sign_In.html")
+    if (req.isAuthenticated()) {
+        res.redirect("/datasPage")
+    }
+    else {
+        res.sendFile(config.viewsDir + "sign_In.html")
+    }
 }
 
 const register = (req, res  ) => {
-    res.sendFile(config.viewsDir + "register.html")
+    if (req.isAuthenticated()) {
+        res.redirect("/datasPage")
+    }
+    else {
+        res.sendFile(config.viewsDir + "register.html")
+    }
 }
 
 const datasPage = (req, res) => {

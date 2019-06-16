@@ -17,11 +17,20 @@ export function createGraphics(graphicValues) {
 
 
     datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки")
-    options = setOptionForGraphic("Температура")
+    //так-с
+    //найдем мин и макс значение и умножим каждое на 0.01 и сложим соотсвтенно
+    var Tmin = Math.min( ...temperatureInHomeArray ),
+        Tmax = Math.max( ...temperatureInHomeArray );
+
+    var Hmin = Math.min( ...humidityInHomeArray ),
+        Hmax = Math.max( ...humidityInHomeArray );
+
+
+    options = setOptionForLineGraphic("Температура", Tmin*0.9, Tmax*1.1)
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
     datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
-    options = setOptionForGraphic("Влажность")
+    options = setOptionForLineGraphic("Влажность", Hmin*0.9, Hmax*1.1)
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
 
@@ -32,13 +41,46 @@ export function createComputerGraphic(graphicValues) {
     const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic').getContext('2d');
     console.log(graphicValues)
 
-    const data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
-    const labels = ["Занято", "Свободно"]
+    var data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
+    var labels = ["Занято", "Свободно"]
+
     datasForCharts = setDatasForPieGraphic(data, labels) 
-    options = setOptionForGraphic("Нагруженность цпу")
+    options = setOptionForGraphic("Нагруженность CPU, %")
     chartNewPieGraphic(CPU_load_iostat_graphic, datasForCharts, options )
-    console.log(datasForCharts)
+
+
+    data = [graphicValues.CPU_currentLoad, graphicValues.CPU_15minute_load, graphicValues.CPU_5minute_load]
+    labels = ["Текущая нагрузка", "5-минутная", "15-минутная"]
+    var min = Math.min( ...data ),
+        max = Math.max( ...data );
+
+    console.log(min, max)
+
+    datasForCharts = setDatasForBarGraphic(data, labels, "Сложные данные для убергениев. Подсказка скоро будет") 
+    options = setOptionForBarGraphic("Нагруженность цпу", min*0.9, max*1.05)
+    chartNewBarGraphic(CPU_load_uptime_graphic, datasForCharts, options )
+
 }
+
+
+export function setDatasForBarGraphic(data, labels, label) {
+    let datasForCharts = {
+        labels: labels, // подпись на оси Х
+        datasets: [{
+            label: label, // подпись самого графика
+            data: data, // точки для графика
+            backgroundColor: [
+                // '#ffcd56',
+                // '#4bc0c0'
+            ]
+        }]
+    };
+
+    return datasForCharts;
+}
+
+
+
 
 export function setDatasForPieGraphic(data, labels) {
     let datasForCharts = {
@@ -54,6 +96,60 @@ export function setDatasForPieGraphic(data, labels) {
 
     return datasForCharts;
 }
+
+function setOptionForBarGraphic(text, ymin, ymax) {
+    let options = {	
+        responsive: true,
+        title: {
+            display: true,
+            text: text
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: ymin,
+                    max: ymax
+                }
+            }]
+        }        
+    }
+    return options
+}
+
+
+function setOptionForLineGraphic(text, ymin, ymax) {
+    let options = {	
+        responsive: true,
+        title: {
+            display: true,
+            text: text
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                     min: ymin,
+                        max: ymax
+                }
+            }]
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        
+    }
+    return options
+}
+
+
 
 function setOptionForGraphic(text) {
     let options = {	
@@ -80,7 +176,9 @@ export function setDatasForGraphic(labels, data, label) {
         labels: labels, // подпись на оси Х
         datasets: [{
             label: label, // подпись самого графика
-            data: data // точки для графика
+            data: data, // точки для графика,
+            //backgroundColor:  fillPattern
+
         }]
     };
 
@@ -97,6 +195,14 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
 
 }
 
+export function chartNewBarGraphic(ctx, datasForCharts, options) {
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: datasForCharts,
+        options: options
+    });
+}
+
 export function chartNewPieGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
         type: 'pie',
@@ -104,7 +210,6 @@ export function chartNewPieGraphic(ctx, datasForCharts, options) {
         options: options,
     });
 
-    //chart.canvas.parentNode.style.height = '128px'; //ВАЖНО СМОТРИ СЮДА
 
 }
 

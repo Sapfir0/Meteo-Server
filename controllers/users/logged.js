@@ -1,7 +1,9 @@
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) 
+    if (req.isAuthenticated()) {
         return next();
+    }
     res.redirect('/sign_In');
+
 }
 
 function loggedCheker(req, res, next) {
@@ -11,7 +13,12 @@ function loggedCheker(req, res, next) {
     res.send('you are not logged')
 }
 
+function isntLogged(req, res, next) {
+
+}
+
 module.exports = {
     isLoggedIn,
-    loggedCheker
+    loggedCheker,
+    isntLogged
 };

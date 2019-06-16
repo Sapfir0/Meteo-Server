@@ -1,4 +1,4 @@
-import { createGraphics, setDatasForGraphic, chartNewLineGraphic, createComputerGraphic, dateToStr } from "./graphic.js"
+import { createGraphics, chartNewLineGraphic, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
 
 
@@ -85,11 +85,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function getlastComputerParams() { 
+        const createdAtCpu = document.querySelector(".createdAtCpu")
 
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
         //console.log(computerValues); 
-        const createdAtCpu = document.querySelector(".createdAtCpu")
         createdAtCpu.innerHTML = dateToStr(new Date(computerValues.createdAt))
 
         return computerValues
