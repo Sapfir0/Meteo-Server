@@ -1,4 +1,4 @@
-import { createGraphics, chartNewLineGraphic, createComputerGraphic, dateToStr } from "./graphic.js"
+import { createGraphics, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
 
 

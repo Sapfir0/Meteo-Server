@@ -3,7 +3,12 @@ const config = require("../config/config")
 
 
 const index = (req, res ) => {
-    res.sendFile(config.viewsDir + "index.html")
+    if (req.isAuthenticated()) {
+        res.redirect("/datasPage")
+    }
+    else {
+        res.sendFile(config.viewsDir + "index.html")
+    }
 }
 
 const success = (req, res) => {

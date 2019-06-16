@@ -10,31 +10,20 @@ export function hideHint(widget) {
     widget.className = 'hint';
 }
 
-
-// export function checkValidation(widget, errorSpan, strError, checkPassword=false, compairWidget=undefined) {
-//     if (widget.validity.valid) {
-//         hideHint(errorSpan)
-//         if(checkPassword) 
-//            passwordEqualRepassword(widget, compairWidget)
-//     }
-//     else {
-//         showHint(errorSpan, strError)
-//     }
-// }
-
-// export function passwordEqualRepassword(widget, compairWidget, errorSpan, strError) {
-//     if (widget.value == compairWidget.value) {
-//         hideHint(compairWidget)
-//         return true
-//     }
-//     else {
-//         showHint(errorSpan, strError)
-//         return false
-//     }
-// }
-
-
-
 export function errorHandler(serverError, err) {
     showHint(serverError, err)
+}
+
+export function findMaxMinArrayValues(array) {
+    const result = [ Math.min( ...array), Math.max( ...array ) ]
+    result[0] = Math.round(result[0]); result[1] = Math.round(result[1])
+    return result
+}
+
+export function findMaxMinArraysValues(array1, array2) {
+    const minMaxInAr1 = findMaxMinArrayValues(array1)
+    const minMaxInAr2 = findMaxMinArrayValues(array2)
+    const sum = minMaxInAr1.concat(minMaxInAr2)
+    const result = findMaxMinArrayValues(sum)
+    return result
 }
