@@ -3,7 +3,9 @@ import { showHint, hideHint } from "./helpers.js"
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    
+    console.log(document.body.clientWidth)
+    console.log(document.body.clientHeight)
+
     // widgets
     const temperatureInHome = document.querySelector(".temperatureInHome")
     const humidityInHome = document.querySelector(".humidityInHome")

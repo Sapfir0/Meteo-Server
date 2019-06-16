@@ -1,5 +1,5 @@
 import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } from "./typeOfGraphics/barGraphics.js"
-import { chartNewLineGraphic, setOptionForLineGraphic, setDatasForHumidityGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
+import { chartNewLineGraphic, setOptionForLineGraphic, setDatasForHumidityGraphic, setDatasForTemperatureHorizontalGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
 import { chartNewPieGraphic, setDatasForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
 import { findMaxMinArrayValues, findMaxMinArraysValues } from "./helpers.js"
 
@@ -25,7 +25,7 @@ export function createGraphics(graphicValues) {
     }
   
     
-    borders =  findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
+    borders = findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
     datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
     options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
@@ -62,7 +62,6 @@ export function createComputerGraphic(graphicValues) {
 
 function setOptionForGraphic(text) {
     let options = {	
-        responsive: true,
         title: {
             display: true,
             text: text
@@ -93,7 +92,12 @@ export function dateToStr(date) {
         str = 'вчера ';
     } else if (nearlyDay && subDay == 0) {
         // сегодня
-        str = 'сегодня ';
+        if(document.body.clientWidth > 600) {
+            str = 'сегодня ';
+        }
+        else {
+            str=''
+        }
     } else {
         const month = ['Января','Февраля','Марта','Апреля','Мая',
             'Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'
