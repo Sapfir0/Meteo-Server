@@ -1,5 +1,5 @@
 import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } from "./typeOfGraphics/barGraphics.js"
-import { chartNewLineGraphic, setOptionForLineGraphic, setDatasForHumidityGraphic, setDatasForTemperatureHorizontalGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
+import { chartNewLineGraphic, setOptionForLineTemperatureGraphic, setOptionForLineHumidityGraphic, setDatasForHumidityGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
 import { chartNewPieGraphic, setDatasForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
 import { findMaxMinArrayValues, findMaxMinArraysValues } from "./helpers.js"
 
@@ -27,13 +27,13 @@ export function createGraphics(graphicValues) {
     
     borders = findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
     datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
-    options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
+    options = setOptionForLineTemperatureGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
 
     borders =  findMaxMinArraysValues(humidityInHomeArray, humidityArray)
     datasForCharts = setDatasForHumidityGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
-    options = setOptionForLineGraphic("Влажность", borders[0]*0.9, borders[1]*1.1)
+    options = setOptionForLineHumidityGraphic("Влажность", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
 }

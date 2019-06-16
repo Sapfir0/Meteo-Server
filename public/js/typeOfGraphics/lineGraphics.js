@@ -1,4 +1,8 @@
 
+const colorOfStreetGraphic = 'rgba(148,185,17, 0.5)'
+const colorOfHomeGraphic = 'rgba(246,232,233, 0.5)'
+const font_color =  'white'
+
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
@@ -6,18 +10,19 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             label: label, // подпись самого графика
             // fill:false,
             data: data, // точки для графика,', 
-            backgroundColor: 'rgba(246,232,233, 0.5)' 
+            backgroundColor: colorOfHomeGraphic
         },
         {
             label: label2, // подпись самого графика
             // fill:false,
             data: data2, // точки для графика,', 
-            backgroundColor: 'rgba(148,185,17, 0.5)' 
+            backgroundColor: colorOfStreetGraphic
         }]
     };
 
     return datasForCharts;
 }
+
 
 export function setDatasForTemperatureGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
@@ -25,9 +30,8 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
         datasets: [{
             label: label, // подпись самого графика
             // fill:false,
-            
             data: data, // точки для графика,', 
-            backgroundColor: 'rgba(246,232,233, 0.5)' ,
+            backgroundColor: colorOfHomeGraphic ,
             pointBackgroundColor: function(context) {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
@@ -39,11 +43,10 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             label: label2, // подпись самого графика
             // fill:false,
             data: data2, // точки для графика,', 
-            backgroundColor: 'rgba(148,185,17, 0.5)' ,
+            backgroundColor: colorOfStreetGraphic ,
             pointBackgroundColor: function(context) {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
-
                 return value > 40 ? 'red' : '#edd9db' 
             }
         }]
@@ -51,28 +54,6 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
 
     return datasForCharts;
 }
-
-
-export function setDatasForTemperatureHorizontalGraphic(labels, data, label, data2, label2) {
-    let datasForCharts = {
-        labels: labels, // подпись на оси Х
-        datasets: [{
-            label: label, // подпись самого графика
-            // fill:false,
-            data: data, // точки для графика,', 
-            backgroundColor: 'rgba(246,232,233, 0.5)' 
-        },
-        {
-            label: label2, // подпись самого графика
-            // fill:false,
-            data: data2, // точки для графика,', 
-            backgroundColor: 'rgba(148,185,17, 0.5)' 
-        }]
-    };
-
-    return datasForCharts;
-}
-
 
 
 export function chartNewLineGraphic(ctx, datasForCharts, options) {
@@ -84,13 +65,20 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
 }
 
 
-export function setOptionForLineGraphic(text, ymin, ymax) {
+export function setOptionForLineTemperatureGraphic(text, ymin, ymax) {
     let options = {	
         responsive: false,
         maintainAspectRatio: false,
         title: {
             display: true,
-            text: text
+            text: text,
+            fontColor: font_color
+        },
+        legend: {
+            display: true,
+            labels: {
+                fontColor: font_color
+            }
         },
         hover: {
             mode: 'nearest',
@@ -103,11 +91,18 @@ export function setOptionForLineGraphic(text, ymin, ymax) {
         scales: {
             yAxes: [{
                 ticks: {
+                    fontColor: font_color,	
                     min: Math.round(ymin),
-                    max: Math.round(ymax)
+                    max: Math.round(ymax),
+                    callback: function(value) {
+                        return value + "°C";
+                    }
                 },
             }],
             xAxes: [{
+                ticks: { 
+                    fontColor: font_color
+                },
                 gridLines: {
                     display: false
                 }
@@ -117,3 +112,49 @@ export function setOptionForLineGraphic(text, ymin, ymax) {
     return options
 }
 
+export function setOptionForLineHumidityGraphic(text, ymin, ymax) {
+    let options = {	
+        responsive: false,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: text,
+            fontColor: font_color
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        legend: {
+            display: true,
+            labels: {
+                fontColor: font_color
+            }
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: font_color,
+                    min: Math.round(ymin),
+                    max: Math.round(ymax),
+                    callback: function(value) {
+                        return value + "%";
+                    }
+                },
+            }],
+            xAxes: [{
+                ticks: { 
+                    fontColor: font_color
+                },
+                gridLines: {
+                    display: false
+                }
+            }]
+        }  
+    }
+    return options
+}

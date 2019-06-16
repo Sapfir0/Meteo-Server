@@ -27,3 +27,4 @@ export function findMaxMinArraysValues(array1, array2) {
     const result = findMaxMinArrayValues(sum)
     return result
 }
+

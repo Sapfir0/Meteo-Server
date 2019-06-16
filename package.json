@@ -9,6 +9,7 @@
     "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
   "dependencies": {
+    "animejs": "^3.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chart.js": "^2.8.0",

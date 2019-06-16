@@ -1,4 +1,7 @@
 
+const colorA = '#ffcd56'
+const colorB = '#4bc0c0'
+
 export function chartNewPieGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
         type: 'pie',
@@ -14,8 +17,8 @@ export function setDatasForPieGraphic(data, labels) {
         datasets: [{
             data: data, // точки для графика
             backgroundColor: [
-                '#ffcd56',
-                '#4bc0c0'
+                colorA,
+                colorB
             ]
         }]
     };

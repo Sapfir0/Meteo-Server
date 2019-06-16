@@ -7,11 +7,18 @@
     <title>Метеосервер</title>
     <link rel="stylesheet" href="/css/style.css">
 
-    <script type="text/javascript"  src="/Chart.js"></script>
+    <script type="text/javascript"  src="chart.js/dist/Chart.js"></script>
+    <!-- <script type="text/javascript"  src="animejs/lib/anime.js"></script> -->
     <script type="module" src="/js/datasPage.js"></script>
+    <script type="module" src="/js/rain.js"></script>
+    <link rel="stylesheet" href="/css/rain.css">
+
 </head>
-<body>
+<body class="back-row-toggle splat-toggle">
     <a href="/home">Добавить девайс </a>
+
+    <div class="rain front-row"></div>
+    <div class="rain back-row"></div>
 
     <content>
             <div class="home"> <h2>Блок дома</h2>
