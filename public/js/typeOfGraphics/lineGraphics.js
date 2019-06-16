@@ -53,28 +53,6 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
 }
 
 
-export function setDatasForTemperatureHorizontalGraphic(labels, data, label, data2, label2) {
-    let datasForCharts = {
-        labels: labels, // подпись на оси Х
-        datasets: [{
-            label: label, // подпись самого графика
-            // fill:false,
-            data: data, // точки для графика,', 
-            backgroundColor: 'rgba(246,232,233, 0.5)' 
-        },
-        {
-            label: label2, // подпись самого графика
-            // fill:false,
-            data: data2, // точки для графика,', 
-            backgroundColor: 'rgba(148,185,17, 0.5)' 
-        }]
-    };
-
-    return datasForCharts;
-}
-
-
-
 export function chartNewLineGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
         type: 'line',
@@ -84,7 +62,7 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
 }
 
 
-export function setOptionForLineGraphic(text, ymin, ymax) {
+export function setOptionForLineTemperatureGraphic(text, ymin, ymax) {
     let options = {	
         responsive: false,
         maintainAspectRatio: false,
@@ -104,7 +82,10 @@ export function setOptionForLineGraphic(text, ymin, ymax) {
             yAxes: [{
                 ticks: {
                     min: Math.round(ymin),
-                    max: Math.round(ymax)
+                    max: Math.round(ymax),
+                    callback: function(value, index, values) {
+                        return value + "°C";
+                    }
                 },
             }],
             xAxes: [{
@@ -117,3 +98,38 @@ export function setOptionForLineGraphic(text, ymin, ymax) {
     return options
 }
 
+export function setOptionForLineHumidityGraphic(text, ymin, ymax) {
+    let options = {	
+        responsive: false,
+        maintainAspectRatio: false,
+        title: {
+            display: true,
+            text: text
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: Math.round(ymin),
+                    max: Math.round(ymax),
+                    callback: function(value, index, values) {
+                        return value + "%";
+                    }
+                },
+            }],
+            xAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }]
+        }  
+    }
+    return options
+}
