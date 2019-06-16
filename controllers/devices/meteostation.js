@@ -37,7 +37,8 @@ function updateMeteoId(req, res, next) {
 
 function getArrays(req, res, next) {  
     
-    const columns = ["temperatureH", "humidityH", "createdAt" ]
+    const columnsInside = ["temperatureH", "humidityH", "createdAt" ]
+    const columnsOutside = ["temperature", "humidity"]
     let finalJson= new Object;
 
     getter().then( (column) =>{
@@ -47,16 +48,26 @@ function getArrays(req, res, next) {
     async function getter() {
         const userId = req.user.meteostationId
         
-        for(let i=0; i<columns.length; i++) {
+        for(let i=0; i<columnsInside.length; i++) {
             try {
-                let item = await helper.getColumnDatasFromSQL(MeteostationInside, columns[i], userId) // мы строим графики только по инсайду, на 
-                finalJson[columns[i]] = item
+                let item = await helper.getColumnDatasFromSQL(MeteostationInside, columnsInside[i], userId) // мы строим графики только по инсайду, на 
+                finalJson[columnsInside[i]] = item
             }
             catch(error) {
                 console.error("Meteostation column error")
             }
-
         }
+
+        for(let i=0; i<columnsOutside.length; i++) {
+            try {
+                let item = await helper.getColumnDatasFromSQL(MeteostationOutside, columnsOutside[i], userId) // мы строим графики только по инсайду, на 
+                finalJson[columnsOutside[i]] = item
+            }
+            catch(error) {
+                console.error("Meteostation column error 2")
+            }
+        }
+        console.log(finalJson)
         return finalJson;
     }
 

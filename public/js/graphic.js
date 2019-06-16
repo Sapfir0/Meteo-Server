@@ -10,27 +10,24 @@ export function createGraphics(graphicValues) {
     const temperatureInHomeArray = graphicValues.temperatureH;
     const humidityInHomeArray = graphicValues.humidityH;
     const createdAtArray = graphicValues.createdAt;
+    const temperatureArray = graphicValues.temperature
+    const humidityArray = graphicValues.humidityH;
+
     
     for (let i = 0; i < createdAtArray.length; i++) {
         createdAtArray[i] = dateToStr(new Date(createdAtArray[i]))
     }
-
-
-    datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки")
-    //так-с
-    //найдем мин и макс значение и умножим каждое на 0.01 и сложим соотсвтенно
-    var Tmin = Math.min( ...temperatureInHomeArray ),
-        Tmax = Math.max( ...temperatureInHomeArray );
-
-    var Hmin = Math.min( ...humidityInHomeArray ),
-        Hmax = Math.max( ...humidityInHomeArray );
-
-
-    options = setOptionForLineGraphic("Температура", Tmin*0.9, Tmax*1.1)
+  
+    
+    
+    datasForCharts = setDatasForGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
+    var borders =  findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
+    options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
-    datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки")
-    options = setOptionForLineGraphic("Влажность", Hmin*0.9, Hmax*1.1)
+    borders =  findMaxMinArraysValues(humidityInHomeArray, humidityArray)
+    datasForCharts = setDatasForGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
+    options = setOptionForLineGraphic("Влажность", borders[0]*0.9, borders[1]*1.1)
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
 
@@ -51,15 +48,26 @@ export function createComputerGraphic(graphicValues) {
 
     data = [graphicValues.CPU_currentLoad, graphicValues.CPU_15minute_load, graphicValues.CPU_5minute_load]
     labels = ["Текущая нагрузка", "5-минутная", "15-минутная"]
-    var min = Math.min( ...data ),
-        max = Math.max( ...data );
 
-    console.log(min, max)
-
+    const borders =  findMaxMinArrayValues(data)
     datasForCharts = setDatasForBarGraphic(data, labels, "Сложные данные для убергениев. Подсказка скоро будет") 
-    options = setOptionForBarGraphic("Нагруженность цпу", min*0.9, max*1.05)
+    options = setOptionForBarGraphic("Нагруженность цпу", borders[0]*0.9, borders[1]*1.05)
     chartNewBarGraphic(CPU_load_uptime_graphic, datasForCharts, options )
 
+}
+
+function findMaxMinArrayValues(array) {
+    const result = [ Math.min( ...array), Math.max( ...array ) ]
+    return result
+}
+
+function findMaxMinArraysValues(array1, array2) {
+    const minMaxInAr1 = findMaxMinArrayValues(array1)
+    const minMaxInAr2 = findMaxMinArrayValues(array2)
+    const sum = minMaxInAr1.concat(minMaxInAr2)
+    const result = findMaxMinArrayValues(sum)
+    console.log(result)
+    return result
 }
 
 
@@ -79,7 +87,39 @@ export function setDatasForBarGraphic(data, labels, label) {
     return datasForCharts;
 }
 
+export function setDatasForGraphic(labels, data, label, data2, label2) {
+    let datasForCharts = {
+        labels: labels, // подпись на оси Х
+        datasets: [{
+            label: label, // подпись самого графика
+            // fill:false,
+            data: data, // точки для графика,', 
+            backgroundColor: '#f0f0f0' ,
+            pointBackgroundColor: function(context) {
+                var index = context.dataIndex;
+                var value = context.dataset.data[index];
 
+                console.log(value)
+                return value > 40 ? 'red' : '#edd9db' 
+            }
+        },
+        {
+            label: label2, // подпись самого графика
+            // fill:false,
+            data: data2, // точки для графика,', 
+            backgroundColor: '#ffffff' ,
+            pointBackgroundColor: function(context) {
+                var index = context.dataIndex;
+                var value = context.dataset.data[index];
+
+                console.log(value)
+                return value > 40 ? 'red' : '#edd9db' 
+            }
+        }]
+    };
+
+    return datasForCharts;
+}
 
 
 export function setDatasForPieGraphic(data, labels) {
@@ -97,7 +137,7 @@ export function setDatasForPieGraphic(data, labels) {
     return datasForCharts;
 }
 
-function setOptionForBarGraphic(text, ymin, ymax) {
+function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax) {
     let options = {	
         responsive: true,
         title: {
@@ -115,7 +155,8 @@ function setOptionForBarGraphic(text, ymin, ymax) {
                     max: ymax
                 }
             }]
-        }        
+        },
+   
     }
     return options
 }
@@ -137,14 +178,14 @@ function setOptionForLineGraphic(text, ymin, ymax) {
                 ticks: {
                      min: ymin,
                         max: ymax
+                },
+            }],
+            xAxes: [{
+                gridLines: {
+                    display: false
                 }
             }]
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        
+        }  
     }
     return options
 }
@@ -168,21 +209,6 @@ function setOptionForGraphic(text) {
         // },
     }
     return options
-}
-
-
-export function setDatasForGraphic(labels, data, label) {
-    let datasForCharts = {
-        labels: labels, // подпись на оси Х
-        datasets: [{
-            label: label, // подпись самого графика
-            data: data, // точки для графика,
-            //backgroundColor:  fillPattern
-
-        }]
-    };
-
-    return datasForCharts;
 }
 
 
