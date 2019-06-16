@@ -2,12 +2,17 @@ body {
   /* padding: 10px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #e1f1f0;
+  color: white;
 
 }
 
 #humidityGraphic, #temperatureGraphic {
   height:400px;
   width: 100%;
+}
+
+span {
+  color: white;
 }
 
 
@@ -36,6 +41,8 @@ content {
 img {
   height: 40px;
 }
+
+
 
 
  .chart-container {
