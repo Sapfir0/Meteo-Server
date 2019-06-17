@@ -1,12 +1,20 @@
+
+const colorA='#ffcd56'
+const colorB='#4bc0c0'
+const colorC='#2e98b0'
+const font_color = 'white'
+
 export function setDatasForBarGraphic(data, labels, label) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
+        
         datasets: [{
             label: label, // подпись самого графика
             data: data, // точки для графика
             backgroundColor: [
-                // '#ffcd56',
-                // '#4bc0c0'
+                colorA,
+                colorB,
+                colorC
             ]
         }]
     };
@@ -28,7 +36,15 @@ export function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMa
         responsive: true,
         title: {
             display: true,
-            text: text
+            text: text,
+            fontColor: font_color
+
+        },
+        legend: {
+            display: true,
+            labels: {
+                fontColor: font_color
+            }
         },
         hover: {
             mode: 'nearest',
@@ -38,7 +54,13 @@ export function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMa
             yAxes: [{
                 ticks: {
                     min: Math.round(ymin),
-                    max: Math.round(ymax)
+                    max: Math.round(ymax),
+                    fontColor: font_color
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: font_color
                 }
             }]
         },

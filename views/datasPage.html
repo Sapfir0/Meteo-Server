@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Метеосервер</title>
+    
     <link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="/css/rain.css">
+    
     <script type="text/javascript"  src="chart.js/dist/Chart.js"></script>
     <!-- <script type="text/javascript"  src="animejs/lib/anime.js"></script> -->
     <script type="module" src="/js/datasPage.js"></script>
     <script type="module" src="/js/rain.js"></script>
-    <link rel="stylesheet" href="/css/rain.css">
 
 </head>
 <body class="back-row-toggle ">
@@ -71,7 +72,7 @@
         </div>
 
     </content>
-    <p> Данные были получены <span class="createdAt"></span>
+    <h4>Данные были получены<p> <span class="createdAt"></span></h4>
     
     <div class="graphics">
         <div class="chart-container">
@@ -89,10 +90,10 @@
             <div class="chart-container"> 
                 <!-- инсертнуть сюда pie график -->
                 <canvas id="CPU_load_iostat_graphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
-                <span class="createdAtCpu" aria-live="polite"></span>
             </div>
         </div>
     </div>
+    <span class="createdAtCpu" aria-live="polite"></span>
 
     <div id="CPU_load_uptime_block" class="block" class="block"> 
         <div class="graphics">

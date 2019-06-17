@@ -1,6 +1,7 @@
 
 const colorA = '#ffcd56'
 const colorB = '#4bc0c0'
+const font_color =  'white'
 
 export function chartNewPieGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
@@ -9,6 +10,29 @@ export function chartNewPieGraphic(ctx, datasForCharts, options) {
         options: options,
     });
 }
+
+export function setOptionForPieGraphic(text) {
+    let options = {	
+        title: {
+            display: true,
+            text: text,
+            fontColor: font_color
+
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        legend: {
+            display: true,
+            labels: {
+                fontColor: font_color
+            }
+        },
+    }
+    return options
+}
+
 
 
 export function setDatasForPieGraphic(data, labels) {

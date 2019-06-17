@@ -1,7 +1,6 @@
 body {
   /* padding: 10px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /* background: #e1f1f0; */
   color: white;
 
 }
@@ -15,6 +14,10 @@ span {
   color: white;
 }
 
+.createdAt {
+ font-size: 12px;
+ /* margin-top: -10px; */
+}
 
 .block {
   width: 230px;

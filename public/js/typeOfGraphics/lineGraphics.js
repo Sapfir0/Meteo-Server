@@ -35,7 +35,6 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             pointBackgroundColor: function(context) {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
-
                 return value > 40 ? 'red' : '#edd9db' 
             }
         },
@@ -65,54 +64,7 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
 }
 
 
-export function setOptionForLineTemperatureGraphic(text, ymin, ymax) {
-    let options = {	
-        responsive: false,
-        maintainAspectRatio: false,
-        title: {
-            display: true,
-            text: text,
-            fontColor: font_color
-        },
-        legend: {
-            display: true,
-            labels: {
-                fontColor: font_color
-            }
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: font_color,	
-                    min: Math.round(ymin),
-                    max: Math.round(ymax),
-                    callback: function(value) {
-                        return value + "°C";
-                    }
-                },
-            }],
-            xAxes: [{
-                ticks: { 
-                    fontColor: font_color
-                },
-                gridLines: {
-                    display: false
-                }
-            }]
-        }  
-    }
-    return options
-}
-
-export function setOptionForLineHumidityGraphic(text, ymin, ymax) {
+export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax, charTitle='') {
     let options = {	
         responsive: false,
         maintainAspectRatio: false,
@@ -142,7 +94,7 @@ export function setOptionForLineHumidityGraphic(text, ymin, ymax) {
                     min: Math.round(ymin),
                     max: Math.round(ymax),
                     callback: function(value) {
-                        return value + "%";
+                        return value + charTitle; //подпись на оси y
                     }
                 },
             }],

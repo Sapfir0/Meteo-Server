@@ -1,6 +1,6 @@
 import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } from "./typeOfGraphics/barGraphics.js"
-import { chartNewLineGraphic, setOptionForLineTemperatureGraphic, setOptionForLineHumidityGraphic, setDatasForHumidityGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
-import { chartNewPieGraphic, setDatasForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
+import { chartNewLineGraphic, setDatasForHumidityGraphic, setOptionForLineGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
+import { chartNewPieGraphic, setDatasForPieGraphic, setOptionForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
 import { findMaxMinArrayValues, findMaxMinArraysValues } from "./helpers.js"
 
 let datasForCharts
@@ -27,13 +27,13 @@ export function createGraphics(graphicValues) {
     
     borders = findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
     datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
-    options = setOptionForLineTemperatureGraphic("Температура", borders[0]*0.9, borders[1]*1.1)
+    options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1, "°C")
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
 
     borders =  findMaxMinArraysValues(humidityInHomeArray, humidityArray)
     datasForCharts = setDatasForHumidityGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
-    options = setOptionForLineHumidityGraphic("Влажность", borders[0]*0.9, borders[1]*1.1)
+    options = setOptionForLineGraphic("Влажность", borders[0]*0.9, borders[1]*1.1, "%"), 
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 
 }
@@ -46,7 +46,7 @@ export function createComputerGraphic(graphicValues) {
     var labels = ["Занято", "Свободно"]
 
     datasForCharts = setDatasForPieGraphic(data, labels) 
-    options = setOptionForGraphic("Нагруженность CPU, %")
+    options = setOptionForPieGraphic("Нагруженность CPU, %")
     chartNewPieGraphic(CPU_load_iostat_graphic, datasForCharts, options )
 
 
@@ -70,6 +70,7 @@ function setOptionForGraphic(text) {
             mode: 'nearest',
             intersect: true
         },
+        
         // tooltips: {
         //     mode: 'index',
         //     intersect: false,
