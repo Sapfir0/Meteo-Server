@@ -1,0 +1,61 @@
+.forms {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto auto;
+    margin-top: 45vh;
+}
+
+a {
+    text-decoration: none;
+    color: #2e2e2e;
+}
+
+body {
+    background-color: #dee1e6;
+}
+
+.register {
+}
+
+.sign_In {
+    background-color: palegoldenrod;
+    padding: 5px 10px 5px 10px;
+
+}
+
+.sign_In:hover, .register:hover {
+    background-color: steelblue;
+    color: whitesmoke;
+}
+
+
+.register , .sign_In  {
+    margin-right: 0.5rem;
+    display: inline-block;
+    font-family: arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    user-select: none;
+    padding: 0.3em 1.2em;
+    outline: none;
+    border-radius: 3px;
+    transition: all 0.218s ease 0s;
+}
+
+.sign_In  {
+    background-color: #333; 
+    color: whitesmoke;
+}
+
+.register {
+    background-color: #ccc;
+    color: black;
+}
+
+.sign_In:active, .register :active {
+    background-color: rgb(99, 45, 80);
+    color: whitesmoke;
+}

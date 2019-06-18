@@ -3,8 +3,8 @@ import { showHint, hideHint } from "./helpers.js"
 import { makeItRain } from "./rain.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log(document.body.clientWidth)
-    console.log(document.body.clientHeight)
+    // console.log(document.body.clientWidth)
+    // console.log(document.body.clientHeight)
 
     // widgets
     const temperatureInHome = document.querySelector(".temperatureInHome")
@@ -65,13 +65,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const computerGraphicValues = await getlastComputerParams()
     createComputerGraphic(computerGraphicValues);
 
-    
     // -------- быдло функции    
 
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
-        const response = await fetch("/meteostationData");
-        const arduinoValues = await response.json();
-        // console.log(arduinoValues)
+        let arduinoValues
+        try {
+            const response = await fetch("/meteostationData");
+            arduinoValues = await response.json();
+        }
+        catch(err) {
+            console.error(err);
+        }
+
         temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityH + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
-        // console.log(graphicValues)
+        console.log(graphicValues)
         return graphicValues;
     }
 

@@ -12,7 +12,7 @@ export function createGraphics(graphicValues) {
     const temperatureGraphic = document.getElementById('temperatureGraphic').getContext('2d');
     const humidityGraphic = document.getElementById('humidityGraphic').getContext('2d');
     console.log(graphicValues)
-    
+
     const temperatureInHomeArray = graphicValues.temperatureH;
     const humidityInHomeArray = graphicValues.humidityH;
     const createdAtArray = graphicValues.createdAt;

@@ -28,7 +28,6 @@ function writeMeteostationOutsideParams(temperature, humidity, pressure,
 
 
 
-
 module.exports = {
     writeMeteostationInsideParams,
     writeMeteostationOutsideParams,

@@ -29,7 +29,27 @@ function changePC_id(userId, PC_Id) {
     )
 }
 
+function getMeteoId(userId) { // объединить в одну функцию ...params
+    return User.findOne({
+        attributes: [
+            'meteostationId'
+        ],
+        where: {
+           id: userId
+        }
+    })
+}
 
+function getPC_Id(userId) {
+    return User.findOne({
+        attributes: [
+            'PC_Id'
+        ],
+        where: {
+           id: userId
+        }
+    })
+}
 
 function getUserById(userId) {
     return User.findOne({
@@ -69,5 +89,7 @@ module.exports = {
     changeMeteoId,
     generateHash,
     isValidPassword,
-    changePC_id
+    changePC_id,
+    getMeteoId,
+    getPC_Id
 }
