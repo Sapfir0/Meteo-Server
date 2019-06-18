@@ -1,8 +1,8 @@
-function makeItRain() {
+export function makeItRain() {
   const rainFront = document.querySelector(".rain.front-row")
   const rainBack = document.querySelector(".rain.back-row")
   const body = document.querySelector("body")
-  
+  console.log(body)
     var increment = 0;
     var drops = "";
     var backDrops = "";
@@ -21,20 +21,31 @@ function makeItRain() {
     }
 
     if (document.body.clientWidth	 > 640) {
-      rainBack.insertAdjacentHTML('beforeend', backDrops)
-      startsplats(body)
+      //startSplats(body, rainFront, drops)
+      //startHeavyRain(body, rainBack, backDrops);
     }
     rainFront.insertAdjacentHTML('beforeend', drops)
 
   }
-  
-  
-  makeItRain();
+// не пойму работают ли оба дождя или нет? вроде робят  
 
- function startsplats(body) {
-  body.className = 'splat-toggle'
+
+
+function startHeavyRain(body, rainBack, backDrops) {
+  body.className += 'back-row-toggle '
+  rainBack.insertAdjacentHTML('beforeend', backDrops)
 }
 
-function stopbackrain(body) {
-  body.className = ' '
+function stopHeavyRain(body, rainBack) {
+  body.className -= ' back-row-toggle '
+  rainBack.innerHTML = ' '
+}
+
+
+function startSplats(body, rainFront, drops) {
+  body.className += ' splat-toggle '
+}
+
+function stopSplats(body) {
+  body.className -= ' splat-toggle '
 }

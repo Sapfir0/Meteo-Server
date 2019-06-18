@@ -1,13 +1,10 @@
 
-const colorA='#ffcd56'
-const colorB='#4bc0c0'
-const colorC='#2e98b0'
-const font_color = 'white'
+import { colorA, colorB, font_color, colorC } from "./colorSettings.js"
+
 
 export function setDatasForBarGraphic(data, labels, label) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
-        
         datasets: [{
             label: label, // подпись самого графика
             data: data, // точки для графика

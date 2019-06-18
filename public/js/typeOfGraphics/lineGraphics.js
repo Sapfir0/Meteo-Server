@@ -1,7 +1,5 @@
+import { colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
 
-const colorOfStreetGraphic = 'rgba(148,185,17, 0.5)'
-const colorOfHomeGraphic = 'rgba(246,232,233, 0.5)'
-const font_color =  'white'
 
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {

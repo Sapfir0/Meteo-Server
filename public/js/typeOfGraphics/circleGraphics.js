@@ -1,7 +1,4 @@
-
-const colorA = '#ffcd56'
-const colorB = '#4bc0c0'
-const font_color =  'white'
+import { colorA, colorB, font_color } from "./colorSettings.js"
 
 export function chartNewPieGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
@@ -17,7 +14,6 @@ export function setOptionForPieGraphic(text) {
             display: true,
             text: text,
             fontColor: font_color
-
         },
         hover: {
             mode: 'nearest',

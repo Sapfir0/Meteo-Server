@@ -1,6 +1,6 @@
 import { createGraphics, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
-
+import { makeItRain } from "./rain.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log(document.body.clientWidth)
@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperature = document.querySelector(".temperature")
     const humidity = document.querySelector(".humidity")
     const pressure = document.querySelector(".pressure")
-    const engWeatherDescription = document.querySelector(".engWeatherDescription")
     const createdAt = document.querySelector(".createdAt");
     const weatherIcon = document.querySelector(".weatherIcon")
 
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperatureHint = document.querySelector(".temperatureHint")
     const humidityHint = document.querySelector(".humidityHint")
     const pressureHint = document.querySelector(".pressureHint")
-    const engWeatherDescriptionHint = document.querySelector(".engWeatherDescriptionHint")
     const weatherIconHint = document.querySelector(".weatherIconHint")
     const sansityHint = document.querySelector(".sansityHint")
 
@@ -82,6 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
 
+        parseWeatherDescription(arduinoValues.engWeatherDescription)
+
         const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
         weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
     }
@@ -108,3 +108,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 
+function parseWeatherDescription(engWeatherDescription) {
+    const rainingNow = engWeatherDescription.indexOf("rain") 
+    if (rainingNow != -1) {//found it
+        makeItRain() // можно еще проверять хеви рейн или маелкнький
+    }
+}
