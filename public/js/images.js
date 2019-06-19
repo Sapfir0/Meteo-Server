@@ -5,8 +5,32 @@ function getWeatherDescriptionIcon(weatherId) { //это можно упрост
     const imgId = parseWeatherId(weatherId)
     //после выбора добавить d или n, если файла без них нет
     console.log(imgId)
-    let pathToIcon = "/img/weatherIconsSVG/" + imgId
-    
+    let timePrefix ='';
+    if( weatherId==741 || weatherId==800 || weatherId==801 || weatherId==802) { // только для этих есть ночная версия
+        if ( isNight() ) {
+            timePrefix="n"
+        }
+        else {
+            timePrefix="d"
+        }
+    }
+    let pathToIcon = "/img/weatherIconsSVG/" + imgId + timePrefix + ".svg"
+    return pathToIcon
+}
+
+
+function isNight() {
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    console.log(hours)
+    if(hours > 22 || hours < 8) {
+        return true
+    }
+    else {
+        return false
+    }
+
 }
 
 
@@ -55,7 +79,7 @@ function parseWeatherId(weatherId) { // этой функции можно бы�
         return 741
     }
     else if(weatherId==762) {
-        return volcanicImg;
+        return "I havnt image on this situation";
     }
     else if(weatherId==771) {
         return 771
