@@ -86,9 +86,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         weatherDescription = arduinoValues.engWeatherDescription
 
         parseWeatherDescription(arduinoValues.engWeatherDescription)
-
-        const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
-        weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
+        
+        const path = "/img/weatherIcons/" + arduinoValues.icon + ".png"
+        //const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
+        weatherIcon.insertAdjacentHTML("beforeend", `<img src="${path}" alt="Погода" id="weatherIcon" >` );
     }
 
     async function getlastComputerParams() { 
