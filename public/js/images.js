@@ -78,9 +78,9 @@ function parseWeatherId(weatherId) { // этой функции можно бы�
     else if(weatherId==751 || weatherId==761) {
         return 741
     }
-    else if(weatherId==762) {
-        return "I havnt image on this situation";
-    }
+    // else if(weatherId==762) {
+    //     return 762;
+    // }
     // else if(weatherId==771) {
     //     return 771
     // }

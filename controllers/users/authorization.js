@@ -27,7 +27,7 @@ function loginUser(req, email, password, next)  { //некст нас не ки�
         });
 }
 
-
+const profileApi = require("../../services/profiles")
 
 function registerUser(req, email, password, done) {
     const res = req.res;
@@ -49,6 +49,8 @@ function registerUser(req, email, password, done) {
                 if (!newUser) {
                     throw new Error(validators.register.userNotCreated);
                 }
+
+                profileApi.writeEmptyProfile()
 
                 done(null, newUser); //все ок
             }).catch(err => {

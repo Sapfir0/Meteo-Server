@@ -96,12 +96,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         var oldIcon = 0
         if (oldIcon) {
             const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
-            weatherIcon.insertAdjacentHTML("beforeend", `<img src="${openweathermapUrl}" alt="Погода" id="weatherIcon" >` );
+            weatherIcon.src = openweathermapUrl
         }
         else {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
-            weatherIcon.insertAdjacentHTML("beforeend", `<img src="${iconId}" alt="Погода" id="weatherIcon" >` );
-            //weatherIcon.src = iconId
+            weatherIcon.src = iconId
         }
 
 }

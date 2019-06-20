@@ -13,6 +13,8 @@ function start() {
 
 
 
+
+
     sendMeteoIdBtn.addEventListener('click', (event) => {
         console.log(meteoId.value)
 

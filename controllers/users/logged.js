@@ -13,12 +13,8 @@ function loggedCheker(req, res, next) {
     res.send('you are not logged')
 }
 
-function isntLogged(req, res, next) {
-
-}
 
 module.exports = {
     isLoggedIn,
-    loggedCheker,
-    isntLogged
+    loggedCheker
 };
