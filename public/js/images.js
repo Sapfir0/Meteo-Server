@@ -3,10 +3,8 @@
 
 export function getWeatherDescriptionIcon(weatherId, createdAt) { //это можно упростить
     const imgId = parseWeatherId(weatherId)
-    console.log(weatherId)
 
     //после выбора добавить d или n, если файла без них нет
-    console.log(imgId)
     let timePrefix ='';
     if( weatherId==741 || weatherId==800 || weatherId==801 || weatherId==802) { // только для этих есть ночная версия
         if ( isNight(createdAt) ) {
@@ -22,9 +20,12 @@ export function getWeatherDescriptionIcon(weatherId, createdAt) { //это мо�
 
 
 function isNight(currentTime) {
+    currentTime = new Date(currentTime)
     var hours = currentTime.getHours();
+    console.log(currentTime)
     console.log(hours)
-    if(hours > 22 || hours < 8) {
+
+    if(hours > 22 || hours < 8) { // надеюсь это сработает корректно
         return true
     }
     else {
@@ -101,7 +102,7 @@ function parseWeatherId(weatherId) { // этой функции можно бы�
     // else if(weatherId==804) {
     //     return 804
     // }
-    console.warn("Вернулся обычный айди, возможно, все в порядке")
+    console.warn("Вернулся обычный айди, возможно, все в порядке. Weather id=" + weatherId)
     return weatherId
 
 }

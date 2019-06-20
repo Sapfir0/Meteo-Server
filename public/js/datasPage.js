@@ -1,7 +1,7 @@
 import { createGraphics, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
 import { makeItRain } from "./rain.js"
-import { getWeatherDescriptionIcon }from "./images.js"
+import { getWeatherDescriptionIcon } from "./images.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     // console.log(document.body.clientWidth)
