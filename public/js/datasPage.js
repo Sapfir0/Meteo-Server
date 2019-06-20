@@ -2,6 +2,7 @@ import { createGraphics, createComputerGraphic, dateToStr } from "./graphic.js"
 import { showHint, hideHint } from "./helpers.js"
 import { makeItRain } from "./rain.js"
 import { getWeatherDescriptionIcon } from "./images.js"
+import { getThermometer } from "./thermometer.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     // console.log(document.body.clientWidth)
@@ -78,6 +79,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error(err);
         }
 
+        const thermometerIcon = document.querySelector("#thermometer")
+        const path = getThermometer(arduinoValues.weatherId)
+        thermometerIcon.src = path
+
+
         temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityH + "%"
         temperature.innerHTML = arduinoValues.temperature + " °C"
@@ -94,8 +100,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         else {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
-            const path =  iconId; //топ картиночка
-            weatherIcon.insertAdjacentHTML("beforeend", `<img src="${path}" alt="Погода" id="weatherIcon" >` );
+            weatherIcon.insertAdjacentHTML("beforeend", `<img src="${iconId}" alt="Погода" id="weatherIcon" >` );
+            //weatherIcon.src = iconId
         }
 
 }
