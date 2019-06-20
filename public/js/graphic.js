@@ -1,7 +1,7 @@
 import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } from "./typeOfGraphics/barGraphics.js"
 import { chartNewLineGraphic, setDatasForHumidityGraphic, setOptionForLineGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
 import { chartNewPieGraphic, setDatasForPieGraphic, setOptionForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
-import { findMaxMinArrayValues, findMaxMinArraysValues } from "./helpers.js"
+import { findMaxMinArrayValues, findMaxMinArraysValues, dateToStr } from "./helpers.js"
 
 let datasForCharts
 let options

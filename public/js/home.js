@@ -14,21 +14,22 @@ function start() {
 
     const serverError = document.querySelector(".serverError")
 
-    oldDescrIconsCheckBox.addEventListener('checked', (event) => {
-
+    oldDescrIconsCheckBox.addEventListener('click', (event) => {
+        
+        console.log( oldDescrIconsCheckBox.checked)
         const options = {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "meteostationId": meteoId.value
+                "oldWeatherDescriptionIcons": oldDescrIconsCheckBox.checked
             })
-     
         }
-        fetch("/updateMeteoId", options).then(response => {
+
+        fetch("/applySettings", options).then(response => {
             if (response.ok) {
-                document.location.href = "/datasPage"
+                console.log(response)
             }
             else {
                 response.text().then(error => {
@@ -39,7 +40,6 @@ function start() {
         }).catch((err) => {
             console.error(err)
         })
-    
     },false);
 
 
