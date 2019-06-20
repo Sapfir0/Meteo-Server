@@ -1,10 +1,9 @@
 
-document.addEventListener('DOMContentLoaded', start);
 
-function start() { 
-
+export function sunshine() { 
+    
     const body = document.querySelector("body")
-    body.insertAdjacentHTML("beforeend", 
+    body.insertAdjacentHTML("beforeend", // надо продумать остановку свечения
     `<div class="sun"> 
         <div class="ray_box">
             <div class="ray ray1"></div>

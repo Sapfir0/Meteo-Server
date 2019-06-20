@@ -1,9 +1,14 @@
 body {
-  /* padding: 10px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
+  background: linear-gradient(to bottom, #007acc, #111119);
+  background-color: #007acc;
 
 }
+
+
+/* body {background-color: orange; transition: all 5s;}
+body:hover {background-color: steelblue;} */
 
 #humidityGraphic, #temperatureGraphic {
   height:400px;
@@ -16,7 +21,6 @@ span {
 
 .createdAt {
  font-size: 12px;
- /* margin-top: -10px; */
 }
 
 .block {
@@ -30,21 +34,17 @@ p {
   color: black;
   font-size: 25px;
 }
-/*
-когда-нибудь я сделаю динамические картинки
-*/
+
 
 content {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 
 img {
   height: 40px;
 }
-
 
 
 

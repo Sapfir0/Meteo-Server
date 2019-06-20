@@ -1,8 +1,9 @@
-import { createGraphics, createComputerGraphic, dateToStr } from "./graphic.js"
-import { showHint, hideHint } from "./helpers.js"
-import { makeItRain } from "./rain.js"
-import { getWeatherDescriptionIcon } from "./images.js"
-import { getThermometer } from "./thermometer.js"
+import { createGraphics, createComputerGraphic } from "./graphic.js"
+import { showHint, hideHint, dateToStr } from "./helpers.js"
+import { getWeatherDescriptionIcon, getThermometer } from "./images.js"
+
+import { sunshine } from "./weathers/clear_sky.js"
+import { makeItRain } from "./weathers/rain.js"
 
 document.addEventListener('DOMContentLoaded', async () => {
     // console.log(document.body.clientWidth)
@@ -92,7 +93,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
 
-        isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
         var oldIcon = 0
         if (oldIcon) {
             const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
@@ -102,7 +102,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
             weatherIcon.src = iconId
         }
-
+        
+        isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
+        isClearSkyNow(arduinoValues.weatherId)
 }
 
     async function getlastComputerParams() { 
@@ -131,5 +133,12 @@ function isRainingNow(engWeatherDescription) {
     const rainingNow = engWeatherDescription.indexOf("rain") 
     if (rainingNow != -1) {//found it
         makeItRain() // можно еще проверять хеви рейн или маелкнький
+    }
+}
+
+function isClearSkyNow(weatherId) {
+    if(weatherId == 800) {
+        console.log("ясно. солнце вышло")
+        sunshine()
     }
 }

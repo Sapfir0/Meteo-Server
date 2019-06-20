@@ -19,6 +19,13 @@ export function getWeatherDescriptionIcon(weatherId, createdAt) { //это мо�
 }
 
 
+export function getThermometer(weatherId) {
+    const thermId = getParsedWeatherIdThermometer(weatherId)
+    return "/img/weatherParamsSVG/" + thermId + "-thermometer.svg"
+}
+
+
+
 function isNight(currentTime) {
     currentTime = new Date(currentTime)
     var hours = currentTime.getHours();
@@ -54,15 +61,6 @@ function parseWeatherId(weatherId) { // этой функции можно бы�
     else if(weatherId>511 && weatherId<531) {
         return 521
     }
-    // else if(weatherId==531) {
-    //     return 531
-    // }
-    // else if(weatherId==600) {
-    //     return 600
-    // }
-    // else if(weatherId==601) {
-    //     return 601
-    // }
     else if(weatherId >= 611 && weatherId <= 613) {
         return 612
     }
@@ -72,37 +70,35 @@ function parseWeatherId(weatherId) { // этой функции можно бы�
     else if(weatherId >= 701 & weatherId<=721) {
         return 701
     }
-    // else if(weatherId==741) {
-    //     return 741
-    // }
     else if(weatherId==751 || weatherId==761) {
         return 741
     }
-    // else if(weatherId==762) {
-    //     return 762;
-    // }
-    // else if(weatherId==771) {
-    //     return 771
-    // }
-    // else if(weatherId==781) {
-    //     return 781
-    // }
-    // else if(weatherId==800) {
-    //     return 800
-    // }
-    // else if(weatherId==801) {
-    //     return 801 //можно если имеется сильный ветер добавлять отдельную иконку( и в 802)
-    // }
-    // else if(weatherId==802) {
-    //     return 802
-    // }
-    // else if(weatherId==803) {
-    //     return 803
-    // }
-    // else if(weatherId==804) {
-    //     return 804
-    // }
     console.warn("Вернулся обычный айди, возможно, все в порядке. Weather id=" + weatherId)
     return weatherId
+ // в коммите за 20.06 убрал лишние блоки
+}
+
+
+function getParsedWeatherIdThermometer(weatherId) {
+    if( (weatherId>=500 && weatherId<=531) || (weatherId>=300 && weatherId<=321 || (weatherId>=200 && weatherId<=232)) ) {
+        //rain
+        return 1
+    }
+    else if(weatherId>=600 && weatherId<=622) {
+        //snow
+        return 0
+    }
+    if(weatherId == 800) {
+        //clear
+        return 2
+    }
+    else if(weatherId>=801 && weatherId<=804) {
+        // cloudy
+        return 3
+    }
+    else {
+        // atmosphere
+        return 4
+    }
 
 }

@@ -1,5 +1,7 @@
 :root {
+    --font-color: white; /*важно! цвета для графиков нужно отдельно выбирать */
     --clear-sky-color: #2EB5E5;
     --rain-color: #007acc;
     
 }
+

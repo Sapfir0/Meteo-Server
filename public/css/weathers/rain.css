@@ -1,10 +1,5 @@
- 
-  body {
-    height: 100%;
-    background: linear-gradient(to bottom, #007acc, #111119);
-    background-color: #007acc;
+ /*убрать и эту дрисню(но мне нравится этот цвет) */
 
-  }
   
    .rain {
     left: 0;
