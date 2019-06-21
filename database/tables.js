@@ -6,6 +6,7 @@ const MeteostationOutside = models.meteostationOutside
 const Meteostation = models.meteostation
 const ComputerParams = models.computerParams
 const Profle = models.profles
+const Push = models.pushSchemas
 
 module.exports = {
     User, 
@@ -13,5 +14,6 @@ module.exports = {
     MeteostationInside,
     Meteostation,
     ComputerParams,
-    Profle
+    Profle,
+    Push
 }

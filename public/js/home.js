@@ -14,6 +14,12 @@ function start() {
 
     const serverError = document.querySelector(".serverError")
 
+
+
+ 
+
+
+
     oldDescrIconsCheckBox.addEventListener('click', (event) => {
         
         console.log( oldDescrIconsCheckBox.checked)

@@ -7,10 +7,32 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/settings.css">
     <script type="module" src="/js/home.js"></script>   
+
 </head>
 <body>
-
-    
+        <script>
+        // load JavaScript for push notifications in supported browsers
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          function loadScript(src) {
+            return new Promise(function (resolve, reject) {
+              var s;
+              s = document.createElement('script');
+              s.src = src;
+              s.onload = resolve;
+              s.onerror = reject;
+              document.head.appendChild(s);
+            });
+          }
+  
+          loadScript('/js/push.js');
+        } else {
+          var info;
+          info = document.createElement('p');
+          info.className = 'message message--error';
+          info.textContent = "Sorry, your browser doesn't support push notifications";
+          document.body.appendChild(info);
+        }
+    </script>
     <p>Meteostation ID</p>
     <input id="meteoId" name="meteoId" placeholder="Type meteoId" required="required" pattern=".+@.+\..+" />      
     <span class="meteoIdError" aria-live="polite"></span>
@@ -29,6 +51,10 @@
             <input type="checkbox" id="oldDescrIcons">
             <label></label>
     </div>
+
+
+    <div class="push-wrapper hidden"></div> 
+    <button class="push-button"></button>
 
 
 

@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
-        createdAt.innerHTML = dateToStr(new Date(arduinoValues.createdAt))
+        createdAt.innerHTML = `Данные были получены  ` + dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
 
-        var oldIcon = 0
+        var oldIcon = 0 
         if (oldIcon) {
             const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка
             weatherIcon.src = openweathermapUrl

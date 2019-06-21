@@ -9,6 +9,23 @@ const favicon = require('serve-favicon');
 
 app.use(logger('dev'));
 
+///////////////////////////////////////////
+
+const webPush = require('web-push');
+
+/**
+ * Set API key
+ */
+webPush.setVapidDetails(
+    'mailto:hallo@justmarkup.com',
+    process.env.PUBLIC_VAPID_KEY, 
+    process.env.PRIVATE_VAPID_KEY
+  );
+  const pushController = require('./controllers/push');
+  app.post('/push/subscribe', pushController.subscribe);
+  app.post('/push/unsubscribe', pushController.unsubscribe);
+////////////////////////////////////////////////////////
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
