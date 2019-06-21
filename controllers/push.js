@@ -49,6 +49,37 @@ function subscribe(req, res) {
   });
 }
 
+/* 
+Send notification
+
+*/
+function sendNotification(push, ) {
+    const payload = JSON.stringify({
+        title: 'Welcome',
+        body: 'Thank you for enabling push notifications',
+        icon: '../img/pushIcons/android-chrome-192x192.png'
+      });
+  
+      const options = {
+        TTL: 86400
+      };
+  
+      const subscription = {
+        endpoint: push.endpoint,
+          p256dh: push.keys.p256dh,
+          auth: push.keys.auth
+      };
+      webPush.sendNotification(subscription, payload,options)
+      .then( () => {
+          console.log("Send welcome push notification");
+        }).catch(err => {
+          console.error("Unable to send welcome push notification", err );
+          throw new Error("Пердеж в носик")
+      });
+      return;
+}
+
+
 /**
  * POST /
  * Unsubscribe user.

@@ -32,13 +32,14 @@ function initAuthControllers(app, passport)  {
 
 
     //---------- API ----------------------
-    app.get('/meteostationData', isLoggedIn, /*id.checkUserId,*/ handler.getMeteostationData) //сюда обращается клиент для получения инфы о датчиках 
+    app.get('/meteostationData', isLoggedIn, id.checkUserId, handler.getMeteostationData) //сюда обращается клиент для получения инфы о датчиках 
     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
     
     app.get("/chartsValues", isLoggedIn, handler.getArrays) //для построения графиков
     
     app.post('/updateMeteoId', urlencodedParser, handler.updateMeteoId, sendHtml.success)
     app.post('/updatePC_Id', urlencodedParser, computerController.updatePC_Id, sendHtml.success)
+    
     app.post('/applySettings', profile.updateSettings, sendHtml.success )
 
     app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)

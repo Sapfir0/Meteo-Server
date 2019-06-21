@@ -79,11 +79,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         catch(err) {
             console.error(err);
         }
+        console.log(arduinoValues)
+        for(let i in arduinoValues) {
+            if (arduinoValues[i] == "521") {
+                console.error("Не указан id метеостанции")
+                const body = document.querySelector("body")
+                body.insertAdjacentHTML("afterbegin", `<p> Не указан id метеостанции`)
+                const graphics = document.querySelector(".graphics")
+                const home = document.querySelector(".home")
+                const street = document.querySelector(".street")
+                graphics.className = "unknown"
+                home.className = "unknown"
+                street.className = "unknown"
+
+                return -1
+            }
+        }
 
         const thermometerIcon = document.querySelector("#thermometer")
         const path = getThermometer(arduinoValues.weatherId)
         thermometerIcon.src = path
-
 
         temperatureInHome.innerHTML = arduinoValues.temperatureH + " °C"
         humidityInHome.innerHTML = arduinoValues.humidityH + "%"
@@ -121,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
-        console.log(graphicValues)
+        //console.log(graphicValues)
         return graphicValues;
     }
 
