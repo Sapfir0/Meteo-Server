@@ -7,7 +7,6 @@ const webPush = require('web-push');
 function subscribe(req, res) {
 
   const endpoint = req.body;
-
   const push = new Push({ 
     endpoint: endpoint.endpoint,
     p256dh: endpoint.keys.p256dh,
@@ -24,7 +23,7 @@ function subscribe(req, res) {
     const payload = JSON.stringify({
       title: 'Welcome',
       body: 'Thank you for enabling push notifications',
-      icon: '/android-chrome-192x192.png'
+      icon: '../img/pushIcons/android-chrome-192x192.png'
     });
 
     const options = {
@@ -57,8 +56,8 @@ function subscribe(req, res) {
  */
 function unsubscribe (req, res) {
 
-  const endpoint = req.body.endpoint;
-
+  const body = req.body;
+    console.log(body)
   Push.findOneAndRemove({endpoint: endpoint}, function (err,data){
     if(err) { 
       console.error('error with unsubscribe', err);
