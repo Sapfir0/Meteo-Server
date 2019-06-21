@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
             weatherIcon.src = iconId
         }
-        
-        isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
+        isRainingNow("rain")
+        //isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
         isClearSkyNow(arduinoValues.weatherId)
 }
 

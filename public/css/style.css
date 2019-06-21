@@ -8,10 +8,7 @@ body {
 
 .unknown {
   filter: blur(15px);
-
 }
-/* body {background-color: orange; transition: all 5s;}
-body:hover {background-color: steelblue;} */
 
 #humidityGraphic, #temperatureGraphic {
   height:400px;

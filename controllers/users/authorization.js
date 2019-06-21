@@ -50,7 +50,7 @@ function registerUser(req, email, password, done) {
                     throw new Error(validators.register.userNotCreated);
                 }
 
-                profileApi.writeEmptyProfile(newUser.id)
+                //profileApi.writeEmptyProfile()
 
                 done(null, newUser); //все ок
             }).catch(err => {

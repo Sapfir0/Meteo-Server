@@ -4,8 +4,7 @@ const { User } = require('../database/tables')
 
 function changeMeteoId(userId, meteostationId) {
     // UPDATE user SET meteostationId=meteostationId WHERE id=userId
-    console.log(userId)
-    console.log(meteostationId)
+
     return User.update({
         meteostationId,
     }, 
@@ -29,27 +28,6 @@ function changePC_id(userId, PC_Id) {
     )
 }
 
-function getMeteoId(userId) { // объединить в одну функцию ...params
-    return User.findOne({
-        attributes: [
-            'meteostationId'
-        ],
-        where: {
-           id: userId
-        }
-    })
-}
-
-function getPC_Id(userId) {
-    return User.findOne({
-        attributes: [
-            'PC_Id'
-        ],
-        where: {
-           id: userId
-        }
-    })
-}
 
 function getUserById(userId) {
     return User.findOne({
@@ -90,6 +68,4 @@ module.exports = {
     generateHash,
     isValidPassword,
     changePC_id,
-    getMeteoId,
-    getPC_Id
 }

@@ -16,6 +16,7 @@ const {
 
 const id = require("../controllers/users/checkId")
 const profile = require("../controllers/profiles")
+const pushController = require('../controllers/push');
 function initAuthControllers(app, passport)  {
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +33,7 @@ function initAuthControllers(app, passport)  {
 
 
     //---------- API ----------------------
-    app.get('/meteostationData', isLoggedIn, id.checkUserId, handler.getMeteostationData) //сюда обращается клиент для получения инфы о датчиках 
+    app.get('/meteostationData', isLoggedIn, /* id.checkUserId,*/ handler.getMeteostationData) //сюда обращается клиент для получения инфы о датчиках 
     app.post('/meteostationData',  debug.seeQuery, handler.deleteOldArticles, handler.saveArduinoData,  sendHtml.success) //сюда обращается сама ардуинка
     
     app.get("/chartsValues", isLoggedIn, handler.getArrays) //для построения графиков
@@ -45,7 +46,6 @@ function initAuthControllers(app, passport)  {
     app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)
     app.get("/computerLoadParams", isLoggedIn, computerController.getComputerData)
 
-    const pushController = require('../controllers/push');
     app.post('/push/subscribe', pushController.subscribe);
     app.post('/push/unsubscribe', pushController.unsubscribe);
 
