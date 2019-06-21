@@ -75,8 +75,8 @@ function unsubscribeUser() {
                 subscriptionData = {
                     endpoint: subscription.endpoint
                 };
-                console.log("Произошла отпеска")
-                console.log(subscriptionData);
+                console.log("Произошла отпеска. Было отправлено в бади:")
+                console.log(JSON.stringify(subscriptionData));
 
 
                 fetch('/push/unsubscribe', {

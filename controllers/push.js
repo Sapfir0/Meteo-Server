@@ -7,13 +7,15 @@ const webPush = require('web-push');
 function subscribe(req, res) {
 
   const endpoint = req.body;
+  console.log("Подписочное тело", endpoint)
+
   const push = new Push({ 
     endpoint: endpoint.endpoint,
     p256dh: endpoint.keys.p256dh,
     auth: endpoint.keys.auth
   });
 
-  push.save(function (err, push) {
+  push.save( (err, push) => {
     if (err) {
       console.error('error with subscribe', err);
       res.status(500).send('subscription not possible');
@@ -36,11 +38,8 @@ function subscribe(req, res) {
         auth: push.keys.auth
     };
 
-    webPush.sendNotification(
-      subscription, 
-      payload,
-      options
-      ).then(function() {
+    webPush.sendNotification(subscription, payload,options)
+    .then( () => {
         console.log("Send welcome push notification");
       }).catch(err => {
         console.error("Unable to send welcome push notification", err );
@@ -55,10 +54,13 @@ function subscribe(req, res) {
  * Unsubscribe user.
  */
 function unsubscribe (req, res) {
-
-  const body = req.body;
-    console.log(body)
-  Push.findOneAndRemove({endpoint: endpoint}, function (err,data){
+  const request = req.body;
+    console.log("Отписочное тело", request)
+    Push.destroy({
+        where: {
+            endpoint: request.endpoint
+        }  
+    }, function (err,data){
     if(err) { 
       console.error('error with unsubscribe', err);
       res.status(500).send('unsubscription not possible'); 

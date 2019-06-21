@@ -18,13 +18,14 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
     let request = event.request;
 
-    if (request.method !== 'GET') 
+    if (request.method !== 'GET') {
         return;
+    }
 
     event.respondWith(
         caches.match(request).then(function(response) {
             return response || fetch(request);
-        }).catch(function() {
+        }).catch( () => {
             return caches.match('/');
         })
     );

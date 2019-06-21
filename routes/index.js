@@ -44,11 +44,9 @@ function initAuthControllers(app, passport)  {
     app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)
     app.get("/computerLoadParams", isLoggedIn, computerController.getComputerData)
 
-    ///////////////////////
-    // const push = require("../controllers/push_notifications")
-    // app.post('/push/subscribe', push.subscribe);
-    // app.post('/push/unsubscribe', push.unsubscribe);
-
+    const pushController = require('../controllers/push');
+    app.post('/push/subscribe', pushController.subscribe);
+    app.post('/push/unsubscribe', pushController.unsubscribe);
 
     //----------Users API------------------------
     app.post('/register',urlencodedParser,userCreateValidator,
