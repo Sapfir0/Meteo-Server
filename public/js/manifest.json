@@ -1,0 +1,17 @@
+{
+    "name": "Meteo-server",
+    "short_name": "MS",
+    "description": "Aggregations data",
+    "icons": [{
+              "src": "img/weatherIcons/01d.png",
+              "sizes": "100x100",
+              "type": "image/png"
+            }
+    ],
+    "start_url": "./?homescreen=1",
+    "display": "standalone",
+    "background_color": "#ff7e7e",
+    "theme_color": "#ffffff",
+    "gcm_sender_id": "38399124687",
+    "gcm_user_visible_only": true
+  }

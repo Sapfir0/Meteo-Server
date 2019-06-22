@@ -1,27 +1,28 @@
-const { Push } = require('../database/tables')
+const {Push} = require('../database/tables')
 const webPush = require('web-push');
 const config = require("../config/config")
 
 /**
- * POST /
- * Subscribe user.
- */
+* POST /
+* Subscribe user.
+*/
 function subscribe(req, res) {
 
   const endpoint = req.body;
 
-  const push = new Push({ // неплохой способ создать строчку в таблице
-    endpoint: endpoint.endpoint,
-    p256dh: endpoint.keys.p256dh,
-    auth: endpoint.keys.auth
+  const push = new Push({
+      endpoint: endpoint.endpoint,
+      p256dh: endpoint.keys.p256dh,
+      auth: endpoint.keys.auth
   });
+
   console.log(push)
 
-  sendNotification(push, 
-    "Привет", 
-    "Важно. Ты петух.", 
-    config.imgDir + "/weatherIcons/01d.png" 
-  ) 
+  sendNotification(push,
+      "Привет",
+      "Важно. Ты петух.",
+      config.imgDir + "/weatherIcons/01d.png"
+  )
 
   res.status(200).send('subscribe');
 
@@ -31,60 +32,60 @@ function subscribe(req, res) {
 Send notification
 
 */
-function sendNotification(push, title, body, icon) {
+async function sendNotification(push, title, body, icon) {
 
-    const payload = JSON.stringify({
+  const payload = JSON.stringify({
       title: title,
       body: body,
-      icon: icon 
-    });
+      icon: icon
+  });
 
-    const options = {
+  const options = {
       TTL: 86400
-    };
+  };
 
-    const subscription = {
+  const subscription = {
       endpoint: push.dataValues.endpoint,
       keys: {
-        p256dh: push.dataValues.p256dh,
-        auth: push.dataValues.auth
+          p256dh: push.dataValues.p256dh,
+          auth: push.dataValues.auth
       }
-    };
+  };
 
-    webPush.sendNotification(subscription, payload, options)
-    .then( () => {
-        console.log("Send welcome push notification");
-      }).catch(err => {
-        console.error("Unable to send welcome push notification", err );
-    });
-    return;
-  
+  try {
+      await webPush.sendNotification(subscription, payload, options)
+      console.log("Send welcome push notification");
+  } catch (err) {
+      console.error("Unable to send welcome push notification", err);
+  }
 }
 
 
 /**
- * POST /
- * Unsubscribe user.
- */
-function unsubscribe (req, res) {
+* POST /
+* Unsubscribe user.
+*/
+async function unsubscribe(req, res) { // не уверен что это работает(т.к. у меня не добавляется строчка)
 
-  Push.destroy({
-        where: {
-            endpoint: req.body.endpoint
-        }  
-    }, function (err,data){
-    if(err) { 
+  try {
+      await Push.destroy({
+          where: {
+              endpoint: req.body.endpoint
+          }
+      })
+  } 
+  catch (error) {
       console.error('error with unsubscribe', err);
-      res.status(500).send('unsubscription not possible'); 
-    }
-    console.log('unsubscribed');
-    res.status(200).send('unsubscribe');
-  });
+      res.status(500).send('unsubscription not possible');
+  }
+  console.log('unsubscribed');
+  res.status(200).send('unsubscribe');
+
 }
 
 
 
 module.exports = {
-    subscribe,
-    unsubscribe
+  subscribe,
+  unsubscribe
 }

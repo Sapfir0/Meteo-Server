@@ -1,5 +1,7 @@
 'use strict';
 
+import { urlB64ToUint8Array} from "./helpers.js"
+
 const appServerKey = 'BKAPKJCCKXxHvBcMfLk5OvIhWsfRDrwzAFlFkBv7JVFTaY3-JQTOB3KHmyrsTpFCukoBLbmWe0FXeUCHVBF8jEg';
 
 const pushWrapper = document.querySelector('.push-wrapper');
@@ -8,21 +10,6 @@ const pushButton = document.querySelector('.push-button');
 let hasSubscription = false;
 let serviceWorkerRegistration = null;
 let subscriptionData = false;
-
-function urlB64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-        .replace(/\-/g, '+')
-        .replace(/_/g, '/');
-
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
-
-    for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
-}
 
 function updatePushButton() {
     pushWrapper.classList.remove('hidden');
@@ -34,33 +21,32 @@ function updatePushButton() {
     }
 }
 
-function subscribeUser() {
+async function subscribeUser() {
     serviceWorkerRegistration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlB64ToUint8Array(appServerKey)
         })
-        .then( (subscription) => {
+        .then( async (subscription) => {
+            const options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(subscription)
+            }
 
-            fetch('/push/subscribe', {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(subscription)
-                })
-                .then( (response) => {
-                    return response;
-                })
-                .then( (text) => {
-                    console.log('User is subscribed.');
-                    hasSubscription = true;
+            try {
+                const response = await fetch('/push/subscribe', options)
+                console.log('User is subscribed.');
+                //console.log(response)
+                hasSubscription = true;   
+                updatePushButton();
+            }
+            catch(error) {
+                hasSubscription = false;
+                console.error('error fetching subscribe', error);
+            }
 
-                    updatePushButton();
-                })
-                .catch(function(error) {
-                    hasSubscription = false;
-                    console.error('error fetching subscribe', error);
-                });
 
         })
         .catch(function(err) {
@@ -134,3 +120,12 @@ navigator.serviceWorker.register('./js/sw.js')
     .catch( (error) => {
         console.error('Service Worker Error', error);
     });
+
+    // try {
+    //     await navigator.serviceWorker.register('./js/sw.js')
+    //     serviceWorkerRegistration = sw;
+    //     initPush();
+    // }
+    // catch(error)  {
+    //     console.error('Service Worker Error', error);
+    // }
