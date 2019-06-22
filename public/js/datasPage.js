@@ -114,8 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         sunset.innerHTML = getTimeFromUnixTime(arduinoValues.sunsetTime)
 
  
-        console.log()
-
         var oldIcon = 0 
         if (oldIcon) {
             const openweathermapUrl = "https://openweathermap.org/img/w/" + arduinoValues.icon + ".png"; //топ картиночка

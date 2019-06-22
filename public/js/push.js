@@ -1,6 +1,6 @@
 'use strict';
 
-const appServerKey = 'BHLCrsFGJQIVgg-XNp8F59C8UFF49GAVxvYMvyCURim3nMYI5TMdsOcrh-yJM7KbtZ3psi5FhfvaJbU_11jwtPY';
+const appServerKey = 'BKAPKJCCKXxHvBcMfLk5OvIhWsfRDrwzAFlFkBv7JVFTaY3-JQTOB3KHmyrsTpFCukoBLbmWe0FXeUCHVBF8jEg';
 
 const pushWrapper = document.querySelector('.push-wrapper');
 const pushButton = document.querySelector('.push-button');
