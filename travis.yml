@@ -1,6 +1,13 @@
 language: node_js
+
 node_js:
  - "node"
- after_success:
+deploy:
+  provider: heroku
+  api_key: 15b0696a-5ce0-44b0-a432-7e4db06177d1
+  app: meteoexpress
+
+after_success:
   #- ./deploy.sh #по идее мне ничего не нужно деплоить самому, я же юзаю хероку TODO(you): deploy the PR changes to your staging server.
   - npm run lh -- --perf=85  https://meteo-server.herokuapp.com/
+
