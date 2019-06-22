@@ -13,6 +13,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
+                console.log(`${value} > ${criticalHighHum}`)
                 if (value > criticalHighHum) return 'red'
                 else if(value < criticalLowHum) return 'blue' 
                 else return '#edd9db' 
@@ -22,16 +23,8 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             label: label2, // подпись самого графика
             // fill:false,
             data: data2, // точки для графика,', 
-            backgroundColor: colorOfStreetGraphic,
-            pointBackgroundColor: (context) => {
-                const index = context.dataIndex;
-                const value = context.dataset.data[index];
-                console.log(value)
-                if (value > criticalHighHum) return 'red'
-                else if(value < criticalLowHum) return 'blue' 
-                else return '#edd9db' 
-            }
-            
+            backgroundColor: colorOfStreetGraphic,    
+            pointBackgroundColor:  '#edd9db'       
         }]
     };
 

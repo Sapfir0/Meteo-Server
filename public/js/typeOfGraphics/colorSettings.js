@@ -11,8 +11,8 @@ const colorC='#2e98b0'
 
 const criticalHighTemp = 35
 const criticalLowTemp = -10
-const criticalLowHum = 90
-const criticalHighHum = 10  
+const criticalLowHum = 10
+const criticalHighHum = 90  
 
 
 export { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color, colorA, colorB, colorC }
