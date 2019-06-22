@@ -28,7 +28,8 @@
     "web-push": "^3.3.5"
   },
   "devDependencies": {
+    "debug": "~2.6.9",
     "eslint": "^5.16.0",
-    "debug": "~2.6.9"
+    "lighthousebot": "git+https://github.com/GoogleChromeLabs/lighthousebot.git"
   }
 }

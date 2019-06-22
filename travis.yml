@@ -1,3 +1,6 @@
 language: node_js
 node_js:
  - "node"
+ after_success:
+  #- ./deploy.sh #по идее мне ничего не нужно деплоить самому, я же юзаю хероку TODO(you): deploy the PR changes to your staging server.
+  - npm run lh -- --perf=85  https://meteo-server.herokuapp.com/
