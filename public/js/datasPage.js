@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             weatherIcon.src = iconId
         }
         isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
-        isClearSkyNow(arduinoValues.weatherId)
+        //isClearSkyNow(arduinoValues.weatherId) //пока еще не работает
 }
 
     async function getlastComputerParams() { 
@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
-        //console.log(graphicValues)
         return graphicValues;
     }
 

@@ -15,14 +15,13 @@ function subscribe(req, res) {
     p256dh: endpoint.keys.p256dh,
     auth: endpoint.keys.auth
   });
+  console.log(push)
 
-  //push.save( sosu );
-  
   sendNotification(push, 
     "Привет", 
     "Важно. Ты петух.", 
     config.imgDir + "/weatherIcons/01d.png" 
-  ) // ахах че за аутизм
+  ) 
 
   res.status(200).send('subscribe');
 
@@ -34,12 +33,6 @@ Send notification
 */
 function sendNotification(push, title, body, icon) {
 
-    // if (err) { /нужно сделать дебагинг
-    //   console.error('error with subscribe', err);
-    //   //res.status(500).send('subscription not possible');
-    //   return;
-    // }
-//
     const payload = JSON.stringify({
       title: title,
       body: body,
@@ -58,7 +51,7 @@ function sendNotification(push, title, body, icon) {
       }
     };
 
-    webPush.sendNotification(subscription, payload,options)
+    webPush.sendNotification(subscription, payload, options)
     .then( () => {
         console.log("Send welcome push notification");
       }).catch(err => {

@@ -25,6 +25,7 @@
     -webkit-animation: ray_anim 12s linear infinite;
     animation: ray_anim 12s linear infinite;
   }
+  
    .ray {  
       background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
           background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%); 
