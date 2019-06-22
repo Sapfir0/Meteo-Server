@@ -1,6 +1,4 @@
- /*убрать и эту дрисню(но мне нравится этот цвет) */
 
-  
    .rain {
     left: 0;
     width: 100%;
@@ -15,7 +13,6 @@
     opacity: 0.5;
   }
   .rain.front-row {
-
   }
    
   body.back-row-toggle .rain.back-row {

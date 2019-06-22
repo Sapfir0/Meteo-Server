@@ -3,7 +3,7 @@ body {
   color: white;
   background: linear-gradient(to bottom, #007acc, #111119);
   background-color: #007acc;
-
+  /* position: absolute; */
 }
 
 .unknown {

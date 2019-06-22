@@ -19,12 +19,14 @@ function saveArduinoData(req, res, next) {
     const weatherId = meteostationData.weatherId 
     const windSpeed =meteostationData.windSpeed 
     const windDeg= meteostationData.windDeg 
+    const sunriseTime = meteostationData.sunriseTime
+    const sunsetTime = meteostationData.sunsetTime
     const icon= meteostationData.icon 
     const meteostationId= meteostationData.meteostationId
     
     arduinoAPI.writeMeteostationInsideParams(temperatureInHome, humidityInHome, sansity, meteostationId)
     arduinoAPI.writeMeteostationOutsideParams(temperature, humidity, pressure, 
-        engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId)
+        engWeatherDescription, weatherId, windSpeed, windDeg, sunriseTime, sunsetTime, icon, meteostationId)
     // запросы выше можно делать параллельно
     next()
 }

@@ -11,7 +11,7 @@ function writeMeteostationInsideParams(temperatureH, humidityH, sansityH, meteos
 }
 
 function writeMeteostationOutsideParams(temperature, humidity, pressure, 
-    engWeatherDescription, weatherId, windSpeed, windDeg, icon, meteostationId) {
+    engWeatherDescription, weatherId, windSpeed, windDeg, sunriseTime, sunsetTime,  icon, meteostationId) {
     
     return MeteostationOutside.create({
         temperature,
@@ -22,6 +22,8 @@ function writeMeteostationOutsideParams(temperature, humidity, pressure,
         windSpeed,
         windDeg,
         icon,
+        sunriseTime, 
+        sunsetTime,
         meteostationId
     })
 }

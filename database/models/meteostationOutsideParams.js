@@ -31,6 +31,12 @@ module.exports = function(sequelize, Sequelize) {
         windDeg: { 
             type: Sequelize.INTEGER  
         },
+        sunriseTime: {
+            type: Sequelize.BIGINT  
+        },
+        sunsetTime: {
+            type: Sequelize.BIGINT
+        },
         icon: { 
             type: Sequelize.STRING, 
             allowNull: false 

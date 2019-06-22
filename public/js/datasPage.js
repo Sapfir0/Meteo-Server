@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pressure = document.querySelector(".pressure")
     const createdAt = document.querySelector(".createdAt");
     const weatherIcon = document.querySelector(".weatherIcon")
-
+    const sunset = document.querySelector(".sunset")
+    const sunrise = document.querySelector(".sunrise")
 
     let weatherDescription; // dynamic string, got from arduino
     getlastArduinoValues()
@@ -107,6 +108,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
         createdAt.innerHTML = `Данные были получены  ` + dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
+        sunrise.innerHTML  = arduinoValues.sunrise
+        sunset.innerHTML = arduinoValues.sunset
 
         var oldIcon = 0 
         if (oldIcon) {
@@ -117,8 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
             weatherIcon.src = iconId
         }
-        isRainingNow("rain")
-        //isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
+        isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
         isClearSkyNow(arduinoValues.weatherId)
 }
 
