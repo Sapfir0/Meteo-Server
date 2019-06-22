@@ -1,9 +1,6 @@
-import { colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
+import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
 
-const criticalHighTemp = 35
-const criticalLowTemp = -10
-const criticalLowHum = 90
-const criticalHighHum = 10  
+
 
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
@@ -29,6 +26,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
+                console.log(value)
                 if (value > criticalHighHum) return 'red'
                 else if(value < criticalLowHum) return 'blue' 
                 else return '#edd9db' 

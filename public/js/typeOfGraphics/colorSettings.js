@@ -8,4 +8,11 @@ const colorA = '#ffcd56'
 const colorB = '#4bc0c0'
 const colorC='#2e98b0'
 
-export { colorOfHomeGraphic, colorOfStreetGraphic, font_color, colorA, colorB, colorC }
+
+const criticalHighTemp = 35
+const criticalLowTemp = -10
+const criticalLowHum = 90
+const criticalHighHum = 10  
+
+
+export { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color, colorA, colorB, colorC }
