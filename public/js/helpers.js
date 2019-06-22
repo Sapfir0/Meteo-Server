@@ -62,3 +62,17 @@ export function dateToStr(date) {
 }
 
 
+export function getTimeFromUnixTime(unixTimestamp, seconds=false) {
+    const date = new Date(unixTimestamp*1000);
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+
+    let formattedTime = hours + ':' + minutes.substr(-2) ;
+    if(seconds) {
+        var seconds = "0" + date.getSeconds();
+        formattedTime += ':' + seconds.substr(-2)
+    }
+    
+    return formattedTime
+}
+

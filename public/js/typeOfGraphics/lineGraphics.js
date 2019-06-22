@@ -1,5 +1,9 @@
 import { colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
 
+const criticalHighTemp = 35
+const criticalLowTemp = -10
+const criticalLowHum = 90
+const criticalHighHum = 10  
 
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
@@ -8,13 +12,28 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             label: label, // подпись самого графика
             // fill:false,
             data: data, // точки для графика,', 
-            backgroundColor: colorOfHomeGraphic
+            backgroundColor: colorOfHomeGraphic,
+            pointBackgroundColor: (context) => {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                if (value > criticalHighHum) return 'red'
+                else if(value < criticalLowHum) return 'blue' 
+                else return '#edd9db' 
+            }
         },
         {
             label: label2, // подпись самого графика
             // fill:false,
             data: data2, // точки для графика,', 
-            backgroundColor: colorOfStreetGraphic
+            backgroundColor: colorOfStreetGraphic,
+            pointBackgroundColor: (context) => {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                if (value > criticalHighHum) return 'red'
+                else if(value < criticalLowHum) return 'blue' 
+                else return '#edd9db' 
+            }
+            
         }]
     };
 
@@ -30,10 +49,10 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             // fill:false,
             data: data, // точки для графика,', 
             backgroundColor: colorOfHomeGraphic ,
-            pointBackgroundColor: function(context) {
+            pointBackgroundColor: (context) => {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
-                return value > 40 ? 'red' : '#edd9db' 
+                return value > criticalHighTemp ? 'red' : '#edd9db' 
             }
         },
         {
@@ -41,10 +60,12 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             // fill:false,
             data: data2, // точки для графика,', 
             backgroundColor: colorOfStreetGraphic ,
-            pointBackgroundColor: function(context) {
-                var index = context.dataIndex;
-                var value = context.dataset.data[index];
-                return value > 40 ? 'red' : '#edd9db' 
+            pointBackgroundColor: (context) => {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                if (value > criticalHighTemp) return 'red'
+                else if(value < criticalLowTemp) return 'blue' 
+                else return '#edd9db' 
             }
         }]
     };

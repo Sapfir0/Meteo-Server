@@ -1,5 +1,5 @@
 import { createGraphics, createComputerGraphic } from "./graphic.js"
-import { showHint, hideHint, dateToStr } from "./helpers.js"
+import { showHint, hideHint, dateToStr, getTimeFromUnixTime } from "./helpers.js"
 import { getWeatherDescriptionIcon, getThermometer } from "./images.js"
 
 import { sunshine } from "./weathers/clear_sky.js"
@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pressureHint = document.querySelector(".pressureHint")
     const weatherIconHint = document.querySelector(".weatherIconHint")
     const sansityHint = document.querySelector(".sansityHint")
-
+    const sunsetHint = document.querySelector("#sunsetHint")
+    const sunriseHint = document.querySelector("#sunriseHint")
 
 
     // block for hovers
@@ -45,7 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const temperatureBlock = document.querySelector("#temperatureBlock")
     const humidityBlock = document.querySelector("#humidityBlock")
     const pressureBlock = document.querySelector("#pressureBlock")
-
+    const sunsetBlock = document.querySelector("#sunsetBlock")
+    const sunriseBlock = document.querySelector("#sunriseBlock")
 
     //единственное что важно в этих массивах - это сохранить корректность тройки значений(они должны быть на одном i)
     const widgets=[temperatureInHomeBlock, humidityInHomeBlock, temperatureBlock, 
@@ -108,8 +110,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
         createdAt.innerHTML = `Данные были получены  ` + dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
-        sunrise.innerHTML  = arduinoValues.sunrise
-        sunset.innerHTML = arduinoValues.sunset
+        sunrise.innerHTML  = getTimeFromUnixTime(arduinoValues.sunriseTime)
+        sunset.innerHTML = getTimeFromUnixTime(arduinoValues.sunsetTime)
+
+ 
+        console.log()
 
         var oldIcon = 0 
         if (oldIcon) {
