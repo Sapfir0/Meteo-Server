@@ -17,6 +17,7 @@ addons:
       - mysql-client
 
 before_install:
+  - mysql_upgrade
   - mysql -e "CREATE DATABASE arduino;"
   - mysql -e "create user 'arduinoSlave'@'localhost' identified with mysql_native_password by '123456'; "
   - mysql -e "grant all privileges on arduino.* to 'arduinoSlave'@'localhost';"
