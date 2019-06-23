@@ -65,3 +65,5 @@ app.listen(config.port, err => {
 });
 
 
+module.exports = app
+
