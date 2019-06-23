@@ -6,9 +6,16 @@ let chaiHttp = require('chai-http');
 
 const app = require('../app')
 const expect = chai.expect;
-const should = chai.should();
+const should = chai.should(); //использую это постоянно
 
 chai.use(chaiHttp);
+
+const faker = require("faker")
+
+const randomUser = {
+    email: faker.internet.email(),
+    password: faker.internet.password()
+}
 
 const testUser = {
     email: "testEmail@mail.ru",
@@ -115,58 +122,57 @@ function PostMeteostationData() {
 
 
 
-function register() {
-    mocha.describe("User API", () => {
-        mocha.it("registration", (done) => {
-            chai.request(app)
-                .post(Tests.POSTmethods.register)
-                .send(testUser)
-                .end( (err, res) => {
-                    expect(err).to.be.null;
-                    expect(res).to.have.status(200);
-                    done()
-                })
-        })
-    })
-}
-
-function sign_In() {
-    mocha.describe("User API", () => {
-        mocha.it("sign in", (done) => {
-            chai.request(app)
-                .post(Tests.POSTmethods.sign_In)
-                .send(testUser)
-                .end( (err, res) => {
-                    expect(err).to.be.null;
-                    expect(res).to.have.status(200);
-                    done()
-                })
-        })
-    })
-}
-
-function logout() {
-    mocha.describe("User API", () => {
-        mocha.it("logout", (done) => {
-            chai.request(app)
-                .get("/logout")
-                .end( (err, res) => {
-                    expect(err).to.be.null;
-                    expect(res).to.have.status(200);
-                    done()
-                })
-        })
-    })
-}
 
 function userApi() {
-    register()
-    logout()
-    sign_In()
+
+    mocha.describe("User API", () => {
+        register()
+        logout()
+        sign_In()
+
+        function register() {
+            mocha.it(Tests.POSTmethods.register, (done) => {
+                chai.request(app)
+                    .post(Tests.POSTmethods.register)
+                    .send(randomUser)
+                    .end( (err, res) => {
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(200);
+                        done()
+                    })
+                })
+        }
+
+        function sign_In() {
+            mocha.it(Tests.POSTmethods.sign_In, (done) => {
+                chai.request(app)
+                    .post(Tests.POSTmethods.sign_In)
+                    .send(randomUser)
+                    .end( (err, res) => {
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(200);
+                        done()
+                    })
+            })
+        }
+
+        function logout() {
+            mocha.it("logout", (done) => {
+                chai.request(app)
+                    .get("/logout")
+                    .end( (err, res) => {
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(200);
+                        done()
+                    })
+            })
+        }
+    })   
 }
 
 GETmethods(Tests.GETmethods.pages)
 PostMeteostationData(Tests.POSTmethods.meteostationData)
 userApi()
+
 
 

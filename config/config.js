@@ -13,6 +13,8 @@ const imgDir = path.join(__dirname, "..", 'public', 'img')
 
 const secretKey = process.env.SECRET_KEY 
 
+console.log(process.env.NODE_ENV)
+
 
 module.exports = {
     port,

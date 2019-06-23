@@ -14,7 +14,6 @@ app.use(logger('dev'));
 const webPush = require('web-push');
 
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(express.static(path.join(__dirname, 'public')));

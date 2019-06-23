@@ -87,7 +87,6 @@ async function getMeteostationData(req, res, next) {
         const inside = await helper.getLastDatasFromSQL(MeteostationInside,userId);
         const outside =  await helper.getLastDatasFromSQL(MeteostationOutside,userId);     
         Object.assign(inside.dataValues, outside.dataValues)
-        console.log(inside)
         return res.json(inside.dataValues)
     }
     catch(error) {

@@ -38,7 +38,7 @@ function registerUser(req, email, password, done) {
     }
 
     UserApi.getUserByEmail(email).then(user => {
-        console.log(user)
+        //console.log(user)
         if (user) {
             throw new Error(validators.register.existedEmail);
         } else {
