@@ -2,62 +2,59 @@
 
 const VERSION = 'v0.0.5';
 
-self.addEventListener('install', function(event) {
+const FILES_TO_CASHE = [
+    '/js/manifest.json',
+    '/js/push.js',
+    '/js/offlinePage.html'
+]
+
+self.addEventListener('install', (evt) => {
+    console.log('[ServiceWorker] Install');
+    // CODELAB: Precache static resources here.
+    evt.waitUntil(
+        caches.open(VERSION).then((cache) => {
+          console.log('[ServiceWorker] Pre-caching offline page');
+          return cache.addAll(FILES_TO_CASHE);
+        })
+    );
     self.skipWaiting();
-    event.waitUntil(
-        caches.open(VERSION).then(function(cache) {
-            return cache.addAll([
-                '/',
-                '/js/manifest.json',
-                '/js/push.js'
-            ]);
-        })
-    );
-});
+  });
 
-self.addEventListener('fetch', function(event) {
-    let request = event.request;
 
-    if (request.method !== 'GET') {
+self.addEventListener('fetch', (evt) => {
+    if (evt.request.mode !== 'navigate') {
+        // Not a page navigation, bail.
         return;
-    }
-
-    event.respondWith(
-        caches.match(request).then(function(response) {
-            return response || fetch(request);
-        }).catch( () => {
-            return caches.match('/');
-        })
-    );
+      }
+      evt.respondWith(
+          fetch(evt.request)
+              .catch(() => {
+                return caches.open(VERSION)
+                    .then((cache) => {
+                      return cache.match('/js/offline.html');
+                    });
+              })
+      );
 });
 
-self.addEventListener('activate', function(event) {
-    if (self.clients && clients.claim) {
-        clients.claim();
-    }
+
+self.addEventListener('activate', (event) => { //удаление кэша сработаывает тогда же когда и кэширование
     event.waitUntil(
-        caches
-        .keys()
-        .then(function(keys) {
-            return Promise.all(
-                keys
-                .filter(function(key) {
-                    return !key.startsWith(VERSION);
-                })
-                .map(function(key) {
-                    return caches.delete(key);
-                })
-            );
-        })
-        .then(function() {
-            console.log('new service worker version registered', VERSION);
-        }).catch(function(error) {
-            console.error('error registering new service worker version', error);
+        caches.keys().then((keyList) => {
+        return Promise.all(keyList.map((key) => {
+            if (key !== FILES_TO_CASHE) {
+            console.log('[ServiceWorker] Removing old cache', key);
+            return caches.delete(key);
+            }
+        }));
         })
     );
+    self.clients.claim()
+
 });
 
-self.addEventListener('push', function(event) {
+
+self.addEventListener('push', (event) => {
 
     let notificationData = {};
 
@@ -99,3 +96,4 @@ self.addEventListener('notificationclick', function(event) {
         })
     );
 });
+

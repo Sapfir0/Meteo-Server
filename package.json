@@ -1,11 +1,12 @@
 {
   "name": "meteoexpress",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "logs": "heroku logs --tail -a meteo-server",
-    "test": "./node_modules/.bin/eslint  \"./**/*.js\" ",
+    "lh": "./node_modules/.bin/lighthousebot",
+    "test": " ",
     "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
   "dependencies": {
@@ -28,8 +29,9 @@
     "web-push": "^3.3.5"
   },
   "devDependencies": {
-    "debug": "~2.6.9",
     "eslint": "^5.16.0",
+    "debug": "~2.6.9",
     "lighthousebot": "git+https://github.com/GoogleChromeLabs/lighthousebot.git"
+
   }
 }

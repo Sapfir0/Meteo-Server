@@ -3,15 +3,30 @@
     "short_name": "MS",
     "description": "Aggregations data",
     "icons": [{
-              "src": "img/weatherIcons/01d.png",
-              "sizes": "100x100",
+              "src": "../img/manifestIcons/drop64.png",
+              "sizes": "64x64",
               "type": "image/png"
-            }
+            },
+            {
+                "src": "../img/manifestIcons/drop128.png",
+                "sizes": "128x128",
+                "type": "image/png"
+              },
+              {
+                "src": "../img/manifestIcons/drop256.png",
+                "sizes": "256x256",
+                "type": "image/png"
+              },
+              {
+                "src": "../img/manifestIcons/drop512.png",
+                "sizes": "512x512",
+                "type": "image/png"
+              }
     ],
-    "start_url": "./?homescreen=1",
+    "start_url": ".",
     "display": "standalone",
     "background_color": "#ff7e7e",
-    "theme_color": "#ffffff",
+    "theme_color": "#2e2e2e", 
     "gcm_sender_id": "38399124687",
     "gcm_user_visible_only": true
   }
