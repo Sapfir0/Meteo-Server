@@ -72,7 +72,7 @@ export function chartNewLineGraphic(ctx, datasForCharts, options) {
 }
 
 
-export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax, charTitle="") {
+export function setOptionForLineGraphic(text, ymin, ymax, charTitle="") {
     let options = {	
         responsive: false,
         maintainAspectRatio: false,
@@ -116,5 +116,8 @@ export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedM
             }]
         }  
     }
+    // if(!ymin) {
+    //     options.scales.yAxes[0].ticks.suggestedMin
+    // }
     return options
 }

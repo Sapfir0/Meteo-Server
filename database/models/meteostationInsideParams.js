@@ -10,10 +10,16 @@ module.exports = function (sequelize, Sequelize) {
         temperatureH: { 
             type: Sequelize.DOUBLE, 
             allowNull: false,
+            validate: {
+                isFloat: true
+            }
         },
         humidityH: { 
             type: Sequelize.DOUBLE, 
-            allowNull: false 
+            allowNull: false,
+            validate: {
+                isFloat: true
+            } 
         },
         sansityH: { 
             type: Sequelize.DOUBLE, 
@@ -22,14 +28,11 @@ module.exports = function (sequelize, Sequelize) {
         },
         sansityQualityH: { 
             type: Sequelize.STRING 
-        }, //
+        }, 
         meteostationId: { 
             type: Sequelize.INTEGER, 
             allowNull: false, 
-            // references: {
-            //     model: meteostation,
-            //     key: 'id'
-            // }
+
         } 
 
     });

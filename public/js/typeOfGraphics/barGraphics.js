@@ -28,7 +28,7 @@ export function chartNewBarGraphic(ctx, datasForCharts, options) {
     });
 }
 
-export function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax) {
+export function setOptionForBarGraphic(text, ymin, ymax) {
     let options = {	
         responsive: true,
         title: {

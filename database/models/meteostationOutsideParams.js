@@ -4,26 +4,44 @@ module.exports = function(sequelize, Sequelize) {
         id: { 
             autoIncrement: true, 
             primaryKey: true, 
-            type: Sequelize.INTEGER 
+            type: Sequelize.INTEGER
         },
         temperature: { 
             type: Sequelize.DOUBLE, 
-            allowNull: false 
+            allowNull: false,
+            validate: {
+                isFloat: true
+            } 
         },
         humidity: { 
             type: Sequelize.DOUBLE, 
-            allowNull: false 
+            allowNull: false,
+            validate: {
+                isFloat: true
+            }
         },
         pressure: { 
             type: Sequelize.DOUBLE, 
-            allowNull: false 
+            allowNull: false,
+            validate: {
+                isFloat: true
+            },
+            // max: 815.85,
+            // min: 641.3
+
         },
         engWeatherDescription: { 
-            type: Sequelize.STRING 
+            type: Sequelize.STRING,
+            allowNull: false
         },
         weatherId: { 
             type: Sequelize.INTEGER, 
-            allowNull: false 
+            allowNull: false,
+            validate: {
+                isInt: true
+            },
+            max: 804,
+            min: 200 
         },
         windSpeed: { 
             type: Sequelize.INTEGER 
@@ -39,15 +57,13 @@ module.exports = function(sequelize, Sequelize) {
         },
         icon: { 
             type: Sequelize.STRING, 
-            allowNull: false 
+            allowNull: false,
+            is: ["^[0-9][0-9](n|d)$", 'i']
         },
         meteostationId: { 
             type: Sequelize.INTEGER, 
             allowNull: false, 
-            // references: {
-            //     model: meteostation,
-            //     key: 'id'
-            // }
+
         } 
 
     });

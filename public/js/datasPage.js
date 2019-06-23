@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function isRainingNow(engWeatherDescription) {
+    console.log(engWeatherDescription)
     const rainingNow = engWeatherDescription.indexOf("rain") 
     if (rainingNow != -1) {//found it
         makeItRain() // можно еще проверять хеви рейн или маелкнький

@@ -42,12 +42,12 @@ export function dateToStr(date) {
         str = "вчера ";
     } else if (nearlyDay && subDay == 0) {
         // сегодня
-        if(document.body.clientWidth > 600) {
-            str = "сегодня ";
-        }
-        else {
+        // if(document.body.clientWidth > 600) {
+        //     str = "сегодня ";
+        // }
+        // else {
             str=""
-        }
+        //}
     } else {
         const month = ["Января","Февраля","Марта","Апреля","Мая",
             "Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"
@@ -57,7 +57,9 @@ export function dateToStr(date) {
         } ${date.getFullYear()}`;
     }
 
-    str += " в " + date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
+    //str += " в " + date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
+    str += date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
+
     return str;
 }
 
@@ -80,7 +82,7 @@ export function getTimeFromUnixTime(unixTimestamp, seconds=false) {
 export function urlB64ToUint8Array(base64String) {
     const padding = "=".repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
-        .replace(/\-/g, "+")
+        .replace(/-/g, "+")
         .replace(/_/g, "/");
 
     const rawData = window.atob(base64);

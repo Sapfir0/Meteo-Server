@@ -16,7 +16,7 @@ function subscribe(req, res) {
       auth: endpoint.keys.auth
   });
 
-  console.log(push)
+  //console.log(push)
 
   sendNotification(push,
       "Привет",
