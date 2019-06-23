@@ -21,7 +21,7 @@ export function setDatasForBarGraphic(data, labels, label) {
 
 
 export function chartNewBarGraphic(ctx, datasForCharts, options) {
-    var chart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'bar',
         data: datasForCharts,
         options: options

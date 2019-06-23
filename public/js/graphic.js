@@ -26,13 +26,13 @@ export function createGraphics(graphicValues) {
   
     
     borders = findMaxMinArraysValues(temperatureInHomeArray, temperatureArray)
-    datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура твоей попки", temperatureArray, "Темп на улице")
+    datasForCharts = setDatasForTemperatureGraphic(createdAtArray,temperatureInHomeArray,"Температура дома", temperatureArray, "Температура на улице")
     options = setOptionForLineGraphic("Температура", borders[0]*0.9, borders[1]*1.1, "°C")
     chartNewLineGraphic(temperatureGraphic, datasForCharts, options)
 
 
     borders =  findMaxMinArraysValues(humidityInHomeArray, humidityArray)
-    datasForCharts = setDatasForHumidityGraphic(createdAtArray,humidityInHomeArray,"Влажность твоей попки", humidityArray, "Влажность на улице")
+    datasForCharts = setDatasForHumidityGraphic(createdAtArray,humidityInHomeArray,"Влажность дома", humidityArray, "Влажность на улице")
     options = setOptionForLineGraphic("Влажность", borders[0]*0.9, borders[1]*1.1, "%"), 
     chartNewLineGraphic(humidityGraphic, datasForCharts, options)
 

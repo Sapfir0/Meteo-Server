@@ -11,10 +11,21 @@ module.exports = {
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+
     },
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "no-unused-vars": [
+            "error", 
+            { 
+                "vars": "all", 
+                "args": "after-used", 
+                "ignoreRestSiblings": false 
+            }
+        ]
+
     }
     
 };

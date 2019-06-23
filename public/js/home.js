@@ -15,13 +15,8 @@ function start() {
     const serverError = document.querySelector(".serverError")
 
 
-
-
-
-
-    oldDescrIconsCheckBox.addEventListener('click', (event) => {
+    oldDescrIconsCheckBox.addEventListener('click', () => {
         
-        console.log( oldDescrIconsCheckBox.checked)
         const options = {
             method: "post",
             headers: {
@@ -48,7 +43,7 @@ function start() {
     },false);
 
 
-    sendMeteoIdBtn.addEventListener('click', (event) => {
+    sendMeteoIdBtn.addEventListener('click', () => {
 
         const options = {
             method: "post",
@@ -76,7 +71,7 @@ function start() {
     
     },false);
 
-    sendPC_IdBtn.addEventListener('click', (event) => {
+    sendPC_IdBtn.addEventListener('click', () => {
     console.log(sendPC_IdBtn.value)
 
     const options = {

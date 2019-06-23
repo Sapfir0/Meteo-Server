@@ -26,7 +26,7 @@ function updatePC_Id(req, res, next) {
 }
 
 
-function getArrays(req, res, next) {  
+function getArrays(req, res) {  
     
     const columns = ["CPU_load_iostat", "CPU_temp", "createdAt" ]
     
@@ -51,7 +51,7 @@ function getArrays(req, res, next) {
 }
 
 
-async function getComputerData(req, res, next) {
+async function getComputerData(req, res) {
     const userId = req.user.PC_Id
     if (userId == null || userId == undefined ) {
         return;

@@ -5,12 +5,13 @@
   "scripts": {
     "start": "node app.js",
     "logs": "heroku logs --tail -a meteo-server",
+    "lint": "eslint \"./**/*.js\" ",
     "lh": "./node_modules/.bin/lighthousebot",
+    "mocha": "./node_modules/mocha/bin/mocha ",
     "test": " ",
     "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
   "dependencies": {
-    "animejs": "^3.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chart.js": "^2.8.0",
@@ -29,9 +30,10 @@
     "web-push": "^3.3.5"
   },
   "devDependencies": {
+    "commander": "^2.20.0",
+    "mocha": "^6.1.4",
     "eslint": "^5.16.0",
     "debug": "~2.6.9",
     "lighthousebot": "git+https://github.com/GoogleChromeLabs/lighthousebot.git"
-
   }
 }

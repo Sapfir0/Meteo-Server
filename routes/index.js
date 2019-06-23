@@ -7,7 +7,7 @@ const computerController = require("../controllers/devices/computer")
 
 
 //  проверка логирования
-const { isLoggedIn, loggedChekerd } = require('../controllers/users/logged.js');
+const { isLoggedIn} = require('../controllers/users/logged.js');
 
 const {
     userCreateValidator,

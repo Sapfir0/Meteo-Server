@@ -69,7 +69,7 @@ export function getTimeFromUnixTime(unixTimestamp, seconds=false) {
 
     let formattedTime = hours + ':' + minutes.substr(-2) ;
     if(seconds) {
-        var seconds = "0" + date.getSeconds();
+        const seconds = "0" + date.getSeconds();
         formattedTime += ':' + seconds.substr(-2)
     }
     

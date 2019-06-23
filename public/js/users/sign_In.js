@@ -16,7 +16,7 @@ function start() {
     const sendBtn = document.querySelector("#submit")
     
 
-    function checkValidation(widget, errorSpan, strError, checkPassword=false) {
+    function checkValidation(widget, errorSpan, strError) {
         if (widget.validity.valid) {
             hideHint(errorSpan)
         }
@@ -37,7 +37,7 @@ function start() {
 
 
 
-    sendBtn.addEventListener('click', (event) => {
+    sendBtn.addEventListener('click', () => {
             if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
                 showHint(emailError, validators.strEventEmailError)
             }

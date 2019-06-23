@@ -1,6 +1,5 @@
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
-
-
+//import { Chart } from "/chart.js/dist/Chart.min.js"
 
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
@@ -65,7 +64,7 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
 
 
 export function chartNewLineGraphic(ctx, datasForCharts, options) {
-    var chart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'line',
         data: datasForCharts,
         options: options,
@@ -102,7 +101,7 @@ export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedM
                     fontColor: font_color,
                     min: Math.round(ymin),
                     max: Math.round(ymax),
-                    callback: function(value) {
+                    callback: (value) => {
                         return value + charTitle; //подпись на оси y
                     }
                 },

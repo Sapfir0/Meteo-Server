@@ -37,7 +37,7 @@ function updateMeteoId(req, res, next) {
 }
 
 
-function getArrays(req, res, next) {  
+function getArrays(req, res) {  
     
     const columnsInside = ["temperatureH", "humidityH", "createdAt" ]
     const columnsOutside = ["temperature", "humidity"]
