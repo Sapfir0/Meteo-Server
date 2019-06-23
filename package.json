@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "npm run inspect:all",
+    "test": "npm run inspect:allConc",
     "logs": "heroku logs --tail -a meteo-server",
     "lh": "./node_modules/.bin/lighthousebot",
     "inspect:lint": "eslint \"./**/*.js\" ",
     "inspect:mocha": "./node_modules/mocha/bin/mocha ",
     "inspect:vulnerabilities": "npm audit",
-    "inspect:all": " npm run inspect:vulnerabilities && npm run inspect:lint && npm run inspect:mocha ",
+    "inspect:all": " npm run inspect:vulnerabilities && npm run inspect:lint && npm run inspect:mocha  ",
     "inspect:allConc": " concurrently \"npm run inspect:vulnerabilities\"  \"npm run inspect:lint\" \"npm run inspect:mocha\"  ",
     "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
