@@ -1,10 +1,36 @@
 language: node_js
+
 node_js:
 - node
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: D5NsSZQsI56wnKslu7LAx985bH20+V4vy8dgemGkRW3SVKna8m48rsraBZktLWzaxEfN0AoSjULLpTSFPldt947j8E9GaPV+8XlqFEMAyL3Sk3hO/5P+71KGEyi3wSqllKPSb0GGHzlde44iBPBmwm0z59N+XFj6ZU6+WhckSE1zKcjxgY/t3uyEJSpc/XVuQqVHHtRW/tapYtqmgGLUY0CS+UJJc7AjaAF4f7M+KCRQy8AqbR81hNdmGyCWeV3Is5IZ0J7kARTo9er2twL9CAILTik/p/+stViTuAWNKenAO+oxynTK1LqKhSKRtyg2wYDhFxq/qy5hkVjtEIrGttboh5jnOP1fh0Rfd821e9VP5oyLrVYV5ZJdAJMZENBgnT3AQjn1IkghLmWC9Dhu3ppfx+vEVirUWHwaO/lXkuWPw6mMjs0JGpbuofeyuecS5SslCNoSTUzaAkBFIe6mDP03qP9UxmyB26VYMBcKLAL/l2etmds1weQEVT3Eg/zHDX7PJoWBOV6cBrhNFtZwvl0FlrJkFU6YZRi9uhM2T9ISKPYdbIkdJ8NbJC8+o2+6BwTHKnsX0xlD2APk3Gj0NHJ/WaeRGXIola1TOEbsrDjLIwWeW4X25zYLDlTo7osj0/W+ePJTHWmRTBA0XQ/p7ej8sJDer6tMyihENC0TJ60=
-#   app: meteoexpress
+
+services:
+- mysql
+
+sudo: required #
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
+
+before_install:
+  - mysql_upgrade
+  - mysql -e "CREATE DATABASE arduino;"
+  - mysql -e "create user 'arduinoSlave'@'localhost' identified with mysql_native_password by '123456'; "
+  - mysql -e "grant all privileges on arduino.* to 'arduinoSlave'@'localhost';"
+
+jobs:
+  include:
+    - stage: Vulnerabilities
+      script: npm run inspect:vulnerabilities
+    - stage: Eslint
+      script: npm run inspect:lint
+    - stage: Tests
+      script: npm run inspect:mocha 
+
+
 after_success: 
 - npm run lh -- --perf=85  https://meteo-server.herokuapp.com/

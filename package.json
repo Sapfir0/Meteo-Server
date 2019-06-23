@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "npm run inspect:all",
+    "test": "npm run inspect:allConc",
     "logs": "heroku logs --tail -a meteo-server",
     "lh": "./node_modules/.bin/lighthousebot",
     "inspect:lint": "eslint \"./**/*.js\" ",
