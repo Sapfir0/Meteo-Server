@@ -5,7 +5,7 @@ export function getWeatherDescriptionIcon(weatherId, createdAt) { //это мо�
     const imgId = parseWeatherId(weatherId)
 
     //после выбора добавить d или n, если файла без них нет
-    let timePrefix ='';
+    let timePrefix ="";
     if( weatherId==741 || weatherId==800 || weatherId==801 || weatherId==802) { // только для этих есть ночная версия
         if ( isNight(createdAt) ) {
             timePrefix="n"

@@ -4,15 +4,15 @@ import { validators } from "./errorStrings.js"
 
 
 
-document.addEventListener('DOMContentLoaded', start);
+document.addEventListener("DOMContentLoaded", start);
 
 function start() {
-    const email = document.querySelector('#email');
-    const emailError = document.querySelector('.emailError');
-    const passwordError = document.querySelector('.passwordError');
+    const email = document.querySelector("#email");
+    const emailError = document.querySelector(".emailError");
+    const passwordError = document.querySelector(".passwordError");
     const serverError = document.querySelector(".serverError")
 
-    const password = document.querySelector('#password')
+    const password = document.querySelector("#password")
     const sendBtn = document.querySelector("#submit")
     
 
@@ -25,19 +25,19 @@ function start() {
         }
     }
     
-    email.addEventListener('input', () => {
+    email.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(email, emailError, validators.strEmailError)
     });
 
-    password.addEventListener('input', () => {
+    password.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(password, passwordError, validators.strPasswordError)
     })
 
 
 
-    sendBtn.addEventListener('click', () => {
+    sendBtn.addEventListener("click", () => {
             if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
                 showHint(emailError, validators.strEventEmailError)
             }
@@ -49,7 +49,7 @@ function start() {
                 const options = {
                     method:"post",
                     headers: {
-                        'Content-Type': 'application/json'
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         "email": email.value,

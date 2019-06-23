@@ -1,13 +1,13 @@
-const { Op } = require('sequelize')
+const { Op } = require("sequelize")
 
 
 function getLastDatasFromSQL(model, params) { 
     //SELECT * FROM tablename ORDER BY ID DESC LIMIT 1 
-    console.log(model);
+    //console.log(model);
     
     return model.findOne({ 
         order: [
-            ['id', 'DESC']
+            ["id", "DESC"]
         ],
         where: {
             ...params

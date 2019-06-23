@@ -1,7 +1,7 @@
 //данные приходят в req.query
 const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
-const { MeteostationInside, MeteostationOutside } = require('../../database/tables')
+const { MeteostationInside, MeteostationOutside } = require("../../database/tables")
 const helper = require("../../services/helper")
 
 function saveArduinoData(req, res, next) {
@@ -87,7 +87,6 @@ async function getMeteostationData(req, res, next) {
         const inside = await helper.getLastDatasFromSQL(MeteostationInside,userId);
         const outside =  await helper.getLastDatasFromSQL(MeteostationOutside,userId);     
         Object.assign(inside.dataValues, outside.dataValues)
-        console.log(inside)
         return res.json(inside.dataValues)
     }
     catch(error) {

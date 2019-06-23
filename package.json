@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
+    "test": "npm run inspect:allConc",
     "logs": "heroku logs --tail -a meteo-server",
-    "lint": "eslint \"./**/*.js\" ",
     "lh": "./node_modules/.bin/lighthousebot",
-    "mocha": "./node_modules/mocha/bin/mocha ",
-    "test": " ",
+    "inspect:lint": "eslint \"./**/*.js\" ",
+    "inspect:mocha": "./node_modules/mocha/bin/mocha ",
+    "inspect:vulnerabilities": "npm audit",
+    "inspect:all": " npm run inspect:vulnerabilities && npm run inspect:lint && npm run inspect:mocha  ",
+    "inspect:allConc": " concurrently \"npm run inspect:vulnerabilities\"  \"npm run inspect:lint\" \"npm run inspect:mocha\"  ",
     "generate_keys": "./node_modules/.bin/web-push generate-vapid-keys"
   },
   "dependencies": {
@@ -33,8 +36,10 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "commander": "^2.20.0",
+    "concurrently": "^4.1.0",
     "debug": "~2.6.9",
     "eslint": "^5.16.0",
+    "faker": "^4.1.0",
     "lighthousebot": "git+https://github.com/GoogleChromeLabs/lighthousebot.git",
     "mocha": "^6.1.4"
   }

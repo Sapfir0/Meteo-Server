@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
 import { urlB64ToUint8Array} from "./helpers.js"
 
-const appServerKey = 'BKAPKJCCKXxHvBcMfLk5OvIhWsfRDrwzAFlFkBv7JVFTaY3-JQTOB3KHmyrsTpFCukoBLbmWe0FXeUCHVBF8jEg';
+const appServerKey = "BKAPKJCCKXxHvBcMfLk5OvIhWsfRDrwzAFlFkBv7JVFTaY3-JQTOB3KHmyrsTpFCukoBLbmWe0FXeUCHVBF8jEg";
 
-const pushWrapper = document.querySelector('.push-wrapper');
-const pushButton = document.querySelector('.push-button');
+const pushWrapper = document.querySelector(".push-wrapper");
+const pushButton = document.querySelector(".push-button");
 
 let hasSubscription = false;
 let serviceWorkerRegistration = null;
 let subscriptionData = false;
 
 function updatePushButton() {
-    pushWrapper.classList.remove('hidden');
+    pushWrapper.classList.remove("hidden");
 
     if (hasSubscription) {
-        pushButton.textContent = `Disable Push Notifications`;
+        pushButton.textContent = "Disable Push Notifications";
     } else {
-        pushButton.textContent = `Enable Push Notifications`;
+        pushButton.textContent = "Enable Push Notifications";
     }
 }
 
@@ -30,27 +30,27 @@ async function subscribeUser() {
             const options = {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(subscription)
             }
 
             try {
-                const response = await fetch('/push/subscribe', options)
-                console.log('User is subscribed.');
+                const response = await fetch("/push/subscribe", options)
+                console.log("User is subscribed.");
                 //console.log(response)
                 hasSubscription = true;   
                 updatePushButton();
             }
             catch(error) {
                 hasSubscription = false;
-                console.error('error fetching subscribe', error);
+                console.error("error fetching subscribe", error);
             }
 
 
         })
         .catch(function(err) {
-            console.log('Failed to subscribe the user: ', err);
+            console.log("Failed to subscribe the user: ", err);
         });
 }
 
@@ -65,10 +65,10 @@ function unsubscribeUser() {
                 console.log(JSON.stringify(subscriptionData));
 
 
-                fetch('/push/unsubscribe', {
+                fetch("/push/unsubscribe", {
                         method: "POST",
                         headers: {
-                            'Content-Type': 'application/json'
+                            "Content-Type": "application/json"
                         },
                         body: JSON.stringify(subscriptionData)
                     })
@@ -82,7 +82,7 @@ function unsubscribeUser() {
                     })
                     .catch( (error) => {
                         hasSubscription = true;
-                        console.error('error fetching subscribe', error);
+                        console.error("error fetching subscribe", error);
                     });
 
                 hasSubscription = false;
@@ -95,7 +95,7 @@ function unsubscribeUser() {
 
 function initPush() {
 
-    pushButton.addEventListener('click', () => {
+    pushButton.addEventListener("click", () => {
         if (hasSubscription) {
             unsubscribeUser();
         } else {
@@ -112,13 +112,13 @@ function initPush() {
         });
 }
 
-navigator.serviceWorker.register('./js/sw.js')
+navigator.serviceWorker.register("./js/sw.js")
     .then( (sw) => {
         serviceWorkerRegistration = sw;
         initPush();
     })
     .catch( (error) => {
-        console.error('Service Worker Error', error);
+        console.error("Service Worker Error", error);
     });
 
     // try {

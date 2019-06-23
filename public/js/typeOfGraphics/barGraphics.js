@@ -22,13 +22,13 @@ export function setDatasForBarGraphic(data, labels, label) {
 
 export function chartNewBarGraphic(ctx, datasForCharts, options) {
     new Chart(ctx, {
-        type: 'bar',
+        type: "bar",
         data: datasForCharts,
         options: options
     });
 }
 
-export function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax) {
+export function setOptionForBarGraphic(text, ymin, ymax) {
     let options = {	
         responsive: true,
         title: {
@@ -44,7 +44,7 @@ export function setOptionForBarGraphic(text, ymin=SuggestedMin, ymax=SuggestedMa
             }
         },
         hover: {
-            mode: 'nearest',
+            mode: "nearest",
             intersect: true
         },
         scales: {

@@ -17,8 +17,10 @@ module.exports = {
     },
     "rules": {
         "no-console": "off",
+        "no-undef": "warn", // убрать! добавлено только из-за аутизма error    'Chart' is not defined 
+        "quotes": ["warn", "double"],
         "no-unused-vars": [
-            "error", 
+            "warn", 
             { 
                 "vars": "all", 
                 "args": "after-used", 

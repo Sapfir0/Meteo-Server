@@ -1,5 +1,5 @@
 module.exports = function (sequelize, Sequelize) {
-    var ComputerParams = sequelize.define('computerParams', {
+    var ComputerParams = sequelize.define("computerParams", {
         id: { 
             autoIncrement: true, 
             primaryKey: true, 

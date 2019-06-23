@@ -2,12 +2,12 @@
 
 export function showHint(widget, str) {
     widget.innerHTML = str;
-    widget.className = 'hint active';
+    widget.className = "hint active";
 }
 
 export function hideHint(widget) {
-    widget.innerHTML = '';
-    widget.className = 'hint';
+    widget.innerHTML = "";
+    widget.className = "hint";
 }
 
 export function errorHandler(serverError, err) {
@@ -39,25 +39,27 @@ export function dateToStr(date) {
 
     if (nearlyDay && subDay == 1) {
         // вчера
-        str = 'вчера ';
+        str = "вчера ";
     } else if (nearlyDay && subDay == 0) {
         // сегодня
-        if(document.body.clientWidth > 600) {
-            str = 'сегодня ';
-        }
-        else {
-            str=''
-        }
+        // if(document.body.clientWidth > 600) {
+        //     str = "сегодня ";
+        // }
+        // else {
+            str=""
+        //}
     } else {
-        const month = ['Января','Февраля','Марта','Апреля','Мая',
-            'Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'
+        const month = ["Января","Февраля","Марта","Апреля","Мая",
+            "Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"
         ];
         str = `${date.getDate()} ${
             month[date.getMonth() - 1]
         } ${date.getFullYear()}`;
     }
 
-    str += ' в ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    //str += " в " + date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
+    str += date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
+
     return str;
 }
 
@@ -67,10 +69,10 @@ export function getTimeFromUnixTime(unixTimestamp, seconds=false) {
     const hours = date.getHours();
     const minutes = "0" + date.getMinutes();
 
-    let formattedTime = hours + ':' + minutes.substr(-2) ;
+    let formattedTime = hours + ":" + minutes.substr(-2) ;
     if(seconds) {
         const seconds = "0" + date.getSeconds();
-        formattedTime += ':' + seconds.substr(-2)
+        formattedTime += ":" + seconds.substr(-2)
     }
     
     return formattedTime
@@ -78,10 +80,10 @@ export function getTimeFromUnixTime(unixTimestamp, seconds=false) {
 
 
 export function urlB64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const padding = "=".repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
-        .replace(/\-/g, '+')
-        .replace(/_/g, '/');
+        .replace(/-/g, "+")
+        .replace(/_/g, "/");
 
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);

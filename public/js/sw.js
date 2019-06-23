@@ -1,19 +1,19 @@
 "use strict";
 
-const VERSION = 'v0.0.5';
+const VERSION = "v0.0.5";
 
 const FILES_TO_CASHE = [
-    '/js/manifest.json',
-    '/js/push.js',
-    '/js/offlinePage.html'
+    "/js/manifest.json",
+    "/js/push.js",
+    "/js/offlinePage.html"
 ]
 
-self.addEventListener('install', (evt) => {
-    console.log('[ServiceWorker] Install');
+self.addEventListener("install", (evt) => {
+    console.log("[ServiceWorker] Install");
     // CODELAB: Precache static resources here.
     evt.waitUntil(
         caches.open(VERSION).then((cache) => {
-          console.log('[ServiceWorker] Pre-caching offline page');
+          console.log("[ServiceWorker] Pre-caching offline page");
           return cache.addAll(FILES_TO_CASHE);
         })
     );
@@ -21,8 +21,8 @@ self.addEventListener('install', (evt) => {
   });
 
 
-self.addEventListener('fetch', (evt) => {
-    if (evt.request.mode !== 'navigate') {
+self.addEventListener("fetch", (evt) => {
+    if (evt.request.mode !== "navigate") {
         // Not a page navigation, bail.
         return;
       }
@@ -31,19 +31,19 @@ self.addEventListener('fetch', (evt) => {
               .catch(() => {
                 return caches.open(VERSION)
                     .then((cache) => {
-                      return cache.match('/js/offline.html');
+                      return cache.match("/js/offline.html");
                     });
               })
       );
 });
 
 
-self.addEventListener('activate', (event) => { //удаление кэша сработаывает тогда же когда и кэширование
+self.addEventListener("activate", (event) => { //удаление кэша сработаывает тогда же когда и кэширование
     event.waitUntil(
         caches.keys().then((keyList) => {
         return Promise.all(keyList.map((key) => {
             if (key !== FILES_TO_CASHE) {
-            console.log('[ServiceWorker] Removing old cache', key);
+            console.log("[ServiceWorker] Removing old cache", key);
             return caches.delete(key);
             }
         }));
@@ -54,7 +54,7 @@ self.addEventListener('activate', (event) => { //удаление кэша ср�
 });
 
 
-self.addEventListener('push', (event) => {
+self.addEventListener("push", (event) => {
 
     let notificationData = {};
 
@@ -62,9 +62,9 @@ self.addEventListener('push', (event) => {
         notificationData = event.data.json();
     } catch (e) {
         notificationData = {
-            title: 'Default title',
-            body: 'Default message',
-            icon: '/default-icon.png'
+            title: "Default title",
+            body: "Default message",
+            icon: "/default-icon.png"
         };
     }
 
@@ -77,7 +77,7 @@ self.addEventListener('push', (event) => {
 
 });
 
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener("notificationclick", function(event) {
 
     // close the notification
     event.notification.close();
@@ -92,7 +92,7 @@ self.addEventListener('notificationclick', function(event) {
                 return clientList[0].focus();
             }
 
-            return self.clients.openWindow('/');
+            return self.clients.openWindow("/");
         })
     );
 });

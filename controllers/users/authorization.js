@@ -1,6 +1,6 @@
 /* Passport js authentificate */
 
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require("express-validator/check");
 const UserApi = require("../../services/user")
 const {validators } = require("./errorStrings")
 const profileApi = require("../../services/profiles")
@@ -38,7 +38,7 @@ function registerUser(req, email, password, done) {
     }
 
     UserApi.getUserByEmail(email).then(user => {
-        console.log(user)
+        //console.log(user)
         if (user) {
             throw new Error(validators.register.existedEmail);
         } else {

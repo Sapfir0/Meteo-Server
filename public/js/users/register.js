@@ -2,16 +2,16 @@ import { showHint, hideHint,  errorHandler } from "../helpers.js"
 import { validators } from "./errorStrings.js"
 
 
-document.addEventListener('DOMContentLoaded', start);
+document.addEventListener("DOMContentLoaded", start);
 
 function start() {
-    const emailError = document.querySelector('.emailError');
-    const passwordError = document.querySelector('.passwordError');
-    const repasswordError = document.querySelector('.repasswordError');
+    const emailError = document.querySelector(".emailError");
+    const passwordError = document.querySelector(".passwordError");
+    const repasswordError = document.querySelector(".repasswordError");
     const serverError = document.querySelector(".serverError")
 
-    const email = document.getElementById('email');
-    const password = document.querySelector('#password')
+    const email = document.getElementById("email");
+    const password = document.querySelector("#password")
     const repassword = document.getElementById("repassword")
     const submitBtn = document.querySelector("#submit")
 
@@ -56,18 +56,18 @@ function start() {
     //     })
     // }
 
-    email.addEventListener('input', () => {
+    email.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(email, emailError, validators.strEmailError)
     });
 
-    password.addEventListener('input', () => {
+    password.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(password, passwordError, validators.strPasswordError, true, repassword)
     })
 
 
-    repassword.addEventListener('input', () => {
+    repassword.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(repassword, repasswordError, validators.strRepasswordError, true, password)
 
@@ -75,7 +75,7 @@ function start() {
 
 
 
-    submitBtn.addEventListener('click', () => {       
+    submitBtn.addEventListener("click", () => {       
         if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
             showHint(emailError, validators.strEventEmailError)
         } else if(!password.value.match(validators.passwordRegExp) ) {
@@ -90,7 +90,7 @@ function start() {
             const options = {
                 method:"post",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "email": email.value,
