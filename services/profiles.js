@@ -1,4 +1,4 @@
-const { Profle } = require('../database/tables')
+const { Profle } = require("../database/tables")
 
 
 

@@ -5,7 +5,7 @@ import { getWeatherDescriptionIcon, getThermometer } from "./images.js"
 import { sunshine } from "./weathers/clear_sky.js"
 import { makeItRain } from "./weathers/rain.js"
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // console.log(document.body.clientWidth)
     // console.log(document.body.clientHeight)
 
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const pressureBlock = document.querySelector("#pressureBlock")
     const sunsetBlock = document.querySelector("#sunsetBlock")
     const sunriseBlock = document.querySelector("#sunriseBlock")
+    const weatherIconBlock = document.querySelector("#weatherIconBlock")
 
     //единственное что важно в этих массивах - это сохранить корректность тройки значений(они должны быть на одном i)
     const widgets=[temperatureInHomeBlock, humidityInHomeBlock, temperatureBlock, 
@@ -59,10 +60,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     for(let i=0; i<widgets.length; i++) {
-        widgets[i].addEventListener('mouseover', () => {
+        widgets[i].addEventListener("mouseover", () => {
             showHint(hints[i], stingsHints[i])
         })
-        widgets[i].addEventListener('mouseout', () => {
+        widgets[i].addEventListener("mouseout", () => {
             hideHint(hints[i])
         })
     }
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (arduinoValues[i] == "521") {
                 console.error("Не указан id метеостанции")
                 const body = document.querySelector("body")
-                body.insertAdjacentHTML("afterbegin", `<p> Не указан id метеостанции`)
+                body.insertAdjacentHTML("afterbegin", "<p> Не указан id метеостанции")
                 const graphics = document.querySelector(".graphics")
                 const home = document.querySelector(".home")
                 const street = document.querySelector(".street")
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         temperature.innerHTML = arduinoValues.temperature + " °C"
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
-        createdAt.innerHTML = `Данные были получены  ` + dateToStr(new Date(arduinoValues.createdAt))
+        createdAt.innerHTML = "Данные были получены  " + dateToStr(new Date(arduinoValues.createdAt))
         weatherDescription = arduinoValues.engWeatherDescription
         sunrise.innerHTML  = getTimeFromUnixTime(arduinoValues.sunriseTime)
         sunset.innerHTML = getTimeFromUnixTime(arduinoValues.sunsetTime)

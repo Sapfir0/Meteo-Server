@@ -12,9 +12,9 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                if (value > criticalHighHum) return 'red'
-                else if(value < criticalLowHum) return 'blue' 
-                else return '#edd9db' 
+                if (value > criticalHighHum) return "red"
+                else if(value < criticalLowHum) return "blue" 
+                else return "#edd9db" 
             }
         },
         {
@@ -22,7 +22,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             // fill:false,
             data: data2, // точки для графика,', 
             backgroundColor: colorOfStreetGraphic,    
-            pointBackgroundColor:  '#edd9db'       
+            pointBackgroundColor:  "#edd9db"       
         }]
     };
 
@@ -41,7 +41,7 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             pointBackgroundColor: (context) => {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
-                return value > criticalHighTemp ? 'red' : '#edd9db' 
+                return value > criticalHighTemp ? "red" : "#edd9db" 
             }
         },
         {
@@ -52,9 +52,9 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                if (value > criticalHighTemp) return 'red'
-                else if(value < criticalLowTemp) return 'blue' 
-                else return '#edd9db' 
+                if (value > criticalHighTemp) return "red"
+                else if(value < criticalLowTemp) return "blue" 
+                else return "#edd9db" 
             }
         }]
     };
@@ -65,14 +65,14 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
 
 export function chartNewLineGraphic(ctx, datasForCharts, options) {
     new Chart(ctx, {
-        type: 'line',
+        type: "line",
         data: datasForCharts,
         options: options,
     });
 }
 
 
-export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax, charTitle='') {
+export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedMax, charTitle="") {
     let options = {	
         responsive: false,
         maintainAspectRatio: false,
@@ -82,7 +82,7 @@ export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedM
             fontColor: font_color
         },
         hover: {
-            mode: 'nearest',
+            mode: "nearest",
             intersect: true
         },
         legend: {
@@ -92,7 +92,7 @@ export function setOptionForLineGraphic(text, ymin=SuggestedMin, ymax=SuggestedM
             }
         },
         tooltips: {
-            mode: 'index',
+            mode: "index",
             intersect: false,
         },
         scales: {

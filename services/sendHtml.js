@@ -40,7 +40,7 @@ const datasPage = (req, res) => {
 const logout = (req, res ) => {
     req.session.destroy(err => {
         console.error(err)
-        res.redirect('/');
+        res.redirect("/");
     });
 };
 

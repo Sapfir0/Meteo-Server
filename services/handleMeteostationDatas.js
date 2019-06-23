@@ -1,4 +1,4 @@
-const { MeteostationInside, MeteostationOutside } = require('../database/tables')
+const { MeteostationInside, MeteostationOutside } = require("../database/tables")
 
 
 function writeMeteostationInsideParams(temperatureH, humidityH, sansityH, meteostationId) {

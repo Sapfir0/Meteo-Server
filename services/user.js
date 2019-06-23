@@ -1,5 +1,5 @@
-const bCrypt = require('bcryptjs');
-const { User } = require('../database/tables')
+const bCrypt = require("bcryptjs");
+const { User } = require("../database/tables")
 
 
 function changeMeteoId(userId, meteostationId) {

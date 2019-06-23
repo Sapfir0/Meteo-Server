@@ -1,5 +1,5 @@
-const {Push} = require('../database/tables')
-const webPush = require('web-push');
+const {Push} = require("../database/tables")
+const webPush = require("web-push");
 const config = require("../config/config")
 
 /**
@@ -24,7 +24,7 @@ function subscribe(req, res) {
       config.imgDir + "/weatherIcons/01d.png"
   )
 
-  res.status(200).send('subscribe');
+  res.status(200).send("subscribe");
 
 }
 
@@ -75,11 +75,11 @@ async function unsubscribe(req, res) { // не уверен что это раб
       })
   } 
   catch (error) {
-      console.error('error with unsubscribe', err);
-      res.status(500).send('unsubscription not possible');
+      console.error("error with unsubscribe", error);
+      res.status(500).send("unsubscription not possible");
   }
-  console.log('unsubscribed');
-  res.status(200).send('unsubscribe');
+  console.log("unsubscribed");
+  res.status(200).send("unsubscribe");
 
 }
 

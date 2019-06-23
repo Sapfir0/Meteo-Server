@@ -1,19 +1,19 @@
-const { body } = require('express-validator/check');
+const { body } = require("express-validator/check");
 
-const emailVaidator = body('email')
+const emailVaidator = body("email")
     .isEmail()
     .normalizeEmail();
 
 
-const passwordValidator = body('password')
+const passwordValidator = body("password")
     .not()
     .isEmpty()
     .trim()
     .isLength({ min: 5 })
-    .withMessage('so short')
+    .withMessage("so short")
     .trim()
     .isLength({ max: 50 })
-    .withMessage('very big');
+    .withMessage("very big");
 
 
 const validators = {

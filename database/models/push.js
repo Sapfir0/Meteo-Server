@@ -1,5 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
-    var PushSchema = sequelize.define('pushSchemas', {
+    var PushSchema = sequelize.define("pushSchemas", {
         id: { 
             autoIncrement: true, 
             primaryKey: true, 

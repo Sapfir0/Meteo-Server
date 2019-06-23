@@ -1,7 +1,7 @@
 //данные приходят в req.query
 const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
-const { MeteostationInside, MeteostationOutside } = require('../../database/tables')
+const { MeteostationInside, MeteostationOutside } = require("../../database/tables")
 const helper = require("../../services/helper")
 
 function saveArduinoData(req, res, next) {

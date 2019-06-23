@@ -1,7 +1,7 @@
 
 
 module.exports = function (sequelize, Sequelize) {
-    var MeteostationInside = sequelize.define('meteostationInside', {
+    var MeteostationInside = sequelize.define("meteostationInside", {
         id: { 
             autoIncrement: true, 
             primaryKey: true, 

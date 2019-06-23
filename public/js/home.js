@@ -1,7 +1,7 @@
 import { errorHandler } from "./helpers.js"
 
 
-document.addEventListener('DOMContentLoaded', start);
+document.addEventListener("DOMContentLoaded", start);
 
 function start() { 
     const meteoId = document.querySelector("#meteoId")
@@ -15,12 +15,12 @@ function start() {
     const serverError = document.querySelector(".serverError")
 
 
-    oldDescrIconsCheckBox.addEventListener('click', () => {
+    oldDescrIconsCheckBox.addEventListener("click", () => {
         
         const options = {
             method: "post",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "oldWeatherDescriptionIcons": oldDescrIconsCheckBox.checked
@@ -43,12 +43,12 @@ function start() {
     },false);
 
 
-    sendMeteoIdBtn.addEventListener('click', () => {
+    sendMeteoIdBtn.addEventListener("click", () => {
 
         const options = {
             method: "post",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "meteostationId": meteoId.value
@@ -71,13 +71,13 @@ function start() {
     
     },false);
 
-    sendPC_IdBtn.addEventListener('click', () => {
+    sendPC_IdBtn.addEventListener("click", () => {
     console.log(sendPC_IdBtn.value)
 
     const options = {
         method: "post",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             "PC_Id": PC_Id.value

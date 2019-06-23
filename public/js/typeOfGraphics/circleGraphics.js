@@ -2,7 +2,7 @@ import { colorA, colorB, font_color } from "./colorSettings.js"
 
 export function chartNewPieGraphic(ctx, datasForCharts, options) {
     var chart = new Chart(ctx, {
-        type: 'pie',
+        type: "pie",
         data: datasForCharts,
         options: options,
     });
@@ -16,7 +16,7 @@ export function setOptionForPieGraphic(text) {
             fontColor: font_color
         },
         hover: {
-            mode: 'nearest',
+            mode: "nearest",
             intersect: true
         },
         legend: {

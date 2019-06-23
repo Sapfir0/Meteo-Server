@@ -1,4 +1,4 @@
-const { Op } = require('sequelize')
+const { Op } = require("sequelize")
 
 
 function getLastDatasFromSQL(model, params) { 
@@ -7,7 +7,7 @@ function getLastDatasFromSQL(model, params) {
     
     return model.findOne({ 
         order: [
-            ['id', 'DESC']
+            ["id", "DESC"]
         ],
         where: {
             ...params

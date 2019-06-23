@@ -1,6 +1,6 @@
 /* Passport js authentificate */
 
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require("express-validator/check");
 const UserApi = require("../../services/user")
 const {validators } = require("./errorStrings")
 const profileApi = require("../../services/profiles")

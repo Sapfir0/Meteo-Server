@@ -1,6 +1,6 @@
 const computerAPI = require("../../services/computerParams")
 const userApi = require("../../services/user")
-const { ComputerParams } = require('../../database/tables')
+const { ComputerParams } = require("../../database/tables")
 const helper = require("../../services/helper")
 
 function saveComputerData(req, res, next) {

@@ -2,7 +2,7 @@ const userControl = require("./authorization")
 const UserApi = require("../../services/user")
 
 const loadPasportStrategies = (passport, user) => {
-    const LocalStrategy = require('passport-local').Strategy;
+    const LocalStrategy = require("passport-local").Strategy;
 
     passport.serializeUser((user, done) => {
         done(null, user.id);
@@ -20,10 +20,10 @@ const loadPasportStrategies = (passport, user) => {
 
 
 
-    passport.use('local-signup',
+    passport.use("local-signup",
         new LocalStrategy({
-                usernameField: 'email',
-                passwordField: 'password',
+                usernameField: "email",
+                passwordField: "password",
                 passReqToCallback: true
             },
             userControl.registerUser
@@ -31,10 +31,10 @@ const loadPasportStrategies = (passport, user) => {
     );
 
 
-    passport.use('local-signin',
+    passport.use("local-signin",
         new LocalStrategy({
-                usernameField: 'email',
-                passwordField: 'password',
+                usernameField: "email",
+                passwordField: "password",
                 passReqToCallback: true //позволяет нам передать весь запрос на обратный вызов
             },
             userControl.loginUser

@@ -9,8 +9,8 @@ let borders
 
 export function createGraphics(graphicValues) {
 
-    const temperatureGraphic = document.getElementById('temperatureGraphic').getContext('2d');
-    const humidityGraphic = document.getElementById('humidityGraphic').getContext('2d');
+    const temperatureGraphic = document.getElementById("temperatureGraphic").getContext("2d");
+    const humidityGraphic = document.getElementById("humidityGraphic").getContext("2d");
     console.log(graphicValues)
 
     const temperatureInHomeArray = graphicValues.temperatureH;
@@ -39,8 +39,8 @@ export function createGraphics(graphicValues) {
 }
 
 export function createComputerGraphic(graphicValues) {
-    const CPU_load_iostat_graphic = document.getElementById('CPU_load_iostat_graphic').getContext('2d');
-    const CPU_load_uptime_graphic = document.getElementById('CPU_load_uptime_graphic').getContext('2d');
+    const CPU_load_iostat_graphic = document.getElementById("CPU_load_iostat_graphic").getContext("2d");
+    const CPU_load_uptime_graphic = document.getElementById("CPU_load_uptime_graphic").getContext("2d");
 
     var data = [graphicValues.CPU_load_iostat, 100-graphicValues.CPU_load_iostat]
     var labels = ["Занято", "Свободно"]
