@@ -40,11 +40,11 @@
             <div class="home"> <h2>Блок дома</h2>
 
             <!-- вынес строчку выше из дива, нужно потестить как оно будет дальше  -->
-            <div id="temperatureBlock" class="block"> 
+            <div id="temperatureInHomeBlock" class="block"> 
                 <p> <img src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
-                <span class="temperature"></span>
+                <span class="temperatureInHome"></span>
             </div>
-            <span class="temperatureHint" aria-live="polite"></span>
+            <span class="temperatureInHomeHint" aria-live="polite"></span>
 
             <div id="humidityInHomeBlock" class="block">  
                 <p><img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность в доме ">
@@ -66,11 +66,11 @@
             </div>
             <span class="weatherIconHint" aria-live="polite"></span>
 
-            <div id="temperatureInHomeBlock" class="block"> 
+            <div id="temperatureBlock" class="block"> 
                 <p><img id="thermometer" src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
-                <span class="temperatureInHome"></span>
+                <span class="temperature"></span>
             </div>
-            <span class="temperatureInHomeHint" aria-live="polite"></span>
+            <span class="temperatureHint" aria-live="polite"></span>
 
             <div id="humidityBlock" class="block" class="block"> 
                 <p> <img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность на улице">

@@ -84,6 +84,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error(err);
         }
         console.log(arduinoValues)
+        console.log(arduinoValues.temperatureH);
+        console.log(arduinoValues.temperature);
+        
         for(let i in arduinoValues) {
             if (arduinoValues[i] == "521") {
                 console.error("Не указан id метеостанции")

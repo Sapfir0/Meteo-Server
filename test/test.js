@@ -55,6 +55,6 @@ const Tests = {
 
 const positive = require("./positiveTests")
 
-positive.startPositiveTests(Tests)
 
+positive.startPositiveTests(Tests)
 
