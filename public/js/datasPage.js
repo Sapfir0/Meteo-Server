@@ -84,8 +84,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error(err);
         }
         console.log(arduinoValues)
-        console.log(arduinoValues.temperatureH);
-        console.log(arduinoValues.temperature);
         
         for(let i in arduinoValues) {
             if (arduinoValues[i] == "521") {
@@ -136,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const response = await fetch("/computerLoadParams");
         const computerValues = await response.json();
-        //console.log(computerValues); 
+        console.log(computerValues); 
         createdAtCpu.innerHTML = dateToStr(new Date(computerValues.createdAt))
 
         return computerValues

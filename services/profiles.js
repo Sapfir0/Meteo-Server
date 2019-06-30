@@ -1,7 +1,6 @@
 const { Profle } = require("../database/tables")
 
 
-
 function writeProfiles(userId, oldWeatherDescriptionIcons) {
     return Profle.update({
         oldWeatherDescriptionIcons    

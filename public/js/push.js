@@ -22,78 +22,82 @@ function updatePushButton() {
 }
 
 async function subscribeUser() {
-    serviceWorkerRegistration.pushManager.subscribe({
+    const subscription = await serviceWorkerRegistration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlB64ToUint8Array(appServerKey)
         })
-        .then( async (subscription) => {
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(subscription)
-            }
 
-            try {
-                const response = await fetch("/push/subscribe", options)
-                console.log("User is subscribed.");
-                //console.log(response)
-                hasSubscription = true;   
-                updatePushButton();
-            }
-            catch(error) {
-                hasSubscription = false;
-                console.error("error fetching subscribe", error);
-            }
+    try {
+        subscribe(subscription)
+    } catch (error) {
+        console.log("Failed to subscribe the user: ", error);
 
+    }
 
-        })
-        .catch(function(err) {
-            console.log("Failed to subscribe the user: ", err);
-        });
+    async function subscribe(subscription) {
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(subscription)
+        }
+
+        try {
+            const response = await fetch("/push/subscribe", options)
+            console.log("User is subscribed.");
+            //console.log(response)
+            hasSubscription = true;   
+            updatePushButton();
+        }
+        catch(error) {
+            hasSubscription = false;
+            console.error("error fetching subscribe", error);
+        }
+    }
 }
 
-function unsubscribeUser() {
-    serviceWorkerRegistration.pushManager.getSubscription()
-        .then(function(subscription) {
-            if (subscription) {
-                subscriptionData = {
-                    endpoint: subscription.endpoint
-                };
-                console.log("Произошла отпеска. Было отправлено в бади:")
-                console.log(JSON.stringify(subscriptionData));
+async function unsubscribeUser() {
+    const subscription = await serviceWorkerRegistration.pushManager.getSubscription()
+    unsubscribe(subscription)
 
+    async function unsubscribe(subscription) {
+        if (!subscription) {
+            throw new Error("User is not subsribed")
+        }
+        subscriptionData = {
+            endpoint: subscription.endpoint
+        };
+        console.log("Произошла отпеска. Было отправлено в бади:")
+        console.log(JSON.stringify(subscriptionData));
+        const options = {  
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(subscriptionData)
+        }
 
-                fetch("/push/unsubscribe", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(subscriptionData)
-                    })
-                    .then( (response) => {
-                        return response;
-                    })
-                    .then( (text) => {
-                        hasSubscription = false;
+        try {
+            const response = await fetch("/push/unsubscribe", options)
+            hasSubscription = false;
+            updatePushButton();    
+        }
+        catch(error) {     
+            hasSubscription = true;
+            console.error("error fetching subscribe", error);
+        }
 
-                        updatePushButton();
-                    })
-                    .catch( (error) => {
-                        hasSubscription = true;
-                        console.error("error fetching subscribe", error);
-                    });
+        hasSubscription = false;
 
-                hasSubscription = false;
+        updatePushButton();
+        return subscription.unsubscribe();
+        
+    }
 
-                updatePushButton();
-                return subscription.unsubscribe();
-            }
-        });
 }
 
-function initPush() {
+async function initPush() {
 
     pushButton.addEventListener("click", () => {
         if (hasSubscription) {
@@ -103,16 +107,13 @@ function initPush() {
         }
     });
 
-    // Set the initial subscription value
-    serviceWorkerRegistration.pushManager.getSubscription()
-        .then(function(subscription) {
-            hasSubscription = !(subscription === null);
+    const subscription = await serviceWorkerRegistration.pushManager.getSubscription()
+    hasSubscription = !(subscription === null);
+    updatePushButton();
 
-            updatePushButton();
-        });
 }
 
-navigator.serviceWorker.register("/js/serviceWorkers/sw.js")
+navigator.serviceWorker.register("./js/serviceWorkers/sw.js")
     .then( (sw) => {
         serviceWorkerRegistration = sw;
         initPush();
@@ -120,12 +121,3 @@ navigator.serviceWorker.register("/js/serviceWorkers/sw.js")
     .catch( (error) => {
         console.error("Service Worker Error", error);
     });
-
-    // try {
-    //     await navigator.serviceWorker.register('./js/sw.js')
-    //     serviceWorkerRegistration = sw;
-    //     initPush();
-    // }
-    // catch(error)  {
-    //     console.error('Service Worker Error', error);
-    // }

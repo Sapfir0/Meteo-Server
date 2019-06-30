@@ -3,9 +3,9 @@
 const VERSION = "v0.0.5";
 
 const FILES_TO_CASHE = [
-    "/js/manifest.json",
+    "/json/manifest.json",
     "/js/push.js",
-    "/js/offlinePage.html"
+    "../../views/offlinePage.html" //как дойти до этого файла?
 ]
 
 self.addEventListener("install", (evt) => {
@@ -25,7 +25,7 @@ self.addEventListener("fetch", (evt) => {
     if (evt.request.mode !== "navigate") {
         // Not a page navigation, bail.
         return;
-      }
+    }
       evt.respondWith(
           fetch(evt.request)
               .catch(() => {
