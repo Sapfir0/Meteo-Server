@@ -56,5 +56,10 @@ const Tests = {
 const positive = require("./positiveTests")
 
 
-positive.startPositiveTests(Tests)
+foo()
+async function foo() {
+    await positive.startPositiveTests(Tests)
+    //process.exit()
+}
+
 

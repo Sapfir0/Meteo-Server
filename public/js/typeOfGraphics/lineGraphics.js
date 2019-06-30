@@ -6,7 +6,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
         labels: labels, // подпись на оси Х
         datasets: [{
             label: label, // подпись самого графика
-            // fill:false,
+            fill:false,
             data: data, // точки для графика,', 
             backgroundColor: colorOfHomeGraphic,
             pointBackgroundColor: (context) => {
