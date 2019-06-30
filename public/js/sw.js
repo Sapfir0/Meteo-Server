@@ -31,7 +31,7 @@ self.addEventListener("fetch", (evt) => {
               .catch(() => {
                 return caches.open(VERSION)
                     .then((cache) => {
-                      return cache.match("/js/offline.html");
+                      return cache.match("/offline.html");
                     });
               })
       );
