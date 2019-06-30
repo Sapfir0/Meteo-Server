@@ -112,7 +112,7 @@ function initPush() {
         });
 }
 
-navigator.serviceWorker.register("/js/sw.js")
+navigator.serviceWorker.register("/js/serviceWorkers/sw.js")
     .then( (sw) => {
         serviceWorkerRegistration = sw;
         initPush();
