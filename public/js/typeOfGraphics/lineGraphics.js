@@ -1,5 +1,4 @@
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
-//import { Chart } from "/chart.js/dist/Chart.min.js"
 
 export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
     let datasForCharts = {
@@ -9,12 +8,12 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             fill:false,
             color: "#f1f3f4",
             data: data, // точки для графика,', 
-            backgroundColor: colorOfHomeGraphic,
+            backgroundColor: "SandyBrown", //sandlybrown
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                if (value > criticalHighHum) return "red"
-                else if(value < criticalLowHum) return "blue" 
+                if (value > criticalHighHum) return "blue" //аха а тут наоборот, типа нижнее значение будет красным
+                else if(value < criticalLowHum) return "red"
                 else return "#edd9db" 
             }
         },
@@ -23,8 +22,14 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             fill:false,
             color: "#87cf3e",
             data: data2, // точки для графика,', 
-            backgroundColor: colorOfStreetGraphic,    
-            pointBackgroundColor:  "#edd9db"       
+            backgroundColor: "ForestGreen",  //limegreen
+            pointBackgroundColor: (context) => {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                if (value > criticalHighHum) return "blue" //аха а тут наоборот, типа нижнее значение будет красным
+                else if(value < criticalLowHum) return "red"
+                else return "#edd9db" 
+            }       
         }]
     };
 
@@ -43,7 +48,9 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             pointBackgroundColor: (context) => {
                 var index = context.dataIndex;
                 var value = context.dataset.data[index];
-                return value > criticalHighTemp ? "red" : "#edd9db" 
+                if (value > criticalHighTemp) return "red"
+                else if(value < criticalLowTemp) return "blue" 
+                else return "#edd9db" 
             }
         },
         {

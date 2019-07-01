@@ -1,15 +1,13 @@
 .forms {
     display: flex;
-    align-content: center;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
     text-align: center;
-    margin: auto auto;
     margin-top: 45vh;
+    width: 30vh;
 }
 
 a {
-    text-decoration: none;
     color: #2e2e2e;
 }
 
@@ -18,9 +16,11 @@ body {
 }
 
 .register {
+    text-decoration: none;
 }
 
 .sign_In {
+    text-decoration: none;
     background-color: palegoldenrod;
     padding: 5px 10px 5px 10px;
 
