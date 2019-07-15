@@ -45,6 +45,7 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
         datasets: [{
             label: label, // подпись самого графика
             // fill:false,
+            borderColor: colorOfHomeGraphic,
             data: data, // точки для графика,', 
             backgroundColor: colorOfHomeGraphic ,
             pointBackgroundColor: (context) => {
@@ -60,6 +61,8 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
             // fill:false,
             data: data2, // точки для графика,', 
             backgroundColor: colorOfStreetGraphic ,
+            borderColor: colorOfStreetGraphic,
+
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
@@ -106,15 +109,20 @@ export function setOptionForLineGraphic(text, ymin, ymax, charTitle="") {
             mode: "index",
             intersect: false,
         },
-        chartArea: {
-            backgroundColor: 'lightgray'
-        },
         scales: {
             yAxes: [{
                 ticks: {
                     fontColor: font_color,
-                    min: Math.round(ymin),
-                    max: Math.round(ymax),
+                    min: (ymin) => {
+                        const axValue = Math.round(ymin);
+                        if (axValue < 0) return 0
+                        else return axValue
+                    },
+                    max: (ymax) => {
+                        const axValue = Math.round(ymax);
+                        if (axValue > 100) return 100
+                        else return axValue
+                    },
                     callback: (value) => {
                         return value + charTitle; //подпись на оси y
                     }
