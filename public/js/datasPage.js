@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
             weatherIcon.src = iconId
         }
-        isRainingNow(arduinoValues.engWeatherDescription) // это выбирает погодный эффект
+        isRainingNow(arduinoValues.weatherId) // это выбирает погодный эффект
         //isClearSkyNow(arduinoValues.weatherId) //пока еще не работает
 }
 
@@ -151,10 +151,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 })
 
 
-function isRainingNow(engWeatherDescription) {
-    console.log(engWeatherDescription)
+function isRainingNow(weatherId) {
     const rainingNow = engWeatherDescription.indexOf("rain") 
-    if (rainingNow != -1) {//found it
+    rain = [500, 501, 502, 503, 504, 511, 520, 522, 531]
+    drizzle = [300, 301, 302, 310, 311, 312, 313, 314, 321]
+    thunderstorm = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
+    if (weatherId in rain || weatherId in drizzle || weatherId in thunderstorm) {
         makeItRain() // можно еще проверять хеви рейн или маелкнький
     }
 }
