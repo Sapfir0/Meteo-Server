@@ -7,6 +7,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             label: label, // подпись самого графика
             fill:false,
             color: "#f1f3f4",
+            borderColor: '#f1f3f4',
             data: data, // точки для графика,', 
             backgroundColor: "SandyBrown", //sandlybrown
             pointBackgroundColor: (context) => {
@@ -21,6 +22,7 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
             label: label2, // подпись самого графика
             fill:false,
             color: "#87cf3e",
+            borderColor: '#87cf3e',
             data: data2, // точки для графика,', 
             backgroundColor: "ForestGreen",  //limegreen
             pointBackgroundColor: (context) => {
@@ -103,6 +105,9 @@ export function setOptionForLineGraphic(text, ymin, ymax, charTitle="") {
         tooltips: {
             mode: "index",
             intersect: false,
+        },
+        chartArea: {
+            backgroundColor: 'lightgray'
         },
         scales: {
             yAxes: [{
