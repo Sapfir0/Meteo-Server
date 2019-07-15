@@ -113,16 +113,8 @@ export function setOptionForLineGraphic(text, ymin, ymax, charTitle="") {
             yAxes: [{
                 ticks: {
                     fontColor: font_color,
-                    min: (ymin) => {
-                        const axValue = Math.round(ymin);
-                        if (axValue < 0) return 0
-                        else return axValue
-                    },
-                    max: (ymax) => {
-                        const axValue = Math.round(ymax);
-                        if (axValue > 100) return 100
-                        else return axValue
-                    },
+                    min: Math.round(ymin),
+                    max: Math.round(ymax),
                     callback: (value) => {
                         return value + charTitle; //подпись на оси y
                     }
