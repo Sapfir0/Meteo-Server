@@ -13,8 +13,26 @@ body {
 #humidityGraphic, #temperatureGraphic {
   height:400px;
   width: 100%;
-  background-color: #333;
+  border: 1px solid rgb(98, 78, 164); 
+  border-radius: 25px; 
+  padding: 5px 20px; 
+  margin: 15px; 
+  background-color: #333; 
+  height: 540px; 
+  box-shadow: 0 0 10px 1px #0b304e; 
 }
+
+content .dblock { 
+  border: 1px solid rgb(98, 78, 164); 
+  border-radius: 25px; 
+  padding: 5px 20px; 
+  margin: 15px; 
+  background-color: #333; 
+  height: 540px; 
+  box-shadow: 0 0 10px 1px #0b304e; 
+  color: white;
+  width: 30%;
+} 
 
 span {
   color: white;
@@ -31,6 +49,7 @@ span {
 a {
   color: #00B7FF;
 }
+
 p {
   color: black;
   font-size: 25px;
@@ -39,17 +58,16 @@ p {
 
 content {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: row;
 
+}
 
 img {
   height: 40px;
 }
 
-
-
- .chart-container {
+.chart-container {
+  
   display: block;
   width: 660px;
 } 

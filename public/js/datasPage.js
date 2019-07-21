@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 graphics.className = "unknown"
                 home.className = "unknown"
                 street.className = "unknown"
-
                 return -1
             }
         }
@@ -111,7 +110,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         humidity.innerHTML = arduinoValues.humidity + "%"
         pressure.innerHTML = arduinoValues.pressure + " мм рт. ст."
         createdAt.innerHTML = "Данные были получены  " + dateToStr(new Date(arduinoValues.createdAt))
-        weatherDescription = arduinoValues.engWeatherDescription
         sunrise.innerHTML  = getTimeFromUnixTime(arduinoValues.sunriseTime)
         sunset.innerHTML = getTimeFromUnixTime(arduinoValues.sunsetTime)
 
@@ -152,7 +150,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function isRainingNow(weatherId) {
-    const rainingNow = engWeatherDescription.indexOf("rain") 
     rain = [500, 501, 502, 503, 504, 511, 520, 522, 531]
     drizzle = [300, 301, 302, 310, 311, 312, 313, 314, 321]
     thunderstorm = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
