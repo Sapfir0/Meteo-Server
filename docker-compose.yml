@@ -1,28 +1,30 @@
 version: '3.1'
 services:
-  db:
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD
-      - DB_DATABASE
-      - DB_USERNAME
-      - DB_PASSWORD
+
   meteo-server:
     build:
       dockerfile: Dockerfile
       context: .
     command: node app.js
-    volumes:
-      - "./src:/home/node/app/src"
     environment:
-      - DB_HOST=localhost
-      - DB_NAME=${DATABASE}
-      - DB_USER=${USERNAME}
-      - DB_PASSWORD=${PASSWORD}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:app.test.localhost.tv"
+      DB_HOST: db:3306
+      DB_PASSWORD: n%FFodEK9Oso9@0U
+    ports:
+    - 5060:5060 # [порт компьютера]:[порт контейнера]
     depends_on:
-      - db
+      - db    
+
+
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      DB_DATABASE: "arduino"
+      DB_USERNAME: "arduinoSlave"
+      DB_PASSWORD: "n%FFodEK9Oso9@0U"
+    volumes:
+      - /var/lib/mysql
+    ports:
+      - "3307:3306"

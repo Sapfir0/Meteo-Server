@@ -5,7 +5,7 @@ const VERSION = "v0.0.5";
 const FILES_TO_CASHE = [
     "/json/manifest.json",
     "/js/push.js",
-    "../../views/offlinePage.html" //как дойти до этого файла?
+    //"../../views/offlinePage.html" //как дойти до этого файла?
 ]
 
 self.addEventListener("install", (evt) => {
