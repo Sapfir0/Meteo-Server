@@ -35,101 +35,104 @@
 
     <div class="rain front-row"></div>
     <div class="rain back-row"></div>
+    <main>
+        <div class="main_inner">
+            <content>
+                <div class="styled_block data_block home"> <h2>Блок дома</h2>
 
-    <content>
-        <div class="dblock home"> <h2>Блок дома</h2>
+                    <!-- вынес строчку выше из дива, нужно потестить как оно будет дальше  -->
+                    <div id="temperatureInHomeBlock" class="block"> 
+                        <p> <img src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
+                        <span class="temperatureInHome"></span>
+                    </div>
+                    <span class="temperatureInHomeHint" aria-live="polite"></span>
 
-            <!-- вынес строчку выше из дива, нужно потестить как оно будет дальше  -->
-            <div id="temperatureInHomeBlock" class="block"> 
-                <p> <img src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
-                <span class="temperatureInHome"></span>
-            </div>
-            <span class="temperatureInHomeHint" aria-live="polite"></span>
+                    <div id="humidityInHomeBlock" class="block">  
+                        <p><img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность в доме ">
+                        <span class="humidityInHome"></span> 
+                    </div>
+                    <span class="humidityInHomeHint" aria-live="polite"></span>
 
-            <div id="humidityInHomeBlock" class="block">  
-                <p><img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность в доме ">
-                <span class="humidityInHome"></span> 
-            </div>
-            <span class="humidityInHomeHint" aria-live="polite"></span>
+                    <div id="sansityInHomeBlock" class="block"> 
+                        <p> <img src="/img/weatherParamsSVG/light.svg" alt="Освещенность в доме">
+                        <span class="sansityInHome"></span>
+                    </div>
+                    <span class="sansityHint" aria-live="polite"></span>
 
-            <div id="sansityInHomeBlock" class="block"> 
-                <p> <img src="/img/weatherParamsSVG/light.svg" alt="Освещенность в доме">
-                <span class="sansityInHome"></span>
-            </div>
-            <span class="sansityHint" aria-live="polite"></span>
+                </div>
 
-        </div>
+                <div class="styled_block data_block street"><h2>На улице</h2>
+                    <div id="temperatureBlock" class="block"> 
+                        <p><img id="thermometer" src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
+                        <span class="temperature"></span>
+                    </div>
+                    <span class="temperatureHint" aria-live="polite"></span>
 
-        <div class="dblock street"><h2>На улице</h2>
-            <div id="temperatureBlock" class="block"> 
-                <p><img id="thermometer" src="/img/weatherParamsSVG/4-thermometer.svg" alt="Температура на улице">
-                <span class="temperature"></span>
-            </div>
-            <span class="temperatureHint" aria-live="polite"></span>
+                    <div id="humidityBlock" class="block" class="block"> 
+                        <p> <img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность на улице">
+                        <span class="humidity"></span>
+                    </div>
+                    <span class="humidityHint" aria-live="polite"></span>
 
-            <div id="humidityBlock" class="block" class="block"> 
-                <p> <img src="/img/weatherParamsSVG/humidity.svg" alt="Влажность на улице">
-                <span class="humidity"></span>
-            </div>
-            <span class="humidityHint" aria-live="polite"></span>
+                    <div id="weatherIconBlock" class="block"> 
+                        <img class="weatherIcon" src="" alt="Погода"> 
+                    </div>
+                    <span class="weatherIconHint" aria-live="polite"></span>
 
-            <div id="weatherIconBlock" class="block"> 
-                <img class="weatherIcon" src="" alt="Погода"> 
-            </div>
-            <span class="weatherIconHint" aria-live="polite"></span>
+                    <div id="pressureBlock" class="block"> 
+                        <p> <img src="/img/weatherParamsSVG/pressure.svg" alt="Атмосферное давление">
+                        <span class="pressure"></span> 
+                    </div>
+                    <span class="pressureHint" aria-live="polite"></span>
+                    
+                    <div id="sunriseBlock" class="block"> 
+                        <p> <img src="/img/weatherIconsSVG/sunrise.svg" alt="Рассвет">
+                        <span class="sunrise"></span> 
+                    </div>
+                    <span class="sunriseHint" aria-live="polite"></span>
 
-            <div id="pressureBlock" class="block"> 
-                <p> <img src="/img/weatherParamsSVG/pressure.svg" alt="Атмосферное давление">
-                <span class="pressure"></span> 
-            </div>
-            <span class="pressureHint" aria-live="polite"></span>
+                    <div id="sunsetBlock" class="block"> 
+                        <p> <img src="/img/weatherIconsSVG/sunset.svg" alt="Закат">
+                        <span class="sunset"></span> 
+                    </div>
+                    <span class="sunsetHint" aria-live="polite"></span>
+                    
+                </div>
+
+            </content>
+            <h4> <span class="createdAt"></span></h4>
             
-            <div id="sunriseBlock" class="block"> 
-                <p> <img src="/img/weatherIconsSVG/sunrise.svg" alt="Рассвет">
-                <span class="sunrise"></span> 
+            <div class="graphics">
+                <div class="chart-container styled_block">
+                    <canvas id="temperatureGraphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
+                </div>
+                    <!-- ЗАМЕНИТЬ УКАЗАНИЕ СТИЛЕЙ У КАНВАСОВ!  -->
+                <div class="chart-container styled_block">
+                    <canvas id="humidityGraphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
+                </div>
             </div>
-            <span class="sunriseHint" aria-live="polite"></span>
 
-            <div id="sunsetBlock" class="block"> 
-                <p> <img src="/img/weatherIconsSVG/sunset.svg" alt="Закат">
-                <span class="sunset"></span> 
+
+            <div id="CPU_load_iostat_block" class="block" class="block"> 
+                <div class="graphics">
+                    <div class="chart-container"> 
+                        <!-- инсертнуть сюда pie график -->
+                        <canvas id="CPU_load_iostat_graphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
+                    </div>
+                </div>
             </div>
-            <span class="sunsetHint" aria-live="polite"></span>
-            
-        </div>
+            <span class="createdAtCpu" aria-live="polite"></span>
 
-    </content>
-    <h4> <span class="createdAt"></span></h4>
-    
-    <div class="graphics">
-        <div class="chart-container">
-            <canvas id="temperatureGraphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
-        </div>
-            <!-- ЗАМЕНИТЬ УКАЗАНИЕ СТИЛЕЙ У КАНВАСОВ!  -->
-        <div class="chart-container">
-            <canvas id="humidityGraphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
-        </div>
-    </div>
-
-
-    <div id="CPU_load_iostat_block" class="block" class="block"> 
-        <div class="graphics">
-            <div class="chart-container"> 
-                <!-- инсертнуть сюда pie график -->
-                <canvas id="CPU_load_iostat_graphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
+            <div id="CPU_load_uptime_block" class="block" class="block"> 
+                <div class="graphics">
+                    <div class="chart-container"> 
+                        <!-- инсертнуть сюда столбчатый график  с тремя параметрами-->
+                        <canvas id="CPU_load_uptime_graphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <span class="createdAtCpu" aria-live="polite"></span>
-
-    <div id="CPU_load_uptime_block" class="block" class="block"> 
-        <div class="graphics">
-            <div class="chart-container"> 
-                <!-- инсертнуть сюда столбчатый график  с тремя параметрами-->
-                <canvas id="CPU_load_uptime_graphic" style="height:400px;width: 100%">Your browser does not support the canvas element.</canvas>
-            </div>
-        </div>
-    </div>
+    </main>
     
 
 </body>
