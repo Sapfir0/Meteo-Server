@@ -3,7 +3,7 @@ body {
   color: white;
   background: linear-gradient(to bottom, #007acc, #111119);
   background-color: #007acc;
-  /* position: absolute; */
+  
 }
 
 .unknown {
@@ -12,7 +12,6 @@ body {
 
 #humidityGraphic, #temperatureGraphic {
   height:400px;
-  width: 100%;
   border: 1px solid rgb(98, 78, 164); 
   border-radius: 25px; 
   padding: 5px 20px; 
@@ -31,7 +30,6 @@ content .dblock {
   height: 540px; 
   box-shadow: 0 0 10px 1px #0b304e; 
   color: white;
-  width: 30%;
 } 
 
 span {
@@ -59,7 +57,9 @@ p {
 content {
   display: flex;
   flex-direction: row;
-
+  align-items: flex-start;
+  justify-content: space-between;
+  
 }
 
 img {
