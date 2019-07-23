@@ -8,21 +8,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign in</title>
     <link rel="stylesheet" href="/css/inputs.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="manifest" href="/json/manifest.json">
 
     <script type="module" src="/js/users/sign_In.js"></script>
 </head>
-<body>
-        <div class="reg">
-            <p> Email
-            <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />            
-            <span class="emailError" aria-live="polite"></span>
-            <p> Password
-            <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,}" />
-            <span class="passwordError" aria-live="polite"></span>
-            <button class="welcome" id="submit">Войти</button>
-            <span class="serverError" aria-live="polite"></span>
+<body >
+    <main >
+        <div class="main_inner" style="height: 100vh">
+            <div class="reg_section styled_block" style="color: white">
+                <p> 
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />            
+                </p>
+                <span class="emailError" aria-live="polite"></span>
+                <p> 
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,}" />
+                </p>
+                <span class="passwordError" aria-live="polite"></span>
+                <button class="welcome" id="submit">Войти</button>
+                <span class="serverError" aria-live="polite"></span>
+                <a href="/register">Регистрация</a>
+            </div>
         </div>
-        <a href="/register">Регистрация</a>
+    </main>
 </body>
 </html>

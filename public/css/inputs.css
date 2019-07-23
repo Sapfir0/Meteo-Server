@@ -1,5 +1,3 @@
-
-
 input {
     padding: 5px 5px 5px 2px;
     -webkit-appearance: none;
@@ -8,13 +6,12 @@ input {
     font-size: 90%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    
 }
 
 input:invalid{
     border-color: #900;
     background-color: #FDD;
-  }
+}
   
 input:focus:invalid {
    outline: none;
@@ -22,4 +19,15 @@ input:focus:invalid {
   
 input:valid {
     border: 1px solid steelblue;
+}
+
+.reg_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.reg_section p {
+    color:white;
 }

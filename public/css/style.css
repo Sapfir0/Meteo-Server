@@ -3,6 +3,10 @@ body {
   color: white;
   background: linear-gradient(to bottom, #007acc, #111119);
   background-color: #007acc;
+
+  margin: 0px;
+  padding: 0px;
+
 }
 
 main {
@@ -16,9 +20,10 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 980px) {
   .main_inner {
     width: 95%;
   }
@@ -95,7 +100,12 @@ img {
 @media screen and (max-width: 780px) {
   .chart-container {
     height:400px;
-    width: 80%
+    width: 400px
+  }
+
+  .data_block .styled_block {
+    width: 400px;
   }
 }
+
 
