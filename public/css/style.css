@@ -3,6 +3,10 @@ body {
   color: white;
   background: linear-gradient(to bottom, #007acc, #111119);
   background-color: #007acc;
+
+  margin: 0px;
+  padding: 0px;
+
 }
 
 main {
@@ -16,6 +20,13 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 980px) {
+  .main_inner {
+    width: 95%;
+  }
 }
 
 .unknown {
@@ -26,7 +37,7 @@ main {
   height: 400px; 
 }
 
-.data_block {
+.height_540 {
   height: 540px;
 }
 
@@ -38,12 +49,6 @@ main {
   background-color: #333; 
   box-shadow: 0 0 10px 1px #0b304e; 
   color: white;
-} 
-
-@media screen and (max-width: 650px) {
-  .styled_block {
-    width: 80%;
-  }
 }
 
 span {
@@ -68,22 +73,21 @@ p {
 }
 
 
-content {
+.data_block {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-around;
-}
-
-@media screen and (max-width: 650px) { 
-  content {
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
 }
 
 img {
   height: 40px;
+}
+
+.graphics {
+  width: 100%;
 }
 
 .chart-container {
@@ -92,14 +96,18 @@ img {
   width: 660px;
 } 
 
-.createdAtCpu {
-}
-
 
 @media screen and (max-width: 780px) {
   .chart-container {
     height:400px;
-    width: 80%
+    width: 400px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .data_block .styled_block {
+    width: 400px;
   }
 }
+
 

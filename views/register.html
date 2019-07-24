@@ -8,26 +8,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
     <link rel="stylesheet" href="/css/inputs.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="manifest" href="/json/manifest.json">
 
     <script type="module" src="/js/users/register.js"></script>
 </head>
 <body>
-    
-    <div class="reg" name="register">
-        <p>Email</p>
-        <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />      
-        <span class="emailError" aria-live="polite"></span>
-        <p>Password</p>
-        <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,50}" />
-        <span class="passwordError" aria-live="polite"></span>
-        <p>Retype password</p>
-        <input id="repassword" type="password" name="repassword" placeholder="Retype password" required="required" />
-        <span class="repasswordError" aria-live="polite"></span>
-        <button class="welcome" id="submit" type="submit">Зарегистрироваться</button>
-        <span class="serverError" aria-live="polite"></span>
-    </div>
-    <a href="/sign_In">Войти</a>
+    <main >
+        <div class="main_inner" style="height: 100vh">
+            <div class="reg_section styled_block" style="color: white" name="register">
+                <p> 
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" placeholder="Type email" required="required" pattern=".+@.+\..+" />            
+                </p>
+                <span class="emailError" aria-live="polite"></span>
+                <p> 
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" placeholder="Type password" required="required" pattern=".{5,50}" />
+                </p>
+                <span class="passwordError" aria-live="polite"></span>
+                <p>
+                    <label for="repassword">Retype password</label>
+                    <input id="repassword" type="password" name="repassword" placeholder="Retype password" required="required" />
+                </p>
+                <span class="repasswordError" aria-live="polite"></span>
+                <button class="welcome" id="submit" type="submit">Зарегистрироваться</button>
+                <span class="serverError" aria-live="polite"></span>
+                <a href="/sign_In">Войти</a>
+            </div>
+        </div>
+    </main>
 
 </body>
 </html>
