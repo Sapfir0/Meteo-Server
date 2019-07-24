@@ -99,9 +99,10 @@ img {
 @media screen and (max-width: 780px) {
   .chart-container {
     height:400px;
-    width: 400px;
+    max-width: 400px;
     padding-top: 20px;
     padding-bottom: 20px;
+    width: 85%;
   }
 
   .data_block .styled_block {

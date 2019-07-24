@@ -46,22 +46,26 @@ initAuthControllers(app, passport);
 loadPasportStrategies(passport, models.user)
 
 
-
-models.sequelize
-    .sync()
-    .then(() => {
+async function start() {
+    try {
+        await models.sequelize.sync()
         console.log("Nice! Database looks fine");
-    })
-    .catch(err => {
+
+    } catch(err) {
         console.log("Something went wrong with the Database Update!");
         console.log("Crashed with error: "+ err)
-});
+        return; // сервер не стартанул 
+    }
+    
+    try {
+        await app.listen(config.port)
+        console.log("Server started on " + config.port + " port");
+    } catch(err) {
+        console.error("Server not started");
+    }   
+}
 
-
-app.listen(config.port, err => {
-    if (!err) console.log("Server started on " + config.port + " port");
-    else console.error("Server not started");
-});
+start().catch(console.error)
 
 
 module.exports = app
