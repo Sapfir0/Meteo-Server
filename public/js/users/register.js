@@ -38,24 +38,6 @@ function start() {
         }
     }
 
-
-
-    const widgets = [email,password,repassword]
-    const errorsSpans = [emailError, passwordError, repasswordError]
-    const errorsStrings = [validators.strEmailError, validators.strPasswordError,validators.strRepasswordError]
-
-    // for(let i=0; i<widgets.length;i++) { //мне не нравится эта реализация , но пусть будет
-    //     widgets[i].addEventListener('input', () => {
-    //         hideHint(serverError)
-    //         if (widgets[i] == password || widgets[i]== repassword) {
-    //             checkValidation(widgets[i],errorsSpans[i],errorsStrings[i], true)
-    //         }
-    //         else {
-    //             checkValidation(widgets[i],errorsSpans[i],errorsStrings[i])
-    //         }
-    //     })
-    // }
-
     email.addEventListener("input", () => {
         hideHint(serverError)
         checkValidation(email, emailError, validators.strEmailError)
@@ -73,8 +55,7 @@ function start() {
 
     })
 
-
-
+    
     submitBtn.addEventListener("click", () => {       
         if ( !email.value.match(validators.emailRegExp) )  { //пусть будет так
             showHint(emailError, validators.strEventEmailError)
