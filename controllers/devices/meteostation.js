@@ -6,15 +6,15 @@ const helper = require("../../services/helper")
 
 function saveArduinoData(req, res, next) {
     // как много присвоений, как же это исправить хм
-    const meteostationData = null;
+    let meteostationData = null;
 
     if (!req.body) {
         meteostationData = req.query;
     }
     else {
         meteostationData = req.body;
-
     }
+
     const temperatureInHome = meteostationData.temperatureInHome
     const humidityInHome = meteostationData.humidityInHome 
     const sansity = meteostationData.sansity 
@@ -105,7 +105,13 @@ async function getMeteostationData(req, res, next) {
 
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
-    const meteoId = req.query.meteostationId
+    let meteoId = null
+    if (!!req.query) {
+        meteoId = req.query.meteostationId
+    }
+    else {
+        meteoId = req.body.meteostationId
+    }
     helper.deleteOldDatasFromSQL(MeteostationInside,meteoId)
     helper.deleteOldDatasFromSQL(MeteostationOutside,meteoId)
     next()
