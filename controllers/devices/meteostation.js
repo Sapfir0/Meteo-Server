@@ -1,4 +1,3 @@
-//данные приходят в req.query
 const arduinoAPI = require("../../services/handleMeteostationDatas")
 const userApi = require("../../services/user")
 const { MeteostationInside, MeteostationOutside } = require("../../database/tables")
@@ -8,22 +7,15 @@ function saveArduinoData(req, res, next) {
     // как много присвоений, как же это исправить хм
     function isEmptyObject(obj) {
         if(req.body.constructor === Object && Object.keys(obj).length === 0) {
-            console.log('Object missing');
             return true
         }
         return false
     }
 
-    let meteostationData = null;
+    let meteostationData = req.body;
     console.log("req.body", isEmptyObject(req.body))
     console.log("req.query", isEmptyObject(req.query))
 
-    if (isEmptyObject(req.body)) { 
-        meteostationData = req.query;
-    }
-    else if (isEmptyObject(req.query) ){
-        meteostationData = req.body;
-    }
     const temperatureInHome = meteostationData.temperatureInHome
     const humidityInHome = meteostationData.humidityInHome 
     const sansity = meteostationData.sansity 
@@ -114,13 +106,8 @@ async function getMeteostationData(req, res, next) {
 
 function deleteOldArticles(req,res,next) {
     //запрашиваю айди метеостанции
-    let meteoId = null
-    if (!!req.query) {
-        meteoId = req.query.meteostationId
-    }
-    else {
-        meteoId = req.body.meteostationId
-    }
+    let meteoId = req.body.meteostationId
+
     helper.deleteOldDatasFromSQL(MeteostationInside,meteoId)
     helper.deleteOldDatasFromSQL(MeteostationOutside,meteoId)
     next()
