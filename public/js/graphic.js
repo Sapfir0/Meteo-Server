@@ -2,7 +2,7 @@ import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } fro
 import { chartNewLineGraphic, setDatasForHumidityGraphic, setOptionForLineGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
 import { chartNewPieGraphic, setDatasForPieGraphic, setOptionForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
 import { findMaxMinArrayValues, findMaxMinArraysValues, dateToStr } from "./helpers.js"
-import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp } from "./typeOfGraphics/colorSettings"
+import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp } from "./typeOfGraphics/colorSettings.js"
 
 let datasForCharts
 let options
