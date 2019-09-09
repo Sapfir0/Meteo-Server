@@ -1,5 +1,5 @@
 import { chartNewLineGraphic, setDatasForLineGraphic, setOptionForLineGraphic } from "./typeOfGraphics/lineGraphics.js"
-import { findMaxMinArrayValues, findMaxMinArraysValues, dateToStr } from "./helpers.js"
+import { findMaxMinArraysValues, dateToStr } from "./helpers.js"
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp } from "./typeOfGraphics/colorSettings.js"
 
 let datasForCharts

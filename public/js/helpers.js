@@ -15,17 +15,16 @@ export function errorHandler(serverError, err) {
 }
 
 export function findMaxMinArrayValues(array) {
-    const result = [ Math.min( ...array), Math.max( ...array ) ]
-    result[0] = Math.round(result[0]); result[1] = Math.round(result[1])
+    const result = [ Math.min( ...array), Math.max( ...array ) ];
+    result[0] = Math.round(result[0]); result[1] = Math.round(result[1]);
     return result
 }
 
 export function findMaxMinArraysValues(array1, array2) {
-    const minMaxInAr1 = findMaxMinArrayValues(array1)
-    const minMaxInAr2 = findMaxMinArrayValues(array2)
-    const sum = minMaxInAr1.concat(minMaxInAr2)
-    const result = findMaxMinArrayValues(sum)
-    return result
+    const minMaxInAr1 = findMaxMinArrayValues(array1);
+    const minMaxInAr2 = findMaxMinArrayValues(array2);
+    const sum = minMaxInAr1.concat(minMaxInAr2);
+    return findMaxMinArrayValues(sum)
 }
 
 
@@ -52,7 +51,6 @@ export function dateToStr(date) {
             str = `${date.getDate()} ${month[date.getMonth() - 1]} ${date.getFullYear()}`; //любой другой
         }
     }
-    //str += " в " + date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
     str += " " + date.toLocaleTimeString([], {hour: "2-digit", minute:"2-digit"});
 
     return str;

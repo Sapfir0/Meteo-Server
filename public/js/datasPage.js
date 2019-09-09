@@ -1,4 +1,4 @@
-import { createGraphics, createComputerGraphic } from "./graphic.js"
+import { createGraphics } from "./graphic.js"
 import { showHint, hideHint, dateToStr, getTimeFromUnixTime } from "./helpers.js"
 import { getWeatherDescriptionIcon, getThermometer } from "./images.js"
 
@@ -64,12 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             hideHint(hints[i])
         })
     }
-    
 
-    const computerGraphicValues = await getlastComputerParams()
-    createComputerGraphic(computerGraphicValues);
-
-    // -------- быдло функции    
 
     async function getlastArduinoValues() { // запрос к бд на получение последних значений метеостанции
         let arduinoValues
@@ -120,8 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const iconId = getWeatherDescriptionIcon(arduinoValues.weatherId, arduinoValues.createdAt)
             weatherIcon.src = iconId
         }
-        isRainingNow(arduinoValues.weatherId) // это выбирает погодный эффект
-        //isClearSkyNow(arduinoValues.weatherId) //пока еще не работает
 }
 
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
@@ -131,4 +124,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         return graphicValues;
     }
 
-})
+});

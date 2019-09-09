@@ -25,16 +25,11 @@ export function getThermometer(weatherId) {
 
 function isNight(currentTime) {
     currentTime = new Date(currentTime)
-    var hours = currentTime.getHours();
+    const hours = currentTime.getHours();
     console.log(currentTime)
     console.log(hours)
 
-    if(hours > 22 || hours < 8) { // надеюсь это сработает корректно
-        return true
-    }
-    else {
-        return false
-    }
+    return hours > 22 || hours < 8;
 
 }
 
