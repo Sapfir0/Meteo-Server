@@ -1,6 +1,4 @@
-import { chartNewBarGraphic, setOptionForBarGraphic, setDatasForBarGraphic } from "./typeOfGraphics/barGraphics.js"
-import { chartNewLineGraphic, setDatasForHumidityGraphic, setOptionForLineGraphic, setDatasForTemperatureGraphic} from "./typeOfGraphics/lineGraphics.js"
-import { chartNewPieGraphic, setDatasForPieGraphic, setOptionForPieGraphic } from "./typeOfGraphics/circleGraphics.js"
+import { chartNewLineGraphic, setDatasForLineGraphic, setOptionForLineGraphic } from "./typeOfGraphics/lineGraphics.js"
 import { findMaxMinArrayValues, findMaxMinArraysValues, dateToStr } from "./helpers.js"
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp } from "./typeOfGraphics/colorSettings.js"
 

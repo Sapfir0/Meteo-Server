@@ -1,6 +1,3 @@
-
-
-
 export function getWeatherDescriptionIcon(weatherId, createdAt) { //это можно упростить
     const imgId = parseWeatherId(weatherId)
 
