@@ -6,10 +6,10 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
         datasets: [{
             label: label, // подпись самого графика
             fill:false,
-            color: "#f1f3f4",
-            borderColor: '#f1f3f4',
+            color: "SandyBrown",
+            borderColor: "SandyBrown",
             data: data, // точки для графика,', 
-            backgroundColor: "SandyBrown", //sandlybrown
+            backgroundColor: "SandyBrown", 
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
@@ -21,14 +21,14 @@ export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
         {
             label: label2, // подпись самого графика
             fill:false,
-            color: "#87cf3e",
-            borderColor: '#87cf3e',
+            color: "ForestGreen",
+            borderColor: "ForestGreen",
             data: data2, // точки для графика,', 
-            backgroundColor: "ForestGreen",  //limegreen
+            backgroundColor: "ForestGreen",  
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                if (value > criticalHighHum) return "blue" //аха а тут наоборот, типа нижнее значение будет красным
+                if (value > criticalHighHum) return "blue" 
                 else if(value < criticalLowHum) return "red"
                 else return "#edd9db" 
             }       
@@ -44,7 +44,7 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
         labels: labels, // подпись на оси Х
         datasets: [{
             label: label, // подпись самого графика
-            // fill:false,
+            fill:false,
             borderColor: colorOfHomeGraphic,
             data: data, // точки для графика,', 
             backgroundColor: colorOfHomeGraphic ,
@@ -58,7 +58,7 @@ export function setDatasForTemperatureGraphic(labels, data, label, data2, label2
         },
         {
             label: label2, // подпись самого графика
-            // fill:false,
+            fill:false,
             data: data2, // точки для графика,', 
             backgroundColor: colorOfStreetGraphic ,
             borderColor: colorOfStreetGraphic,
