@@ -1,75 +1,35 @@
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
 
-export function setDatasForHumidityGraphic(labels, data, label, data2, label2) {
+export function setDatasForHumidityGraphic(labels, data, label, data2, label2, criticalLowParam, criticalHighParam) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
         datasets: [{
             label: label, // подпись самого графика
             fill:false,
-            color: "SandyBrown",
-            borderColor: "SandyBrown",
-            data: data, // точки для графика,', 
-            backgroundColor: "SandyBrown", 
-            pointBackgroundColor: (context) => {
-                const index = context.dataIndex;
-                const value = context.dataset.data[index];
-                if (value > criticalHighHum) return "blue" //аха а тут наоборот, типа нижнее значение будет красным
-                else if(value < criticalLowHum) return "red"
-                else return "#edd9db" 
-            }
-        },
-        {
-            label: label2, // подпись самого графика
-            fill:false,
-            color: "ForestGreen",
-            borderColor: "ForestGreen",
-            data: data2, // точки для графика,', 
-            backgroundColor: "ForestGreen",  
-            pointBackgroundColor: (context) => {
-                const index = context.dataIndex;
-                const value = context.dataset.data[index];
-                if (value > criticalHighHum) return "blue" 
-                else if(value < criticalLowHum) return "red"
-                else return "#edd9db" 
-            }       
-        }]
-    };
-
-    return datasForCharts;
-}
-
-
-export function setDatasForTemperatureGraphic(labels, data, label, data2, label2) {
-    let datasForCharts = {
-        labels: labels, // подпись на оси Х
-        datasets: [{
-            label: label, // подпись самого графика
-            fill:false,
+            color: colorOfHomeGraphic,
             borderColor: colorOfHomeGraphic,
             data: data, // точки для графика,', 
-            backgroundColor: colorOfHomeGraphic ,
+            backgroundColor: colorOfHomeGraphic,
             pointBackgroundColor: (context) => {
-                var index = context.dataIndex;
-                var value = context.dataset.data[index];
-                if (value > criticalHighTemp) return "red"
-                else if(value < criticalLowTemp) return "blue" 
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                if (value > criticalHighParam || value < criticalLowParam) return "red"
                 else return "#edd9db" 
             }
         },
         {
             label: label2, // подпись самого графика
             fill:false,
-            data: data2, // точки для графика,', 
-            backgroundColor: colorOfStreetGraphic ,
+            color: colorOfStreetGraphic,
             borderColor: colorOfStreetGraphic,
-
+            data: data2, // точки для графика,', 
+            backgroundColor: colorOfStreetGraphic, 
             pointBackgroundColor: (context) => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                if (value > criticalHighTemp) return "red"
-                else if(value < criticalLowTemp) return "blue" 
+                if (value > criticalHighParam || value < criticalLowParam) return "red"
                 else return "#edd9db" 
-            }
+            }       
         }]
     };
 
