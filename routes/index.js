@@ -3,7 +3,6 @@ const debug = require("../services/debug")
 
 const sendHtml = require("../services/sendHtml")
 const handler = require("../controllers/devices/meteostation")
-const computerController = require("../controllers/devices/computer")
 
 
 //  проверка логирования
@@ -39,12 +38,8 @@ function initAuthControllers(app, passport)  {
     app.get("/chartsValues", isLoggedIn, handler.getArrays) //для построения графиков
     
     app.post("/updateMeteoId", urlencodedParser, handler.updateMeteoId, sendHtml.success)
-    app.post("/updatePC_Id", urlencodedParser, computerController.updatePC_Id, sendHtml.success)
     
     app.post("/applySettings", profile.updateSettings, sendHtml.success )
-
-    app.post("/computerLoadParams",  debug.seeBody, computerController.deleteOldDatas, computerController.saveComputerData, sendHtml.success)
-    app.get("/computerLoadParams", isLoggedIn, computerController.getComputerData)
 
     app.post("/push/subscribe", pushController.subscribe);
     app.post("/push/unsubscribe", pushController.unsubscribe);

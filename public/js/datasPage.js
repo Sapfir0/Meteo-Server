@@ -2,9 +2,6 @@ import { createGraphics, createComputerGraphic } from "./graphic.js"
 import { showHint, hideHint, dateToStr, getTimeFromUnixTime } from "./helpers.js"
 import { getWeatherDescriptionIcon, getThermometer } from "./images.js"
 
-import { sunshine } from "./weathers/clear_sky.js"
-import { makeItRain } from "./weathers/rain.js"
-
 document.addEventListener("DOMContentLoaded", async () => {
     // console.log(document.body.clientWidth)
     // console.log(document.body.clientHeight)
@@ -127,17 +124,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         //isClearSkyNow(arduinoValues.weatherId) //пока еще не работает
 }
 
-    async function getlastComputerParams() { 
-        const createdAtCpu = document.querySelector(".createdAtCpu")
-
-        const response = await fetch("/computerLoadParams");
-        const computerValues = await response.json();
-        console.log(computerValues); 
-        createdAtCpu.innerHTML = dateToStr(new Date(computerValues.createdAt))
-
-        return computerValues
-    }
-
     async function getMeteostationGraphicValues() { // получение всех значений))) в массиве. каждый массив - столбец бд (переделать в объект)
         const graphicsResponse = await fetch("/chartsValues");
         const graphicValues = await graphicsResponse.json();
@@ -145,22 +131,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         return graphicValues;
     }
 
-
 })
-
-
-function isRainingNow(weatherId) {
-    rain = [500, 501, 502, 503, 504, 511, 520, 522, 531]
-    drizzle = [300, 301, 302, 310, 311, 312, 313, 314, 321]
-    thunderstorm = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
-    if (weatherId in rain || weatherId in drizzle || weatherId in thunderstorm) {
-        makeItRain() // можно еще проверять хеви рейн или маелкнький
-    }
-}
-
-function isClearSkyNow(weatherId) {
-    if(weatherId == 800) {
-        console.log("ясно. солнце вышло")
-        sunshine()
-    }
-}

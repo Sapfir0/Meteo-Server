@@ -1,6 +1,6 @@
 import { criticalHighHum, criticalHighTemp, criticalLowHum, criticalLowTemp, colorOfHomeGraphic, colorOfStreetGraphic, font_color } from "./colorSettings.js"
 
-export function setDatasForHumidityGraphic(labels, data, label, data2, label2, criticalLowParam, criticalHighParam) {
+export function setDatasForLineGraphic(labels, data, label, data2, label2, criticalLowParam, criticalHighParam) {
     let datasForCharts = {
         labels: labels, // подпись на оси Х
         datasets: [{
